@@ -96,7 +96,7 @@ export function Recognition() {
               ...legoDelay(idx),
               background: C.surface,
               border: `1px solid ${C.line}`,
-              boxShadow: '0 18px 44px -26px rgba(46,33,64,0.30)',
+              boxShadow: '0 18px 44px -26px rgba(31, 16, 20,0.30)',
             }}
           >
             <span
@@ -182,7 +182,7 @@ function PlayDisc() {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(17,12,24,0.10) 0%, rgba(17,12,24,0.12) 55%, rgba(17,12,24,0.60) 100%)',
+            'linear-gradient(180deg, rgba(26, 14, 18,0.10) 0%, rgba(26, 14, 18,0.12) 55%, rgba(26, 14, 18,0.60) 100%)',
         }}
       />
       <span
@@ -191,7 +191,7 @@ function PlayDisc() {
         style={{
           background: C.surface,
           boxShadow:
-            'inset 0 0 0 1px rgba(220,203,238,0.45), 0 10px 26px -10px rgba(0,0,0,0.7)',
+            'inset 0 0 0 1px rgba(252, 228, 234,0.45), 0 10px 26px -10px rgba(0,0,0,0.7)',
         }}
       >
         <Play weight="fill" className="h-5 w-5 translate-x-[1px]" style={{ color: C.ink }} />
@@ -230,7 +230,7 @@ function ClipCard({
         style={{
           aspectRatio: CLIP_RATIO,
           background: C.navyDeep,
-          boxShadow: hasVideo ? 'inset 0 0 0 1px rgba(220,203,238,0.28)' : undefined,
+          boxShadow: hasVideo ? 'inset 0 0 0 1px rgba(252, 228, 234,0.28)' : undefined,
         }}
       >
         {!hasVideo ? (
@@ -313,7 +313,7 @@ function ClipCard({
               className="absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(180deg, rgba(17,12,24,0.10) 0%, rgba(17,12,24,0.12) 55%, rgba(17,12,24,0.60) 100%)',
+                  'linear-gradient(180deg, rgba(26, 14, 18,0.10) 0%, rgba(26, 14, 18,0.12) 55%, rgba(26, 14, 18,0.60) 100%)',
               }}
             />
             <span
@@ -321,7 +321,7 @@ function ClipCard({
               className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition-transform duration-300 group-hover:scale-105"
               style={{
                 background: C.surface,
-                boxShadow: 'inset 0 0 0 1px rgba(220,203,238,0.45)',
+                boxShadow: 'inset 0 0 0 1px rgba(252, 228, 234,0.45)',
               }}
             >
               <Play weight="fill" className="h-5 w-5 translate-x-[1px]" style={{ color: C.ink }} />

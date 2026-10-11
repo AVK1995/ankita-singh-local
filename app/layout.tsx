@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Lora, Manrope } from 'next/font/google';
+import { Fraunces, Manrope } from 'next/font/google';
 
 import Analytics from '@/components/Analytics';
 import MetaPixel from '@/components/MetaPixel';
@@ -9,34 +9,23 @@ import LegoObserver from './_landing/lego';
 import { PRICE, SESSION_TIMES, START_DATE } from './_landing/offer';
 import './globals.css';
 
-/**
- * Lora (display) does the headlines. It never appears below headline size.
- *
- * Manrope (body) does the reading at a 17px base, and the page's third voice,
- * the "spec" one that labels and credentials use, is tracked uppercase Manrope
- * rather than a monospace: a mono next to a yoga practice reads like a
- * terminal.
- *
- * Both are variable families, so next/font takes NO weight array: it rejects
- * one for a variable family, and omitting it loads the whole wght axis in one
- * file per style. The italic is loaded because the founder pull-quote is
- * set in a true display italic.
- */
-const display = Lora({
+/* Fraunces headlines, Manrope body. Both are variable, so next/font takes no
+   weight array. */
+const display = Fraunces({
   subsets: ['latin'],
   style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const manrope = Manrope({
+const body = Manrope({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
 });
 
-const TITLE = '5-Day Fertility Reset Challenge | Bindwithyoga';
-const DESCRIPTION = `A live, expert-led 5-day challenge for women preparing their body for natural conception. Five sessions with Ankita Singh on fertility-focused movement, breathing, pelvic and core work and cycle-based practice. Starts ${START_DATE}, ${SESSION_TIMES}, live on Zoom, for ${PRICE}.`;
+const TITLE = 'Conceive Naturally: 5-Day Fertility Reset Challenge | Bindwithyoga';
+const DESCRIPTION = `In just 5 days, discover what can improve your chances of natural conception. A fertility expert-led live reset around your cycle, fertile window, pelvic & core strength, breathing and nutrition. Starts ${START_DATE}, ${SESSION_TIMES}, live on Zoom, for ${PRICE}.`;
 
 /* '' when NEXT_PUBLIC_SITE_URL is unset, which is the current state. The
    metadata block below omits metadataBase and the OG url rather than naming a
@@ -67,14 +56,14 @@ export const viewport: Viewport = {
      browser chrome continues it rather than cutting a line above it. This is
      --navy-deep, the strip's own ground: the strip is the one dark band above
      the fold, so the chrome matches it and not the light stage beneath. */
-  themeColor: '#241A33',
+  themeColor: '#C73A57',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${display.variable} ${manrope.variable}`}>
+    <html lang="en-IN" className={`${display.variable} ${body.variable}`}>
       <body>
         {/* Marks the document as JS-capable BEFORE first paint, so the CSS
             scroll reveals only hide content when JS is there to reveal it.

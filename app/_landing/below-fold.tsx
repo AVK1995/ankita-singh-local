@@ -48,9 +48,9 @@ import Toolkit from './toolkit';
    grid that cycles a rainbow reads as decoration rather than as a set. Every
    bed here is PALE on a LIGHT band, so each glyph takes the deep step. */
 const BEDS = [
-  { bed: C.goldPale, fg: C.goldInk },
-  { bed: C.coralBed, fg: C.coralInk },
-  { bed: C.navyBed, fg: C.emeraldInk },
+  { bed: C.goldPale, fg: C.goldDeep },
+  { bed: C.coralBed, fg: C.goldDeep },
+  { bed: C.navyBed, fg: C.goldDeep },
 ];
 
 /* ══ 3 · Here's What You'll Experience In 5 Days ═══════════════════════════
@@ -309,7 +309,7 @@ function Schedule() {
                      fill is 1.5% off the ground, so the shadow is what seats
                      it; without one the lit node hangs beside a hole. */
                   background: C.surface,
-                  boxShadow: '0 18px 44px -26px rgba(46,33,64,0.30)',
+                  boxShadow: '0 18px 44px -26px rgba(31, 16, 20,0.30)',
                 }}
               >
                 <span
@@ -354,16 +354,16 @@ function SessionsBand() {
       <div
         className="mx-auto max-w-[920px] rounded-[28px] px-6 py-12 text-center sm:px-12"
         style={{
-          background: `radial-gradient(ellipse 92% 62% at 50% 0%, rgba(220,203,238,0.14), transparent 64%), ${C.navyDeep}`,
-          border: '1px solid rgba(220,203,238,0.20)',
+          background: `radial-gradient(ellipse 92% 62% at 50% 0%, rgba(252, 228, 234,0.14), transparent 64%), ${C.navyDeep}`,
+          border: '1px solid rgba(252, 228, 234,0.20)',
           boxShadow:
-            '0 0 46px -24px rgba(169,139,201,0.22), 0 30px 60px -34px rgba(46,33,64,0.42)',
+            '0 0 46px -24px rgba(248, 113, 134,0.22), 0 30px 60px -34px rgba(31, 16, 20,0.42)',
         }}
       >
         <span
           data-lego=""
           className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em]"
-          style={{ background: 'rgba(220,203,238,0.16)', color: C.gold }}
+          style={{ background: 'rgba(252, 228, 234,0.16)', color: C.gold }}
         >
           <Clock weight="bold" className="h-3 w-3" />
           Live Sessions, Twice A Day
@@ -385,10 +385,10 @@ function SessionsBand() {
             data-cta
             className="lego-press cta-shimmer group inline-flex min-h-[56px] w-full items-center justify-center gap-2.5 rounded-full px-7 font-body text-[15px] font-bold"
             style={{
-              background: C.ctaGold,
-              color: C.onAccent,
-              boxShadow: '0 10px 30px -12px rgba(201,169,230,0.5)',
-              ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
+              background: '#FFFFFF',
+              color: C.goldInk,
+              boxShadow: '0 14px 30px -14px rgba(31, 16, 20,0.45)',
+              ['--shimmer' as string]: 'rgba(242, 76, 105,0.25)',
             }}
           >
             <span className="inline-flex items-center gap-2.5">

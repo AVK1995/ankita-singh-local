@@ -24,27 +24,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: { DEFAULT: '#FFFCFF', alt: '#F5F1F8', surface: '#FFFFFF' },
+        canvas: { DEFAULT: '#FFF7F9', alt: '#FDF3F5', surface: '#FFFFFF' },
         ink: {
-          DEFAULT: '#2E2140',
-          soft: '#635777',
-          deep: '#241A33',
-          on: '#2E2140',
+          DEFAULT: '#1F1014',
+          soft: '#4B2A33',
+          deep: '#C73A57',
+          on: '#FFFFFF',
         },
         gold: {
-          DEFAULT: '#DCCBEE',
-          pale: '#F3F0F6',
-          wash: '#F1EAF8',
-          mid: '#A98BC9',
-          deep: '#6E4E96',
-          ink: '#5A3C80',
-          cta: '#C9A9E6',
+          DEFAULT: '#FCE4EA',
+          pale: '#FDF3F5',
+          wash: '#FFE8EE',
+          mid: '#F87186',
+          deep: '#F24C69',
+          ink: '#C73A57',
+          cta: '#F24C69',
         },
         /* `emerald.bed` is the same value as `C.navyBed` in shared.tsx, which
            keeps the skin's role name. Same colour, two names, on purpose. */
-        emerald: { DEFAULT: '#5FA37F', ink: '#2F6B4C', bed: '#EFEAF6' },
-        coral: { DEFAULT: '#D98BA6', bed: '#FBEDF2', ink: '#A64A6B' },
-        line: { DEFAULT: '#E6E0EC', strong: '#D3CADC' },
+        emerald: { DEFAULT: '#5FA37F', ink: '#2F6B4C', bed: '#FCE7EC' },
+        coral: { DEFAULT: '#FF6E88', bed: '#FCE7EC', ink: '#C73A57' },
+        line: { DEFAULT: '#F2D6DD', strong: '#E5D2D8' },
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
@@ -53,9 +53,9 @@ const config: Config = {
       borderRadius: { pill: '999px' },
       boxShadow: {
         /* Layered and tinted toward the brand ink, never a flat grey. */
-        soft: '0 4px 20px -10px rgba(46,33,64,0.14)',
-        card: '0 18px 44px -26px rgba(46,33,64,0.26)',
-        lift: '0 2px 0 0 rgba(169,139,201,0.30), 0 22px 42px -22px rgba(46,33,64,0.34)',
+        soft: '0 4px 20px -10px rgba(31, 16, 20,0.14)',
+        card: '0 18px 44px -26px rgba(31, 16, 20,0.26)',
+        lift: '0 2px 0 0 rgba(248, 113, 134,0.30), 0 22px 42px -22px rgba(31, 16, 20,0.34)',
       },
     },
   },

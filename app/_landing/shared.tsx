@@ -28,37 +28,40 @@ import Link from 'next/link';
 import { CHECKOUT_HREF } from './offer';
 
 export const C = {
-  /* ── environment. Never pure white: #FFFCFF is lilac-tinted and does not
+  /* ── environment. Never pure white: #FFF7F9 is lilac-tinted and does not
      glare ── */
-  canvas: '#FFFCFF',
+  canvas: '#FFF7F9',
   /* The alternating band. A lilac GREY, not the accent: a page whose bands are
      the accent is a page standing on its own highlight. */
-  canvasAlt: '#F5F1F8',
+  canvasAlt: '#FDF3F5',
   /* The card: the one surface above BOTH grounds, edged by `line` and seated
      on an ink-tinted shadow. */
   surface: '#FFFFFF',
-  navyDeep: '#241A33',
+  navyDeep: '#C73A57',
 
   /* ── ink ── */
-  ink: '#2E2140', // 14.65:1 on the canvas
-  inkSoft: '#635777', // secondary body. 6.52:1 on the canvas
-  onDark: '#F7F2FA',
-  onDarkMute: 'rgba(247,242,250,0.74)',
-  onAccent: '#2E2140', // ink label ON the accent CTA pill. 7.32:1
+  ink: '#1F1014', // 14.65:1 on the canvas
+  inkSoft: '#4B2A33', // secondary body
+  inkMuted: '#8C6B74', // small captions under a bolder line (bodyworx)
+  onDark: '#FFF7F9',
+  onDarkMute: 'rgba(255, 247, 249,0.74)',
+  onAccent: '#FFFFFF', // label on the pink CTA pill
 
   /* ── heather: the accent ── */
-  gold: '#DCCBEE', // the highlight word ON THE DEEP FILL (10.9:1)
+  gold: '#FCE4EA', // the highlight word ON THE DEEP FILL (10.9:1)
   /* Icon beds and washes. NEAR-NEUTRAL: a saturated bed under a heather glyph
      makes every icon on the page an accent object. The glyph keeps the colour,
      the bed does not. */
-  goldPale: '#F3F0F6',
-  goldWash: '#F1EAF8', // the ONE accent surface. Money moments only.
-  goldMid: '#A98BC9', // hairlines and rules ONLY, never a numeral
-  goldDeep: '#6E4E96', // headline highlight on light. 6.46:1
-  goldInk: '#5A3C80', // small text and eyebrows on light. 8.62:1 on the canvas
-  ctaGold: '#C9A9E6', // the accent CTA pill; ink label at 7.32:1. The fill is
-  //                     only 2.0:1 on the canvas, so any instance on a LIGHT
+  goldPale: '#FDF3F5',
+  goldWash: '#FFE8EE', // the ONE accent surface. Money moments only.
+  goldMid: '#F87186', // hairlines and rules ONLY, never a numeral
+  goldDeep: '#F24C69', // headline highlight on light
+  goldInk: '#C73A57', // small text and eyebrows on light
+  ctaGold: '#F24C69', // the accent CTA pill, white label. The fill is
+  //                     low-contrast on the canvas, so any instance on a LIGHT
   //                     ground draws its own INSET hairline (see ./hero).
+  ctaFill: 'linear-gradient(180deg, #F24C69, #C73A57)', // every CTA, as on bodyworx
+  ctaGlow: '0 18px 40px -14px rgba(199,58,87,0.55)',
 
   /* ── sage: semantic, not brand. Ticks and guarantees only.
      `emerald` is a fill or a glyph on dark; `emeraldInk` is the step that
@@ -67,18 +70,18 @@ export const C = {
   emeraldInk: '#2F6B4C',
 
   /* ── rose: the spark, spent even more scarcely than the accent ── */
-  coral: '#D98BA6',
-  coralBed: '#FBEDF2',
-  coralInk: '#A64A6B', // rose as readable text. 5.41:1 on canvas, 4.85:1 on the
+  coral: '#FF6E88',
+  coralBed: '#FCE7EC',
+  coralInk: '#C73A57', // rose as readable text. 5.41:1 on canvas, 4.85:1 on the
   //                      bed, and the pills using it are 10px, so it has to
   //                      clear 4.5 on the BED rather than on the canvas.
 
   /* ── beds. Three, deliberately, so the page reads as one palette ── */
-  navyBed: '#EFEAF6',
+  navyBed: '#FCE7EC',
 
   /* ── rules ── */
-  line: '#E6E0EC',
-  lineStrong: '#D3CADC',
+  line: '#F2D6DD',
+  lineStrong: '#E5D2D8',
 } as const;
 
 /**
@@ -96,7 +99,7 @@ export function SectionEyebrow({ text }: { text: string }) {
         className="lego-pulse-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full"
         style={{
           background: C.coral,
-          ['--dot-pulse' as string]: 'rgba(217,139,166,0.5)',
+          ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.5)',
         }}
       />
       {text}
@@ -122,7 +125,7 @@ export function SectionHeading({
         </div>
       )}
       <h2
-        className="font-display text-[clamp(28px,4.4vw,46px)] font-bold leading-[1.14]"
+        className="font-display text-[clamp(28px,4.4vw,46px)] font-extrabold leading-[1.14]"
         style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
       >
         {children}
@@ -159,7 +162,7 @@ export function PrimaryCTA({
 }: {
   href?: string;
   label: string;
-  /** navy = on the light page · gold = the accent pill · cream = on a dark card */
+  /** navy and gold = the pink pill · cream = on a dark card */
   tone?: 'navy' | 'gold' | 'cream';
   breathe?: boolean;
   full?: boolean;
@@ -167,23 +170,23 @@ export function PrimaryCTA({
   const skin =
     tone === 'gold'
       ? {
-          background: C.ctaGold,
+          background: C.ctaFill,
           color: C.onAccent,
           shimmer: 'rgba(255,255,255,0.55)',
-          shadow: '0 14px 30px -14px rgba(0,0,0,0.6), 0 10px 32px -10px rgba(201,169,230,0.4)',
+          shadow: C.ctaGlow,
         }
       : tone === 'cream'
         ? {
             background: C.canvas,
             color: C.ink,
-            shimmer: 'rgba(169,139,201,0.4)',
+            shimmer: 'rgba(248, 113, 134,0.4)',
             shadow: '0 14px 30px -14px rgba(0,0,0,0.55)',
           }
         : {
-            background: C.ink,
-            color: C.canvas,
-            shimmer: 'rgba(220,203,238,0.42)',
-            shadow: '0 14px 30px -14px rgba(46,33,64,0.5)',
+            background: C.ctaFill,
+            color: C.onAccent,
+            shimmer: 'rgba(255,255,255,0.55)',
+            shadow: C.ctaGlow,
           };
 
   return (

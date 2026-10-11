@@ -124,7 +124,7 @@ function Guide() {
               background: C.surface,
               border: `1px solid ${C.line}`,
               borderLeft: `2px solid ${C.goldDeep}`,
-              boxShadow: '0 18px 40px -30px rgba(46,33,64,0.32)',
+              boxShadow: '0 18px 40px -30px rgba(31, 16, 20,0.32)',
             }}
           >
             <Quotes
@@ -220,7 +220,7 @@ function Mechanism() {
         style={{
           background: C.line,
           border: `1px solid ${C.line}`,
-          boxShadow: '0 20px 48px -28px rgba(46,33,64,0.28)',
+          boxShadow: '0 20px 48px -28px rgba(31, 16, 20,0.28)',
         }}
       >
         {PILLARS.map((p, i) => (
@@ -298,7 +298,7 @@ function Results() {
         style={{
           background: C.surface,
           border: `1px solid ${C.line}`,
-          boxShadow: '0 20px 48px -28px rgba(46,33,64,0.28)',
+          boxShadow: '0 20px 48px -28px rgba(31, 16, 20,0.28)',
         }}
       >
         {RESULTS.map((item, idx) => (
@@ -377,18 +377,18 @@ function TwoOptions() {
           style={{
             ['--lego-from' as string]: '30px',
             ['--lego-d' as string]: '110ms',
-            background: `radial-gradient(ellipse 96% 58% at 50% 0%, rgba(220,203,238,0.18), transparent 66%), ${C.navyDeep}`,
+            background: `radial-gradient(ellipse 96% 58% at 50% 0%, rgba(252, 228, 234,0.18), transparent 66%), ${C.navyDeep}`,
             /* An ACCENT hairline, never `line`. `line` is a lilac grey and on a
                dark card it draws a pale ring around the object, which is the
                clearest tell that a dark card was left over from a dark page. */
-            border: '1px solid rgba(220,203,238,0.22)',
+            border: '1px solid rgba(252, 228, 234,0.22)',
             boxShadow:
-              '0 0 0 6px rgba(220,203,238,0.10), 0 0 44px -20px rgba(169,139,201,0.24), 0 26px 56px -28px rgba(46,33,64,0.40)',
+              '0 0 0 6px rgba(252, 228, 234,0.10), 0 0 44px -20px rgba(248, 113, 134,0.24), 0 26px 56px -28px rgba(31, 16, 20,0.40)',
           }}
         >
           <span
             className="lego-stud inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em]"
-            style={{ background: 'rgba(220,203,238,0.18)', color: C.gold }}
+            style={{ background: 'rgba(252, 228, 234,0.18)', color: C.gold }}
           >
             <Plus weight="bold" className="h-3 w-3" />
             OPTION 2
@@ -404,9 +404,9 @@ function TwoOptions() {
             data-cta
             className="lego-press cta-shimmer group mt-7 inline-flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-full px-6 font-body text-[15px] font-bold"
             style={{
-              background: C.ctaGold,
+              background: C.ctaFill,
               color: C.onAccent,
-              boxShadow: '0 10px 30px -12px rgba(201,169,230,0.5)',
+              boxShadow: C.ctaGlow,
               ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
             }}
           >
@@ -456,7 +456,7 @@ function Recap() {
       data-final
       className="px-4 py-20 sm:py-28"
       style={{
-        background: `radial-gradient(ellipse 68% 44% at 50% 0%, rgba(169,139,201,0.18), transparent 62%), ${C.canvas}`,
+        background: `radial-gradient(ellipse 68% 44% at 50% 0%, rgba(248, 113, 134,0.18), transparent 62%), ${C.canvas}`,
       }}
     >
       <div data-lego="" className="kz-recap">
@@ -550,7 +550,7 @@ function Recap() {
           <p className="kz-price kz-lit mt-3 font-display text-[56px] font-bold leading-none">
             {PRICE}
           </p>
-          <p className="mt-2 text-[13px]" style={{ color: C.inkSoft }}>
+          <p className="mt-2 text-[13px] font-normal" style={{ color: C.inkMuted }}>
             (One-time payment)
           </p>
         </div>

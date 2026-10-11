@@ -31,7 +31,7 @@ export default function SiteFooter({ children }: { children?: React.ReactNode })
 
         <p
           className="mx-auto mt-5 max-w-4xl text-[12.5px] leading-relaxed sm:text-[13.5px]"
-          style={{ color: 'rgba(247,242,250,0.72)' }}
+          style={{ color: 'rgba(255, 247, 249,0.72)' }}
         >
           {LEGAL_DISCLAIMER}
         </p>
@@ -44,7 +44,7 @@ export default function SiteFooter({ children }: { children?: React.ReactNode })
             rather than writing to ask. */}
         <p
           className="mx-auto mt-6 max-w-3xl text-[12px] leading-relaxed sm:text-[12.5px]"
-          style={{ color: 'rgba(247,242,250,0.62)' }}
+          style={{ color: 'rgba(255, 247, 249,0.62)' }}
         >
           {LEGAL.entity}, trading as {LEGAL.tradeName}
           <br />
@@ -74,7 +74,7 @@ export default function SiteFooter({ children }: { children?: React.ReactNode })
             notice nobody reviewed that year. */}
         <p
           className="mt-4 text-[12px] sm:text-[13px]"
-          style={{ color: 'rgba(247,242,250,0.62)' }}
+          style={{ color: 'rgba(255, 247, 249,0.62)' }}
         >
           {LEGAL_COPYRIGHT}
         </p>
@@ -82,18 +82,18 @@ export default function SiteFooter({ children }: { children?: React.ReactNode })
         <nav
           aria-label="Legal"
           className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px]"
-          style={{ color: 'rgba(247,242,250,0.78)' }}
+          style={{ color: 'rgba(255, 247, 249,0.78)' }}
         >
           <Link href="/privacy-policy" className="hover:underline">
             Privacy Policy
           </Link>
-          <span aria-hidden style={{ color: 'rgba(247,242,250,0.34)' }}>
+          <span aria-hidden style={{ color: 'rgba(255, 247, 249,0.34)' }}>
             ·
           </span>
           <Link href="/terms-and-conditions" className="hover:underline">
             Terms and Conditions
           </Link>
-          <span aria-hidden style={{ color: 'rgba(247,242,250,0.34)' }}>
+          <span aria-hidden style={{ color: 'rgba(255, 247, 249,0.34)' }}>
             ·
           </span>
           <Link href="/refund-policy" className="hover:underline">

@@ -482,9 +482,10 @@ export default function CheckoutPage() {
                 disabled={busy}
                 className="lego-press cta-shimmer mt-7 inline-flex min-h-[58px] w-full items-center justify-center rounded-2xl px-6 text-[15.5px] font-bold disabled:opacity-60"
                 style={{
-                  background: C.ink,
-                  color: C.canvas,
-                  ['--shimmer' as string]: 'rgba(242,221,182,0.42)',
+                  background: C.ctaFill,
+                  color: C.onAccent,
+                  boxShadow: C.ctaGlow,
+                  ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
                 }}
               >
                 {/* The label is wrapped, exactly as PrimaryCTA wraps its own.

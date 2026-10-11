@@ -161,18 +161,20 @@ export default function Toolkit() {
             background: `linear-gradient(160deg, ${C.goldWash} 0%, ${C.surface} 62%)`,
             border: `1px solid ${C.lineStrong}`,
             boxShadow:
-              '0 0 40px -22px rgba(169,139,201,0.28), 0 24px 54px -30px rgba(46,33,64,0.34)',
+              '0 0 40px -22px rgba(248, 113, 134,0.28), 0 24px 54px -30px rgba(31, 16, 20,0.34)',
           }}
         >
+          {/* Phones read it like the bonus cards below: cover, then the
+              number row, then the text. */}
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
-            <div className="flex shrink-0 flex-col items-start gap-4">
+            <div className="flex shrink-0 flex-row items-center gap-3 sm:flex-col sm:items-start sm:gap-4">
+              <IconBed icon={LeadGlyph} size="lg" />
               <span
                 className="font-display text-[44px] font-bold leading-none"
                 style={{ color: C.goldDeep }}
               >
                 {lead.n}
               </span>
-              <IconBed icon={LeadGlyph} size="lg" />
             </div>
             <div className="min-w-0 flex-1">
               <h3
@@ -200,7 +202,7 @@ export default function Toolkit() {
             <Cover
               item={lead}
               sizes="(min-width: 640px) 240px, 100vw"
-              className="w-full sm:w-[240px] sm:shrink-0"
+              className="order-first w-full sm:order-none sm:w-[240px] sm:shrink-0"
             />
           </div>
         </article>
@@ -219,7 +221,7 @@ export default function Toolkit() {
                   ...legoBrick(i + 1, 80),
                   background: C.surface,
                   border: `1px solid ${C.line}`,
-                  boxShadow: '0 18px 44px -26px rgba(46,33,64,0.30)',
+                  boxShadow: '0 18px 44px -26px rgba(31, 16, 20,0.30)',
                 }}
               >
                 <Cover item={item} sizes="(min-width: 640px) 460px, 100vw" className="mb-6" />

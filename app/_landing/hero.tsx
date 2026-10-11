@@ -83,11 +83,11 @@ export function AnnouncementBar() {
               className="lego-pulse-dot inline-block h-[7px] w-[7px] shrink-0 rounded-full"
               style={{
                 background: C.coral,
-                ['--dot-pulse' as string]: 'rgba(217,139,166,0.6)',
+                ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.6)',
               }}
             />
           ) : (
-            <span aria-hidden style={{ color: 'rgba(247,242,250,0.38)' }}>
+            <span aria-hidden style={{ color: 'rgba(255, 247, 249,0.38)' }}>
               |
             </span>
           )}
@@ -105,8 +105,8 @@ export function AnnouncementBar() {
            the fold and it caps the light stage rather than sitting inside it. */
         background: C.navyDeep,
         color: C.onDark,
-        borderBottom: '1px solid rgba(220,203,238,0.16)',
-        ['--shimmer' as string]: 'rgba(255,253,255,0.16)',
+        borderBottom: '1px solid rgba(252, 228, 234,0.16)',
+        ['--shimmer' as string]: 'rgba(255, 247, 249,0.16)',
       }}
     >
       {/* The mask lives on this inner element, NOT on the bar. A mask applies
@@ -145,7 +145,7 @@ export function Hero() {
               className="inline-flex items-center justify-center gap-2.5 rounded-full px-4 py-2 text-center text-[10.5px] lg:justify-start lg:text-left font-bold uppercase leading-[1.5] tracking-[0.1em]"
               style={{
                 background: C.goldWash,
-                border: '1px solid rgba(169,139,201,0.45)',
+                border: '1px solid rgba(248, 113, 134,0.45)',
                 /* 10.5px uppercase is the smallest type on the screen, so it
                    takes the 4.5:1 step: goldInk is 7.47:1 on goldWash. */
                 color: C.goldInk,
@@ -155,7 +155,7 @@ export function Hero() {
                 className="lego-pulse-dot inline-block h-2 w-2 shrink-0 rounded-full"
                 style={{
                   background: C.coral,
-                  ['--dot-pulse' as string]: 'rgba(217,139,166,0.6)',
+                  ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.6)',
                 }}
               />
               For Women Trying to Conceive Naturally &amp; Prepare Their Body for
@@ -168,11 +168,12 @@ export function Hero() {
               className="mt-7 font-display text-[32px] font-bold leading-[1.08] sm:text-[40px] lg:text-[48px]"
               style={{ color: C.ink }}
             >
-              <span className="kz-lit kz-lit-hero block whitespace-nowrap text-[9.5vw] font-bold leading-[1.05] tracking-[-0.02em] sm:text-[60px] lg:text-[52px] xl:text-[62px]">
-                Conceive Naturally.
+              <span className="kz-lit kz-lit-hero block whitespace-nowrap text-[9.5vw] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[60px] lg:text-[52px] xl:text-[62px]">
+                <span style={{ color: C.ink }}>Conceive</span>{' '}
+                <em className="italic">Naturally.</em>
               </span>
               <span
-                className="mt-4 block font-body text-[18px] font-medium leading-[2] sm:text-[20px] lg:text-[22px]"
+                className="mt-4 block font-body text-[18px] font-semibold leading-[1.45] sm:text-[20px] lg:text-[22px]"
                 style={{ color: C.inkSoft }}
               >
                 Even if You Have{' '}
@@ -180,8 +181,8 @@ export function Hero() {
                   (c, i, all) => (
                     <span key={c}>
                       <strong
-                        className="whitespace-nowrap rounded-md px-2 py-0.5 font-bold"
-                        style={{ background: C.goldInk, color: '#FFFFFF' }}
+                        className="whitespace-nowrap font-extrabold"
+                        style={{ color: C.goldDeep }}
                       >
                         {c}
                       </strong>
@@ -211,62 +212,62 @@ export function Hero() {
             />
 
             <p
-              className="mx-auto mt-6 max-w-[600px] text-[16px] leading-[1.7] lg:mx-0"
+              className="mx-auto mt-6 max-w-[600px] text-[17px] font-bold leading-[1.45] lg:mx-0"
+              style={{ color: C.ink }}
+            >
+              In Just 5 Days, Discover What Can Improve Your Chances of Natural
+              Conception
+            </p>
+            <p
+              className="mx-auto mt-3 max-w-[600px] text-[16px] leading-[1.7] lg:mx-0"
               style={{ color: C.inkSoft }}
             >
-              Experience 5 days of guided fertility-focused movement,
-              breathing &amp; cycle-based practices designed to help you improve
-              body awareness, understand your fertile window and prepare your
-              body better for natural conception. Starts {START_DATE}, live on
-              Zoom
+              A fertility expert-led live reset designed around the key areas
+              that influence conception readiness: your cycle, fertile window,
+              pelvic &amp; core strength, breathing and nutrition, so you can
+              better support your chances of conceiving naturally. Starts{' '}
+              <strong className="font-bold" style={{ color: C.ink }}>
+                {START_DATE}
+              </strong>
+              , live on Zoom.
             </p>
 
             <div className="mt-9 flex justify-center lg:justify-start">
-              {/* Shimmer, but no breath: the offer card beside it is the page's
-                  focal action and carries the one breathing CTA. Two breathing
-                  buttons on one screen is two primaries, which is none. */}
-              <Link
-                href={CHECKOUT_HREF}
-                data-cta
-                className="lego-press cta-shimmer group inline-flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-full px-8 font-body text-[15.5px] font-bold sm:w-auto"
-                style={{
-                  background: C.ctaGold,
-                  color: C.onAccent,
-                  /* The pill is its own ground, so the ink label holds at
-                     7.32:1 either way. What changes is the seating: a shadow
-                     built to sit a pill on a near-black slab is a smudge on
-                     near-white, and the fill itself is only 2.0:1 against the
-                     stage, so the edge is drawn with an inset accent hairline
-                     rather than left to the fill. */
-                  boxShadow:
-                    'inset 0 0 0 1px rgba(110,78,150,0.35), 0 14px 30px -16px rgba(46,33,64,0.40), 0 10px 28px -10px rgba(169,139,201,0.45)',
-                  ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
-                }}
-              >
-                <span className="inline-flex items-center gap-2.5">
-                  {CTA_LABEL}
-                  <ArrowRight
-                    weight="bold"
-                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                  />
-                </span>
-              </Link>
-            </div>
+              {/* Sized to the button, so the note below centres under it. */}
+              <div className="flex w-full flex-col items-center sm:w-auto">
+                <Link
+                  href={CHECKOUT_HREF}
+                  data-cta
+                  className="lego-press cta-shimmer group inline-flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-full px-8 font-body text-[15.5px] font-bold sm:w-auto"
+                  style={{
+                    background: C.ctaFill,
+                    color: C.onAccent,
+                    boxShadow: C.ctaGlow,
+                    ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
+                  }}
+                >
+                  <span className="inline-flex items-center gap-2.5">
+                    {CTA_LABEL}
+                    <ArrowRight
+                      weight="bold"
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </Link>
 
-            {/* Welded to the button, never floated away from it. */}
-            <p
-              className="mt-4 flex items-center justify-center gap-2 text-[13.5px] font-medium lg:justify-start"
-              style={{ color: C.inkSoft }}
-            >
-              {/* Sage is the confirm colour in this palette and the shield is a
-                  guarantee mark; `--gold` is 1.5:1 on the light stage. */}
-              <ShieldCheck
-                weight="fill"
-                className="h-4 w-4 shrink-0"
-                style={{ color: C.emeraldInk }}
-              />
-              {CTA_NOTE}
-            </p>
+                <p
+                  className="mt-4 flex items-center justify-center gap-2 text-[13.5px] font-medium"
+                  style={{ color: C.inkSoft }}
+                >
+                  <ShieldCheck
+                    weight="fill"
+                    className="h-4 w-4 shrink-0"
+                    style={{ color: C.emeraldInk }}
+                  />
+                  {CTA_NOTE}
+                </p>
+              </div>
+            </div>
 
             {/* The three facts, on a hairline rule rather than in boxes. */}
             <ul
@@ -319,7 +320,7 @@ export function Hero() {
                 background: C.surface,
                 border: `1px solid ${C.lineStrong}`,
                 boxShadow:
-                  '0 0 0 8px rgba(169,139,201,0.12), 0 28px 60px -34px rgba(46,33,64,0.34)',
+                  '0 0 0 8px rgba(248, 113, 134,0.12), 0 28px 60px -34px rgba(31, 16, 20,0.34)',
               }}
             >
               <Art
@@ -355,9 +356,10 @@ export function Hero() {
                 data-cta
                 className="lego-press cta-shimmer cta-breath group mt-6 inline-flex min-h-[56px] w-full items-center justify-center gap-2.5 rounded-2xl font-body text-[15.5px] font-bold"
                 style={{
-                  background: C.ink,
-                  color: C.canvas,
-                  ['--shimmer' as string]: 'rgba(220,203,238,0.42)',
+                  background: C.ctaFill,
+                  color: C.onAccent,
+                  boxShadow: C.ctaGlow,
+                  ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
                 }}
               >
                 <span className="inline-flex items-center gap-2.5">
@@ -435,7 +437,7 @@ function TrustLedger() {
         style={{
           background: C.surface,
           border: `1px solid ${C.line}`,
-          boxShadow: '0 26px 54px -30px rgba(46,33,64,0.32)',
+          boxShadow: '0 26px 54px -30px rgba(31, 16, 20,0.32)',
         }}
       >
         {STATS.map(({ icon: Icon, big, small, bed, fg }, idx) => (
@@ -462,7 +464,7 @@ function TrustLedger() {
               >
                 {big}
               </span>
-              <span className="mt-0.5 block text-[12.5px]" style={{ color: C.inkSoft }}>
+              <span className="mt-0.5 block text-[12.5px] font-normal" style={{ color: C.inkMuted }}>
                 {small}
               </span>
             </span>
