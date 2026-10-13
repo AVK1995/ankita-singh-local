@@ -11,14 +11,23 @@ const RAW_PRICE = Number(process.env.NEXT_PUBLIC_PRICE_RUPEES);
 export const PRICE_RUPEES = Number.isFinite(RAW_PRICE) && RAW_PRICE > 0 ? RAW_PRICE : 497;
 export const PRICE = `₹${PRICE_RUPEES.toLocaleString('en-IN')}`;
 
-/** The anchor the announcement bar names, per the source copy. */
-export const PRICE_RISES_TO = '₹1599';
+/* The price the announcement bar says it rises to, struck through against
+   PRICE on the hero card and the checkout. */
+export const STRIKE_PRICE_RUPEES = 1599;
+export const STRIKE_PRICE = `₹${STRIKE_PRICE_RUPEES.toLocaleString('en-IN')}`;
+/* Rounded down, so the label never claims more off than the two prices give. */
+export const DISCOUNT_PCT = Math.floor(
+  ((STRIKE_PRICE_RUPEES - PRICE_RUPEES) / STRIKE_PRICE_RUPEES) * 100,
+);
 
 /* ⚠️ NO YEAR WAS SUPPLIED. The source says "21st October" and nothing more, so
    that is what renders. */
 export const START_DATE = '21st October';
 export const SESSION_TIMES = '6 AM & 7 PM';
 export const SESSION_TIMES_TZ = '6 AM or 7 PM IST';
+/* The first session, 6 AM IST on the start date (2026: the source gives no
+   year, and 21 October 2026 is the next one). Drives the checkout countdown. */
+export const START_AT = '2026-10-21T06:00:00+05:30';
 
 /**
  * ⚠️ UNVERIFIED. The source asserts "1000+ Women Guided" and a "5.0 Review"
@@ -37,13 +46,13 @@ export const WHATSAPP_INVITE = process.env.NEXT_PUBLIC_WHATSAPP_INVITE ?? '';
 /** The next click is a payment. Every CTA on the page points here. */
 export const CHECKOUT_HREF = '/checkout';
 
-/* Verbatim from the source, which repeats the same pair at the hero, the
-   live-sessions card and the closing recap. */
-export const CTA_LABEL = `Start Your 5-Day Reset · ${PRICE}`;
+/* The source pair, with the price swapped for the discount. Used at the hero,
+   the live-sessions card and the closing recap. */
+export const CTA_LABEL = `Start Your 5-Day Reset · ${DISCOUNT_PCT}% Off Today`;
 export const CTA_NOTE = '100% Money-Back Guarantee';
 
 /** The two-options beat words its button differently from every other CTA. */
-export const CTA_LABEL_ACTION = `Take Action · ${PRICE}`;
+export const CTA_LABEL_ACTION = `Take Action · ${DISCOUNT_PCT}% Off Today`;
 
 /** 2500 → "₹2,500". One formatter, so a value never renders two ways. */
 export const inr = (n: number) => `₹${n.toLocaleString('en-IN')}`;

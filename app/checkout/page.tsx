@@ -39,7 +39,16 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 
 import { LEGAL } from '../_landing/legal';
-import { CTA_NOTE, PRICE, PRICE_RUPEES, SESSION_TIMES_TZ, START_DATE } from '../_landing/offer';
+import {
+  CTA_NOTE,
+  PRICE,
+  PRICE_RUPEES,
+  SESSION_TIMES_TZ,
+  START_DATE,
+  STRIKE_PRICE,
+  STRIKE_PRICE_RUPEES,
+} from '../_landing/offer';
+import { StartCountdown } from '../_landing/countdown';
 import PaymentLogos from '@/components/PaymentLogos';
 import SiteFooter from '@/components/SiteFooter';
 import { collectSignals } from '@/lib/client-signals';
@@ -179,7 +188,12 @@ export default function CheckoutPage() {
     e.preventDefault();
     setTouched(true);
     setFailed('');
-    if (!valid || busy) return;
+    if (!valid) {
+      // The sticky bar submits from below the form, so bring the errors into view.
+      document.getElementById('checkout-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    if (busy) return;
     setBusy(true);
 
     /* Meta itc_event (+ qc_event) + GA4 add_payment_info. Fired before the sheet
@@ -312,6 +326,7 @@ export default function CheckoutPage() {
               accordion on a phone so it never pushes the fields below the fold. */}
           <div className="grid gap-8 lg:grid-cols-[1fr_minmax(320px,380px)] lg:items-start lg:gap-10">
             <form
+              id="checkout-form"
               onSubmit={startPayment}
               noValidate
               className="rounded-2xl p-6 sm:p-8"
@@ -494,9 +509,37 @@ export default function CheckoutPage() {
                     can select, so the highlight was passing OVER the words
                     instead of behind them. */}
                 <span>
-                  {busy ? 'Taking you to payment…' : `Pay ${PRICE} & Join the Reset`}
+                  {busy ? (
+                    'Taking you to payment…'
+                  ) : (
+                    <>
+                      Pay{' '}
+                      <s className="mr-1 font-semibold opacity-75 decoration-2">{STRIKE_PRICE}</s>
+                      {PRICE} &amp; Join the Reset
+                    </>
+                  )}
                 </span>
               </button>
+
+              <p className="mt-3 text-center text-[12.5px] font-semibold leading-snug" style={{ color: C.ink }}>
+                <ShieldCheck
+                  weight="fill"
+                  aria-hidden
+                  className="mr-1.5 inline-block h-4 w-4 align-[-3px]"
+                  style={{ color: C.emeraldInk }}
+                />
+                {CTA_NOTE}
+              </p>
+
+              <div className="mt-4 flex flex-col items-center gap-2">
+                <p
+                  className="text-[10.5px] font-bold uppercase tracking-[0.16em]"
+                  style={{ color: C.goldInk }}
+                >
+                  Reset starts in
+                </p>
+                <StartCountdown />
+              </div>
 
               {/* The three pointers that sit under every checkout CTA we ship.
                   Dot-separated on one line, each nowrap so a narrow phone wraps
@@ -534,7 +577,8 @@ export default function CheckoutPage() {
               <PaymentMethods />
             </form>
 
-            <div className="lg:sticky lg:top-8">
+            {/* Phones see what they are paying for before the form. */}
+            <div className="order-first lg:order-none lg:sticky lg:top-8">
               <OrderSummary />
             </div>
           </div>
@@ -542,6 +586,47 @@ export default function CheckoutPage() {
       </section>
 
       <SiteFooter />
+
+      {/* Phones only: room for the docked bar, then the bar itself. */}
+      <div aria-hidden className="lg:hidden" style={{ height: 'calc(108px + env(safe-area-inset-bottom))' }} />
+      <div
+        className="fixed inset-x-0 bottom-0 z-50 lg:hidden"
+        style={{
+          background: C.surface,
+          borderTop: `1px solid ${C.lineStrong}`,
+          boxShadow: '0 -6px 24px rgba(31, 16, 20, 0.14)',
+          paddingBottom: 'env(safe-area-inset-bottom)',
+        }}
+      >
+        <p
+          className="px-4 py-1.5 text-center text-[12px] font-semibold"
+          style={{ background: C.goldInk, color: '#FFFFFF' }}
+        >
+          Starts in <StartCountdown inline />
+        </p>
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5">
+          <div className="shrink-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: C.inkSoft }}>
+              Total
+            </p>
+            <p className="font-display text-[20px] font-bold leading-tight tabular-nums" style={{ color: C.ink }}>
+              {PRICE}
+            </p>
+            <s className="block text-[12px] font-semibold leading-none decoration-2" style={{ color: C.inkSoft }}>
+              {STRIKE_PRICE}
+            </s>
+          </div>
+          <button
+            type="submit"
+            form="checkout-form"
+            disabled={busy}
+            className="lego-press inline-flex min-h-[52px] flex-1 items-center justify-center rounded-full px-3 text-center text-[15px] font-bold leading-tight disabled:opacity-60"
+            style={{ background: C.ctaFill, color: C.onAccent, boxShadow: C.ctaGlow }}
+          >
+            {busy ? 'Opening…' : 'Book My Spot'}
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
@@ -652,8 +737,12 @@ function OrderSummary() {
 
         <div className="space-y-2 text-[13.5px]">
           <div className="flex justify-between" style={{ color: C.inkSoft }}>
-            <span>Subtotal</span>
-            <span className="tabular-nums">{inr(PRICE_RUPEES)}</span>
+            <span>Full price</span>
+            <span className="tabular-nums">{STRIKE_PRICE}</span>
+          </div>
+          <div className="flex justify-between font-semibold" style={{ color: C.ink }}>
+            <span>Launch discount</span>
+            <span className="tabular-nums">−{inr(STRIKE_PRICE_RUPEES - PRICE_RUPEES)}</span>
           </div>
           <div className="flex justify-between" style={{ color: C.inkSoft }}>
             <span>Total bonus value</span>
@@ -680,16 +769,19 @@ function OrderSummary() {
         >
           Total
         </span>
-        <div className="text-right">
-          <div
+        <div className="flex items-baseline gap-2 text-right">
+          <s
+            className="text-[15px] font-semibold tabular-nums decoration-2 sm:text-[17px]"
+            style={{ color: C.inkSoft }}
+          >
+            {STRIKE_PRICE}
+          </s>
+          <span
             className="font-display text-[26px] font-extrabold leading-none tabular-nums sm:text-[32px]"
             style={{ color: C.goldDeep }}
           >
             {PRICE}
-          </div>
-          <s className="text-[12px] tabular-nums sm:text-[12.5px]" style={{ color: C.inkSoft }}>
-            {inr(VALUE_TOTAL)}
-          </s>
+          </span>
         </div>
       </div>
 
@@ -709,11 +801,13 @@ function OrderSummary() {
         </div>
       </div>
 
-      <p
-        className="mt-4 flex items-center justify-center gap-1.5 text-center text-[12px]"
-        style={{ color: C.inkSoft }}
-      >
-        <ShieldCheck weight="fill" className="h-3.5 w-3.5" style={{ color: C.goldInk }} />
+      <p className="mt-4 text-center text-[12px]" style={{ color: C.inkSoft }}>
+        <ShieldCheck
+          weight="fill"
+          aria-hidden
+          className="mr-1.5 inline-block h-3.5 w-3.5 align-[-2px]"
+          style={{ color: C.emeraldInk }}
+        />
         {CTA_NOTE}
       </p>
     </div>

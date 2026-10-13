@@ -34,19 +34,15 @@ import {
   CTA_LABEL,
   CTA_NOTE,
   PRICE,
-  PRICE_RISES_TO,
   SESSION_TIMES,
   START_DATE,
+  STRIKE_PRICE,
   WOMEN_GUIDED,
 } from './offer';
 import { asset } from './asset-version';
 import { Art, C } from './shared';
 
-/* ══ 0 · Announcement strip ════════════════════════════════════════════════
-   ⚠️ FLAG FOR ATUL: "Price Increases To ₹1599 Tomorrow" renders verbatim. On a
-   page that goes live weeks before a 21 October cohort, "Tomorrow" stops being
-   true the day after launch. Either the campaign carries a real dated deadline
-   or the segment needs re-wording by NO-BRAINER. Not silently changed. */
+/* ══ 0 · Announcement strip ════════════════════════════════════════════════ */
 export function AnnouncementBar() {
   const segments = [
     <>
@@ -56,8 +52,7 @@ export function AnnouncementBar() {
       Challenge for <span style={{ color: C.gold }}>{PRICE}</span>
     </>,
     <>
-      Price Increases To{' '}
-      <span style={{ color: C.gold }}>{PRICE_RISES_TO}</span> Tomorrow
+      Price Increases To <span style={{ color: C.gold }}>{STRIKE_PRICE}</span> Tomorrow
     </>,
     <>100% Money-Back Guarantee</>,
     <>
@@ -345,6 +340,12 @@ export function Hero() {
                 className="mt-6 flex items-baseline justify-center gap-3 border-t pt-6 lg:justify-start"
                 style={{ borderColor: C.line }}
               >
+                <s
+                  className="font-display text-[24px] font-bold leading-none tabular-nums decoration-2"
+                  style={{ color: C.inkSoft }}
+                >
+                  {STRIKE_PRICE}
+                </s>
                 <span className="kz-lit font-display text-[46px] font-bold leading-none">
                   {PRICE}
                 </span>
