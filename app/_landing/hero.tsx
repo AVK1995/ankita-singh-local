@@ -204,7 +204,7 @@ export function Hero() {
                 No priority: the LCP candidate on a phone is the headline above
                 it, and preloading a banner pushes that text further out. */}
             <Art
-              src={asset('/system-images/offer-stack-animated.webp')}
+              src={asset('/system-images/fertility-collection-animated.webp')}
               alt="Ankita with the 5 day cards, the 4 guides and the live Zoom sessions"
               ratio="1 / 1"
               sizes="100vw"
@@ -324,7 +324,7 @@ export function Hero() {
               }}
             >
               <Art
-                src={asset('/system-images/offer-stack-animated.webp')}
+                src={asset('/system-images/fertility-collection-animated.webp')}
                 alt="Ankita with the 5 day cards and the 4 guides"
                 ratio="1 / 1"
                 sizes="(min-width: 1024px) 460px, 100vw"
