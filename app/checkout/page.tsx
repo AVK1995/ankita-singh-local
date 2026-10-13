@@ -41,6 +41,7 @@ import {
 import { LEGAL } from '../_landing/legal';
 import {
   CTA_NOTE,
+  DISCOUNT_PCT,
   PRICE,
   PRICE_RUPEES,
   SESSION_TIMES_TZ,
@@ -48,7 +49,7 @@ import {
   STRIKE_PRICE,
   STRIKE_PRICE_RUPEES,
 } from '../_landing/offer';
-import { StartCountdown } from '../_landing/countdown';
+import { OfferCountdown } from '../_landing/countdown';
 import PaymentLogos from '@/components/PaymentLogos';
 import SiteFooter from '@/components/SiteFooter';
 import { collectSignals } from '@/lib/client-signals';
@@ -495,7 +496,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={busy}
-                className="lego-press cta-shimmer mt-7 inline-flex min-h-[58px] w-full items-center justify-center rounded-2xl px-6 text-[15.5px] font-bold disabled:opacity-60"
+                className="lego-press cta-shimmer mt-7 inline-flex min-h-[64px] w-full items-center justify-center rounded-2xl px-6 py-2.5 text-[15.5px] font-bold disabled:opacity-60"
                 style={{
                   background: C.ctaFill,
                   color: C.onAccent,
@@ -512,11 +513,13 @@ export default function CheckoutPage() {
                   {busy ? (
                     'Taking you to payment…'
                   ) : (
-                    <>
-                      Pay{' '}
-                      <s className="mr-1 font-semibold opacity-75 decoration-2">{STRIKE_PRICE}</s>
-                      {PRICE} &amp; Join the Reset
-                    </>
+                    <span className="flex flex-col items-center leading-tight">
+                      <span>Book My Spot - {DISCOUNT_PCT}% Off Today</span>
+                      <span className="mt-1 text-[14px] font-semibold tabular-nums">
+                        <s className="mr-1.5 opacity-75 decoration-2">{STRIKE_PRICE}</s>
+                        {PRICE}
+                      </span>
+                    </span>
                   )}
                 </span>
               </button>
@@ -536,9 +539,9 @@ export default function CheckoutPage() {
                   className="text-[10.5px] font-bold uppercase tracking-[0.16em]"
                   style={{ color: C.goldInk }}
                 >
-                  Reset starts in
+                  Offer ends in
                 </p>
-                <StartCountdown />
+                <OfferCountdown />
               </div>
 
               {/* The three pointers that sit under every checkout CTA we ship.
@@ -602,7 +605,7 @@ export default function CheckoutPage() {
           className="px-4 py-1.5 text-center text-[12px] font-semibold"
           style={{ background: C.goldInk, color: '#FFFFFF' }}
         >
-          Starts in <StartCountdown inline />
+          Offer ends in <OfferCountdown inline />
         </p>
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5">
           <div className="shrink-0">
@@ -623,7 +626,7 @@ export default function CheckoutPage() {
             className="lego-press inline-flex min-h-[52px] flex-1 items-center justify-center rounded-full px-3 text-center text-[15px] font-bold leading-tight disabled:opacity-60"
             style={{ background: C.ctaFill, color: C.onAccent, boxShadow: C.ctaGlow }}
           >
-            {busy ? 'Opening…' : 'Book My Spot'}
+            {busy ? 'Opening…' : `Book My Spot - ${DISCOUNT_PCT}% Off Today`}
           </button>
         </div>
       </div>
@@ -637,7 +640,10 @@ export default function CheckoutPage() {
 function OrderSummary() {
   const [open, setOpen] = useState(false);
   const [lead, ...bonuses] = RECAP;
-  const bonusValue = VALUE_TOTAL - lead.value;
+  /* The challenge is priced at the strike price here, not its recap value, and
+     the discount is whatever brings the full stack down to PRICE. */
+  const totalPrice = STRIKE_PRICE_RUPEES + (VALUE_TOTAL - lead.value);
+  const launchDiscount = totalPrice - PRICE_RUPEES;
 
   return (
     <div
@@ -706,7 +712,7 @@ function OrderSummary() {
           className="shrink-0 text-right font-display text-[14px] font-extrabold tabular-nums sm:text-[15px]"
           style={{ color: C.ink }}
         >
-          {inr(lead.value)}
+          {STRIKE_PRICE}
         </div>
       </div>
 
@@ -737,21 +743,12 @@ function OrderSummary() {
 
         <div className="space-y-2 text-[13.5px]">
           <div className="flex justify-between" style={{ color: C.inkSoft }}>
-            <span>Full price</span>
-            <span className="tabular-nums">{STRIKE_PRICE}</span>
+            <span>Total Price</span>
+            <span className="tabular-nums">{inr(totalPrice)}</span>
           </div>
           <div className="flex justify-between font-semibold" style={{ color: C.ink }}>
-            <span>Launch discount</span>
-            <span className="tabular-nums">−{inr(STRIKE_PRICE_RUPEES - PRICE_RUPEES)}</span>
-          </div>
-          <div className="flex justify-between" style={{ color: C.inkSoft }}>
-            <span>Total bonus value</span>
-            <s
-              className="decoration-[2.5px] underline-offset-2 tabular-nums"
-              style={{ color: C.inkSoft, textDecorationColor: C.coralInk }}
-            >
-              {inr(bonusValue)}
-            </s>
+            <span>Launch Discount</span>
+            <span className="tabular-nums">−{inr(launchDiscount)}</span>
           </div>
         </div>
       </div>
@@ -760,34 +757,36 @@ function OrderSummary() {
 
       {/* The ruled Total. Gold appears here and nowhere else on the page. */}
       <div
-        className="flex items-baseline justify-between gap-3 rounded-2xl px-4 py-3.5"
+        className="rounded-2xl px-4 py-3.5"
         style={{ background: C.goldWash, border: `1px solid ${C.lineStrong}` }}
       >
-        <span
-          className="font-display text-[13px] font-bold uppercase tracking-[0.12em] sm:text-[14px] sm:tracking-[0.14em]"
-          style={{ color: C.ink }}
-        >
-          Total
-        </span>
-        <div className="flex items-baseline gap-2 text-right">
-          <s
-            className="text-[15px] font-semibold tabular-nums decoration-2 sm:text-[17px]"
-            style={{ color: C.inkSoft }}
-          >
-            {STRIKE_PRICE}
-          </s>
+        <div className="flex items-baseline justify-between gap-3">
           <span
-            className="font-display text-[26px] font-extrabold leading-none tabular-nums sm:text-[32px]"
-            style={{ color: C.goldDeep }}
+            className="font-display text-[13px] font-bold uppercase tracking-[0.12em] sm:text-[14px] sm:tracking-[0.14em]"
+            style={{ color: C.ink }}
           >
-            {PRICE}
+            Today&rsquo;s Offer Price
           </span>
+          <div className="flex items-baseline gap-2 text-right">
+            <s
+              className="text-[15px] font-semibold tabular-nums decoration-2 sm:text-[17px]"
+              style={{ color: C.inkSoft }}
+            >
+              {inr(totalPrice)}
+            </s>
+            <span
+              className="font-display text-[26px] font-extrabold leading-none tabular-nums sm:text-[32px]"
+              style={{ color: C.goldDeep }}
+            >
+              {PRICE}
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Method */}
       <div
-        className="mt-5 flex items-start gap-3 rounded-2xl p-3"
+        className="mt-5 hidden items-start gap-3 rounded-2xl p-3 lg:flex"
         style={{ background: C.canvasAlt, border: `1px solid ${C.line}` }}
       >
         <CreditCard weight="duotone" className="h-5 w-5 shrink-0" style={{ color: C.goldInk }} />

@@ -10,7 +10,14 @@ import { ArrowRight, CalendarBlank, Clock } from '@phosphor-icons/react/dist/ssr
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { CHECKOUT_HREF, CTA_LABEL, PRICE, SESSION_TIMES, START_DATE } from './offer';
+import {
+  CHECKOUT_HREF,
+  DISCOUNT_PCT,
+  PRICE,
+  SESSION_TIMES,
+  START_DATE,
+  STRIKE_PRICE,
+} from './offer';
 import { C } from './shared';
 
 export default function StickyCta() {
@@ -75,38 +82,46 @@ export default function StickyCta() {
         />
   
         <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-3 px-4 py-3 sm:px-8">
-          <div className="min-w-0">
+          <div className="min-w-0 shrink-0">
             <p
-              className="truncate font-display text-[15px] font-bold leading-tight sm:text-[16.5px]"
+              className="truncate font-display text-[13px] font-bold leading-tight sm:text-[16.5px]"
               style={{ color: C.ink }}
             >
               5-Day Fertility Reset
-              <span className="mx-1.5" style={{ color: C.lineStrong }}>
-                ·
+            </p>
+            <p className="mt-0.5 flex items-baseline gap-1.5 tabular-nums">
+              <s
+                className="text-[12px] font-semibold decoration-2 sm:text-[13px]"
+                style={{ color: C.inkSoft }}
+              >
+                {STRIKE_PRICE}
+              </s>
+              <span
+                className="font-display text-[20px] font-extrabold leading-none sm:text-[22px]"
+                style={{ color: C.goldDeep }}
+              >
+                {PRICE}
               </span>
-              {/* goldInk, not goldDeep: this price sets below the 18.66px-bold
-                  large-text threshold, so it needs the 4.5:1 step. */}
-              <span style={{ color: C.goldInk }}>{PRICE}</span>
             </p>
             <p
-              className="mt-0.5 flex items-center gap-3 truncate text-[11.5px] font-normal sm:text-[12px]"
+              className="mt-1 hidden items-center gap-3 truncate text-[12px] font-normal sm:flex"
               style={{ color: C.inkMuted }}
             >
               <span className="inline-flex shrink-0 items-center gap-1.5">
                 <CalendarBlank weight="bold" className="h-3 w-3" style={{ color: C.goldInk }} />
                 Starts {START_DATE}
               </span>
-              <span className="hidden shrink-0 items-center gap-1.5 min-[420px]:inline-flex">
+              <span className="inline-flex shrink-0 items-center gap-1.5">
                 <Clock weight="bold" className="h-3 w-3" style={{ color: C.coralInk }} />
                 {SESSION_TIMES}
               </span>
             </p>
           </div>
-  
+
           <Link
             href={CHECKOUT_HREF}
             data-cta
-            className="lego-press cta-shimmer group inline-flex min-h-[48px] shrink-0 items-center justify-center gap-2 rounded-full px-5 text-[14px] font-bold sm:px-7 sm:text-[15px]"
+            className="lego-press cta-shimmer group inline-flex min-h-[50px] flex-1 items-center justify-center gap-2 rounded-full px-4 text-center text-[14px] font-bold leading-tight sm:flex-none sm:px-7 sm:text-[15px]"
             style={{
               background: C.ctaFill,
               color: C.onAccent,
@@ -115,11 +130,10 @@ export default function StickyCta() {
             }}
           >
             <span className="inline-flex items-center gap-2">
-              <span className="sm:hidden">Reserve My Spot</span>
-              <span className="hidden sm:inline">{CTA_LABEL}</span>
+              Book My Spot - {DISCOUNT_PCT}% Off Today
               <ArrowRight
                 weight="bold"
-                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
               />
             </span>
           </Link>

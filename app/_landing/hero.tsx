@@ -19,8 +19,8 @@ import {
   ArrowRight,
   CalendarBlank,
   Clock,
+  Gift,
   Heart,
-  Lock,
   ShieldCheck,
   Star,
   VideoCamera,
@@ -31,8 +31,7 @@ import { legoBrick, legoDelay } from './lego-style';
 import {
   CHECKOUT_HREF,
   CLIENT_RATING,
-  CTA_LABEL,
-  CTA_NOTE,
+  DISCOUNT_PCT,
   PRICE,
   SESSION_TIMES,
   START_DATE,
@@ -40,6 +39,7 @@ import {
   WOMEN_GUIDED,
 } from './offer';
 import { asset } from './asset-version';
+import { SeatCount } from './seat-count';
 import { Art, C } from './shared';
 
 /* ══ 0 · Announcement strip ════════════════════════════════════════════════ */
@@ -121,23 +121,23 @@ export function AnnouncementBar() {
 /* ══ 1 · Hero ══════════════════════════════════════════════════════════════ */
 
 const HERO_FACTS = [
-  { icon: CalendarBlank, text: `Starts ${START_DATE}` },
-  { icon: Clock, text: SESSION_TIMES },
-  { icon: VideoCamera, text: 'Live, Expert-Led Sessions' },
+  { icon: VideoCamera, text: '5-Day Live, at-home Workshop' },
+  { icon: CalendarBlank, text: '21st - 25th October' },
+  { icon: Clock, text: '6 AM or 7 PM Flexible Time' },
+  { icon: Gift, text: 'Bonuses worth ₹4499' },
 ];
+
+const HERO_CTA_LABEL = `Book My Seat Now - ${DISCOUNT_PCT}% Off Today!`;
 
 export function Hero() {
   return (
     <>
       <section data-hero className="kz-stage pb-24 pt-10 sm:pt-12">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-9 px-5 pt-6 sm:gap-12 md:px-8 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16 lg:pt-10">
+        <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-10 px-5 pt-6 sm:gap-12 md:px-8 lg:pt-10">
           {/* ══ LEFT ══════════════════════════════════════════════════════ */}
-          <div className="text-center lg:text-left">
-            {/* The gate line: who this is for, said before anything is sold.
-                86 characters, so it is set at 10.5px with explicit leading and
-                a shrink-0 dot: it holds two lines on a phone and one from lg. */}
+          <div className="w-full max-w-[860px] text-center">
             <span
-              className="inline-flex items-center justify-center gap-2.5 rounded-full px-4 py-2 text-center text-[10.5px] lg:justify-start lg:text-left font-bold uppercase leading-[1.5] tracking-[0.1em]"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full px-4 py-2 text-center text-[10.5px] font-bold uppercase leading-[1.5] tracking-[0.1em]"
               style={{
                 background: C.goldWash,
                 border: '1px solid rgba(248, 113, 134,0.45)',
@@ -153,40 +153,38 @@ export function Hero() {
                   ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.6)',
                 }}
               />
-              For Women Trying to Conceive Naturally &amp; Prepare Their Body for
-              Pregnancy
+              5-Day Fertility Reset Challenge
             </span>
 
-            {/* `.kz-lit`, not `.kz-lit-dark`: the dark-ground sweep renders at
-                about 2.0:1 on this light hero. */}
-            <h1
-              className="mt-7 font-display text-[32px] font-bold leading-[1.08] sm:text-[40px] lg:text-[48px]"
-              style={{ color: C.ink }}
+            <p
+              className="mx-auto mt-6 max-w-[620px] font-body text-[17px] font-semibold leading-[1.45] sm:text-[19px]"
+              style={{ color: C.inkSoft }}
             >
-              <span className="kz-lit kz-lit-hero block whitespace-nowrap text-[9.5vw] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[60px] lg:text-[52px] xl:text-[62px]">
-                <span style={{ color: C.ink }}>Conceive</span>{' '}
-                <em className="italic">Naturally.</em>
-              </span>
-              <span
-                className="mt-4 block font-body text-[18px] font-semibold leading-[1.45] sm:text-[20px] lg:text-[22px]"
-                style={{ color: C.inkSoft }}
-              >
-                Even if You Have{' '}
-                {['PCOS', 'Thyroid', 'Endometriosis', 'Unexplained Infertility', 'Failed IVF/IUI'].map(
-                  (c, i, all) => (
-                    <span key={c}>
-                      <strong
-                        className="whitespace-nowrap font-extrabold"
-                        style={{ color: C.goldDeep }}
-                      >
-                        {c}
-                      </strong>
-                      {i === all.length - 1 ? '' : i === all.length - 2 ? ' or ' : ', '}
-                    </span>
-                  ),
-                )}
-              </span>
+              Want to get pregnant even with{' '}
+              {['PCOS', 'thyroid', 'endometriosis', 'weight gain'].map((c, i, all) => (
+                <span key={c}>
+                  <strong className="whitespace-nowrap font-extrabold" style={{ color: C.goldDeep }}>
+                    {c}
+                  </strong>
+                  {i === all.length - 1 ? '?' : i === all.length - 2 ? ' or ' : ', '}
+                </span>
+              ))}
+            </p>
+
+            <h1
+              className="mt-4 font-display text-[30px] font-extrabold leading-[1.12] sm:text-[40px] lg:text-[46px]"
+              style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
+            >
+              Double your chances of Pregnancy with a simple at-home{' '}
+              <span className="kz-lit kz-lit-hero">&ldquo;Period-Sync Yoga Routine&rdquo;</span>
             </h1>
+
+            <p
+              className="mx-auto mt-4 max-w-[620px] font-body text-[17px] font-semibold leading-[1.45] sm:text-[19px]"
+              style={{ color: C.inkSoft }}
+            >
+              Even after trying IVF/IUI, hormonal injections or medicines
+            </p>
 
             {/* ══ THE MOBILE CLIENT BANNER ═════════════════════════════════
                 Directly under the headline, and `lg:hidden` because `lg` is
@@ -207,27 +205,29 @@ export function Hero() {
             />
 
             <p
-              className="mx-auto mt-6 max-w-[600px] text-[17px] font-bold leading-[1.45] lg:mx-0"
+              className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[14.5px] font-semibold"
               style={{ color: C.ink }}
             >
-              In Just 5 Days, Discover What Can Improve Your Chances of Natural
-              Conception
-            </p>
-            <p
-              className="mx-auto mt-3 max-w-[600px] text-[16px] leading-[1.7] lg:mx-0"
-              style={{ color: C.inkSoft }}
-            >
-              A fertility expert-led live reset designed around the key areas
-              that influence conception readiness: your cycle, fertile window,
-              pelvic &amp; core strength, breathing and nutrition, so you can
-              better support your chances of conceiving naturally. Starts{' '}
-              <strong className="font-bold" style={{ color: C.ink }}>
-                {START_DATE}
-              </strong>
-              , live on Zoom.
+              <span className="inline-flex gap-0.5" aria-label="Five stars">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} weight="fill" className="h-4 w-4" style={{ color: C.goldDeep }} />
+                ))}
+              </span>
+              <span>
+                Trusted by {WOMEN_GUIDED} Women on their stress-free motherhood journey
+              </span>
             </p>
 
-            <div className="mt-9 flex justify-center lg:justify-start">
+            {/* Desktop: card and facts side by side, widened past the 860 copy
+                column to 980. Below lg both keep their stacked places. */}
+            <div className="mt-8 hidden grid-cols-2 items-center gap-6 lg:-mx-[60px] lg:grid">
+              <OfferCard compact className="h-full" />
+              <HeroFacts />
+            </div>
+
+            <HeroFacts className="mt-6 lg:hidden" />
+
+            <div className="mt-9 flex justify-center">
               {/* Sized to the button, so the note below centres under it. */}
               <div className="flex w-full flex-col items-center sm:w-auto">
                 <Link
@@ -242,7 +242,7 @@ export function Hero() {
                   }}
                 >
                   <span className="inline-flex items-center gap-2.5">
-                    {CTA_LABEL}
+                    {HERO_CTA_LABEL}
                     <ArrowRight
                       weight="bold"
                       className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
@@ -251,142 +251,136 @@ export function Hero() {
                 </Link>
 
                 <p
-                  className="mt-4 flex items-center justify-center gap-2 text-[13.5px] font-medium"
+                  className="mt-4 text-center font-display text-[16px] font-bold leading-snug sm:text-[17px]"
+                  style={{ color: C.ink }}
+                >
+                  Last{' '}
+                  <span className="seat-chip">
+                    <SeatCount />
+                  </span>{' '}
+                  Seats Left - Booking Closes Once Full
+                </p>
+
+                <p
+                  className="mt-3 max-w-[520px] text-center text-[13.5px] leading-snug"
                   style={{ color: C.inkSoft }}
                 >
                   <ShieldCheck
                     weight="fill"
-                    className="h-4 w-4 shrink-0"
+                    aria-hidden
+                    className="mr-1.5 inline-block h-4 w-4 align-[-3px]"
                     style={{ color: C.emeraldInk }}
                   />
-                  {CTA_NOTE}
+                  <strong style={{ color: C.ink }}>Get-Clarity Promise:</strong> Get complete
+                  clarity on how to reset your fertility by day-5 or get 100% refund!
                 </p>
               </div>
             </div>
-
-            {/* The three facts, on a hairline rule rather than in boxes. */}
-            <ul
-              className="mt-9 flex flex-col items-stretch gap-px overflow-hidden rounded-2xl sm:flex-row"
-              style={{
-                /* This background IS the 1px rules: the rows sit on gap-px and
-                   it shows through between them. On the dark stage that meant
-                   it had to be BRIGHTER than the rows; the rows are white now,
-                   so the same trick needs it DARKER. Same mechanism, inverted
-                   relationship. */
-                background: C.lineStrong,
-                border: `1px solid ${C.line}`,
-              }}
-            >
-              {HERO_FACTS.map(({ icon: Icon, text }, idx) => (
-                <li
-                  key={text}
-                  data-lego=""
-                  className="flex flex-1 items-center justify-center gap-2.5 px-4 py-3.5 text-[13px] font-semibold"
-                  style={{
-                    ...legoDelay(idx, 90),
-                    /* Opaque paper. A translucent tile here would let the dot
-                       grid read through the type. */
-                    background: C.surface,
-                    color: C.ink,
-                  }}
-                >
-                  <Icon weight="bold" className="h-4 w-4 shrink-0" style={{ color: C.goldInk }} />
-                  {text}
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* ══ RIGHT · the offer card ════════════════════════════════════
-              The page's single focal object. There is no video and no
-              photography yet, so the offer itself is what catches the light. */}
-          <div>
-            <div
-              data-lego=""
-              className="rounded-[28px] p-7 text-center sm:p-8 lg:text-left"
-              style={{
-                ...legoDelay(2, 90),
-                /* `surface`, not `canvas`. On the dark stage the card was the
-                   only light object and any near-white read as paper; on a
-                   light stage `canvas` is two steps off the ground and the card
-                   stops being an object. Pure white plus the ring is what still
-                   separates it, and the halo, which used to be the card's own
-                   light bleeding onto a dark slab, becomes a plain accent ring. */
-                background: C.surface,
-                border: `1px solid ${C.lineStrong}`,
-                boxShadow:
-                  '0 0 0 8px rgba(248, 113, 134,0.12), 0 28px 60px -34px rgba(31, 16, 20,0.34)',
-              }}
-            >
-              <Art
-                src={asset('/system-images/fertility-collection-animated.webp')}
-                alt="Ankita with the 5 day cards and the 4 guides"
-                ratio="1 / 1"
-                sizes="(min-width: 1024px) 460px, 100vw"
-                className="mb-6"
-              />
-
-              <h2
-                className="font-display text-[26px] font-bold leading-[1.16]"
-                style={{ color: C.ink }}
-              >
-                5-Day Fertility Reset Challenge
-              </h2>
-              <p className="mt-2 text-[14px]" style={{ color: C.inkSoft }}>
-                Live expert-led sessions · Zoom · 2 session timings
-              </p>
-
-              <div
-                className="mt-6 flex items-baseline justify-center gap-3 border-t pt-6 lg:justify-start"
-                style={{ borderColor: C.line }}
-              >
-                <s
-                  className="font-display text-[24px] font-bold leading-none tabular-nums decoration-2"
-                  style={{ color: C.inkSoft }}
-                >
-                  {STRIKE_PRICE}
-                </s>
-                <span className="kz-lit font-display text-[46px] font-bold leading-none">
-                  {PRICE}
-                </span>
-              </div>
-
-              {/* THE breathing CTA, and the only one on the page. */}
-              <Link
-                href={CHECKOUT_HREF}
-                data-cta
-                className="lego-press cta-shimmer cta-breath group mt-6 inline-flex min-h-[56px] w-full items-center justify-center gap-2.5 rounded-2xl font-body text-[15.5px] font-bold"
-                style={{
-                  background: C.ctaFill,
-                  color: C.onAccent,
-                  boxShadow: C.ctaGlow,
-                  ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
-                }}
-              >
-                <span className="inline-flex items-center gap-2.5">
-                  Reserve My Spot
-                  <ArrowRight
-                    weight="bold"
-                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                  />
-                </span>
-              </Link>
-
-              <p
-                className="mt-4 flex items-center justify-center gap-2 text-[11.5px] font-semibold uppercase tracking-[0.08em]"
-                style={{ color: C.inkSoft }}
-              >
-                <Lock weight="fill" className="h-3.5 w-3.5 shrink-0" style={{ color: C.goldInk }} />
-                100% Secure · UPI / Card / NetBanking
-              </p>
-            </div>
-          </div>
+          {/* ══ The offer card: stacked on phones, landscape (image left,
+              details right) from md up, centred under the hero copy. */}
+          <OfferCard className="w-full max-w-[980px] lg:hidden" />
         </div>
       </section>
 
       <div className="kz-stage-seam" aria-hidden />
       <TrustLedger />
     </>
+  );
+}
+
+function HeroFacts({ className = '' }: { className?: string }) {
+  return (
+    <ul className={`grid grid-cols-2 gap-3 ${className}`}>
+      {HERO_FACTS.map(({ icon: Icon, text }, idx) => (
+        <li
+          key={text}
+          data-lego=""
+          className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[12.5px] font-semibold leading-snug sm:text-[13px]"
+          style={{
+            ...legoDelay(idx, 90),
+            background: C.surface,
+            border: `1px solid ${C.lineStrong}`,
+            color: C.ink,
+          }}
+        >
+          <span
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-full"
+            style={{ background: C.goldPale }}
+          >
+            <Icon weight="bold" className="h-4 w-4" style={{ color: C.goldInk }} />
+          </span>
+          {text}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* Rendered twice in the hero, one per breakpoint. `compact` is the half-width
+   desktop version: image and details side by side at every size. */
+function OfferCard({ className, compact = false }: { className: string; compact?: boolean }) {
+  return (
+    <div className={className}>
+      <div
+        data-lego=""
+        className={
+          compact
+            ? 'grid h-full grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] items-center gap-5 rounded-[24px] p-5 text-left'
+            : 'grid items-center gap-6 rounded-[28px] p-7 text-center sm:p-8 md:grid-cols-2 md:gap-9 md:text-left'
+        }
+        style={{
+          ...legoDelay(2, 90),
+          /* `surface`, not `canvas`. On the dark stage the card was the
+             only light object and any near-white read as paper; on a
+             light stage `canvas` is two steps off the ground and the card
+             stops being an object. Pure white plus the ring is what still
+             separates it, and the halo, which used to be the card's own
+             light bleeding onto a dark slab, becomes a plain accent ring. */
+          background: C.surface,
+          border: `1px solid ${C.lineStrong}`,
+          boxShadow:
+            '0 0 0 8px rgba(248, 113, 134,0.12), 0 28px 60px -34px rgba(31, 16, 20,0.34)',
+        }}
+      >
+        <Art
+          src={asset('/system-images/fertility-collection-animated.webp')}
+          alt="Ankita with the 5 day cards and the 4 guides"
+          ratio="1 / 1"
+          sizes={compact ? '220px' : '(min-width: 768px) 440px, 100vw'}
+        />
+
+        <div>
+          <h2
+            className={`font-display font-bold leading-[1.16] ${compact ? 'text-[20px]' : 'text-[26px]'}`}
+            style={{ color: C.ink }}
+          >
+            5-Day Fertility Reset Challenge
+          </h2>
+          <p className={`mt-2 ${compact ? 'text-[12.5px]' : 'text-[14px]'}`} style={{ color: C.inkSoft }}>
+            Live expert-led sessions · Zoom · 2 session timings
+          </p>
+
+          <div
+            className={`flex items-baseline justify-center gap-3 border-t md:justify-start ${compact ? 'mt-4 pt-4' : 'mt-6 pt-6'}`}
+            style={{ borderColor: C.line }}
+          >
+            <s
+              className={`font-display font-bold leading-none tabular-nums decoration-2 ${compact ? 'text-[19px]' : 'text-[24px]'}`}
+              style={{ color: C.inkSoft }}
+            >
+              {STRIKE_PRICE}
+            </s>
+            <span
+              className={`kz-lit font-display font-bold leading-none ${compact ? 'text-[36px]' : 'text-[46px]'}`}
+            >
+              {PRICE}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

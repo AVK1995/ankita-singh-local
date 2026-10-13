@@ -2,26 +2,31 @@
 
 import { useEffect, useState } from 'react';
 
-import { START_AT } from './offer';
 import { C } from './shared';
 
-const START_MS = new Date(START_AT).getTime();
 const pad = (n: number) => String(n).padStart(2, '0');
+
+/* Next local midnight in the viewer's own timezone, so the offer always ends
+   at the close of THEIR day and rolls over to a fresh 24h window after. */
+function msToMidnight(now: number) {
+  const end = new Date(now);
+  end.setHours(24, 0, 0, 0);
+  return end.getTime() - now;
+}
 
 function parts(ms: number) {
   const s = Math.max(0, Math.floor(ms / 1000));
   return [
-    { v: Math.floor(s / 86400), label: 'Days' },
-    { v: Math.floor((s % 86400) / 3600), label: 'Hrs' },
+    { v: Math.floor(s / 3600), label: 'Hrs' },
     { v: Math.floor((s % 3600) / 60), label: 'Mins' },
     { v: s % 60, label: 'Secs' },
   ];
 }
 
-/* Time left until the first session: a boxed DD : HH : MM : SS timer, or one
-   line of text for the docked bar. Renders nothing until mounted, so the server
-   HTML and the first client render agree, and nothing once the reset starts. */
-export function StartCountdown({ inline = false }: { inline?: boolean }) {
+/* Time left on today's offer: a boxed HH : MM : SS timer, or one line of text
+   for the docked bar. Renders nothing until mounted, so the server HTML and
+   the first client render agree. */
+export function OfferCountdown({ inline = false }: { inline?: boolean }) {
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
@@ -30,14 +35,14 @@ export function StartCountdown({ inline = false }: { inline?: boolean }) {
     return () => window.clearInterval(id);
   }, []);
 
-  if (now === null || now >= START_MS) return null;
-  const segs = parts(START_MS - now);
+  if (now === null) return null;
+  const segs = parts(msToMidnight(now));
 
   if (inline) {
-    const [d, h, m, s] = segs;
+    const [h, m, s] = segs;
     return (
       <span className="tabular-nums" role="timer">
-        {pad(d.v)}d : {pad(h.v)}h : {pad(m.v)}m : {pad(s.v)}s
+        {pad(h.v)}h : {pad(m.v)}m : {pad(s.v)}s
       </span>
     );
   }
@@ -46,7 +51,7 @@ export function StartCountdown({ inline = false }: { inline?: boolean }) {
     <span
       className="inline-flex items-start gap-1.5"
       role="timer"
-      aria-label="Time until the reset starts"
+      aria-label="Time left on today's offer"
     >
       {segs.map((p, i) => (
         <span key={p.label} className="inline-flex items-start gap-1.5">

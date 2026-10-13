@@ -12,8 +12,12 @@ export const PRICE_RUPEES = Number.isFinite(RAW_PRICE) && RAW_PRICE > 0 ? RAW_PR
 export const PRICE = `₹${PRICE_RUPEES.toLocaleString('en-IN')}`;
 
 /* The price the announcement bar says it rises to, struck through against
-   PRICE on the hero card and the checkout. */
-export const STRIKE_PRICE_RUPEES = 1599;
+   PRICE on the hero card and the checkout. Derived from PRICE so the page
+   always reads 81% off: the smallest strike that reaches 81%, rounded up to
+   end in 99 (₹497 → ₹2,699). */
+const TARGET_DISCOUNT_PCT = 81;
+const minStrike = Math.ceil(PRICE_RUPEES / (1 - TARGET_DISCOUNT_PCT / 100));
+export const STRIKE_PRICE_RUPEES = Math.ceil((minStrike + 1) / 100) * 100 - 1;
 export const STRIKE_PRICE = `₹${STRIKE_PRICE_RUPEES.toLocaleString('en-IN')}`;
 /* Rounded down, so the label never claims more off than the two prices give. */
 export const DISCOUNT_PCT = Math.floor(
@@ -26,8 +30,11 @@ export const START_DATE = '21st October';
 export const SESSION_TIMES = '6 AM & 7 PM';
 export const SESSION_TIMES_TZ = '6 AM or 7 PM IST';
 /* The first session, 6 AM IST on the start date (2026: the source gives no
-   year, and 21 October 2026 is the next one). Drives the checkout countdown. */
+   year, and 21 October 2026 is the next one). */
 export const START_AT = '2026-10-21T06:00:00+05:30';
+
+/** The hero's "Last xx Seats Left" starts here; seat-count.tsx steps it down. */
+export const SEATS_START = 44;
 
 /**
  * ⚠️ UNVERIFIED. The source asserts "1000+ Women Guided" and a "5.0 Review"

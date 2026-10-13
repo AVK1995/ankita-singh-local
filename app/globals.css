@@ -631,6 +631,16 @@ button {
   filter: none;
 }
 
+/* The live seat number in "Last xx Seats Left". */
+.seat-chip {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  border-radius: 6px;
+  background: var(--gold-ink);
+  color: #ffffff;
+  font-weight: 800;
+}
+
 .kz-lit-hero {
   background: none;
   color: var(--gold-deep);

@@ -4,8 +4,8 @@
  * Everything below the hero:
  *
  *   7  Real Fertility Journeys ................. ./proof   ← HOISTED, see below
- *   3  Here's What You'll Experience In 5 Days ... this file
- *   4  Your 5-Day Schedule ..................... this file  ← the signature beat
+ *   3  What Will Change After This 5-Day Reset .. this file
+ *   4  Your 5-Day Plan ......................... this file  ← the signature beat
  *   5  Live Sessions, Twice A Day .............. this file
  *   6  Does this sound like you? ............... ./proof
  *   8  GET INSTANT ACCESS TO ................... ./toolkit
@@ -24,14 +24,13 @@ import {
   ArrowRight,
   ArrowsClockwise,
   Barbell,
+  BowlFood,
   CalendarBlank,
   Clock,
   Compass,
-  ForkKnife,
+  Heart,
+  Lightning,
   PersonSimpleTaiChi,
-  UsersThree,
-  VideoCamera,
-  Wind,
 } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -39,7 +38,7 @@ import { useEffect, useRef, useState } from 'react';
 import Close from './close';
 import { legoBrick, legoDelay } from './lego-style';
 import { domAnimation, LazyMotion } from './motion-lite';
-import { CHECKOUT_HREF, CTA_LABEL, CTA_NOTE, SESSION_TIMES, SESSION_TIMES_TZ } from './offer';
+import { CHECKOUT_HREF, CTA_LABEL, CTA_NOTE, SESSION_TIMES } from './offer';
 import { Recognition, Testimonials } from './proof';
 import { C, SectionHeading } from './shared';
 import Toolkit from './toolkit';
@@ -53,65 +52,63 @@ const BEDS = [
   { bed: C.navyBed, fg: C.goldDeep },
 ];
 
-/* ══ 3 · Here's What You'll Experience In 5 Days ═══════════════════════════
+/* ══ 3 · What Will Change After This 5-Day Reset ══════════════════════════
    Eight parallel capabilities, each with a title and a body. A set, not a
    sequence, so it is a grid of equal pieces and the order carries no meaning
    the reader has to follow. */
 const EXPERIENCE = [
   {
-    icon: VideoCamera,
-    title: 'Live Fertility-Focused Sessions',
-    body: 'Join Ankita live on Zoom every day for guided movement, breathing and fertility-focused practices. No pre-recorded routines or one-size-fits-all workouts.',
-  },
-  {
-    icon: ForkKnife,
-    title: 'Fertility Nutrition Guidance',
-    body: 'Learn simple, practical nutrition principles and everyday food habits that can better support your fertility health and conception preparation, without complicated diets or restrictive meal plans.',
-  },
-  {
     icon: ArrowsClockwise,
-    title: 'Cycle-Based Fertility Practice',
-    body: 'Learn how your movement and intensity should change during your period, fertile window and waiting phase instead of following the same routine throughout your cycle.',
+    title: 'SYNC',
+    body: 'Know exactly what to do during your period, fertile window and waiting phase.',
+  },
+  {
+    icon: CalendarBlank,
+    title: 'TRACK',
+    body: 'Find your real fertile window and probable ovulation days, not just your period date.',
   },
   {
     icon: PersonSimpleTaiChi,
-    title: 'Pelvic & Hip Mobility',
-    body: 'Work on pelvic and hip mobility to improve flexibility, reduce stiffness and build a stronger foundation in the area that will support and carry your baby through pregnancy.',
+    title: 'OPEN',
+    body: 'Release tight hips and a stiff pelvis to support conception and a healthy pregnancy.',
   },
   {
     icon: Barbell,
-    title: 'Core & Pelvic Floor Connection',
-    body: 'Learn how to activate and coordinate your core and pelvic floor through gentle strengthening and posture-focused practices that support better body stability.',
+    title: 'STRENGTHEN',
+    body: 'Reconnect your core and pelvic floor for the stability your body needs to carry a baby.',
+  },
+  {
+    icon: Heart,
+    title: 'CALM',
+    body: 'Let go of the stress after months of trying by calming your nervous system',
+  },
+  {
+    icon: BowlFood,
+    title: 'NOURISH',
+    body: 'Know what to eat for fertility, without crash diets or conflicting family advice',
+  },
+  {
+    icon: Lightning,
+    title: 'ENERGIZE',
+    body: 'Feel lighter, more flexible and more energetic in your body every day',
   },
   {
     icon: Compass,
-    title: 'Understand Your Fertile Window',
-    body: 'Learn how to identify your probable ovulation days and understand when your fertile window may fall, because it can vary from woman to woman.',
-  },
-  {
-    icon: Wind,
-    title: 'Breathing & Relaxation Practices',
-    body: 'Use guided breathing and relaxation practices to reduce body tension, calm your system and support better mind-body regulation, including the hormonal communication pathway often referred to as the HPO axis.',
-  },
-  {
-    icon: UsersThree,
-    title: 'A Supportive Community of Women Like You',
-    body: 'Connect with other women who are also preparing for conception, navigating fertility concerns and trying to understand their bodies better, so the journey feels less isolating and more supported.',
+    title: 'PLAN',
+    body: 'Leave with a personalized plan for your safe, stress-free and natural pregnancy',
   },
 ];
 
 function Experience() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvasAlt }}>
-      <SectionHeading sub="A live, guided fertility reset designed to help you understand your body better, move according to your cycle and feel more prepared for conception.">
-        Here&rsquo;s What You&rsquo;ll Experience{' '}
-        <span style={{ color: C.goldDeep }}>In 5 Days</span>
+      <SectionHeading sub="Most women just try harder every month. This workshop reset shows you what to do in each phase of your cycle, so your first (or next) attempt is built on a plan, not a guess.">
+        WHAT WILL CHANGE AFTER THIS{' '}
+        <span style={{ color: C.goldDeep }}>5-DAY RESET?</span>
       </SectionHeading>
 
-      {/* Eight cards tile exactly at 1 and 2 columns and leave a PAIR on the
-          last row at 3, which reads as a pair rather than as a stranded
-          orphan, so none of the single-card placement maths is needed. */}
-      <ul className="mx-auto mt-14 grid max-w-[1120px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Eight short cards: two rows of four on desktop. */}
+      <ul className="mx-auto mt-14 grid max-w-[1120px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {EXPERIENCE.map(({ icon: Icon, title, body }, idx) => {
           const skin = BEDS[idx % BEDS.length];
           return (
@@ -140,7 +137,7 @@ function Experience() {
                 <Icon weight="duotone" className="h-6 w-6" style={{ color: skin.fg }} />
               </span>
               <h3
-                className="mt-5 font-display text-[19px] font-bold leading-snug"
+                className="mt-5 font-display text-[19px] font-bold leading-snug tracking-[0.06em]"
                 style={{ color: C.ink }}
               >
                 {title}
@@ -156,7 +153,7 @@ function Experience() {
   );
 }
 
-/* ══ 4 · Your 5-Day Schedule ═══════════════════════════════════════════════
+/* ══ 4 · Your 5-Day Plan ═══════════════════════════════════════════════════
    The signature beat, and the page's ONE heavy motion moment. Five days is a
    genuine sequence, so it is a spine with a filling rail rather than five
    cards in a row: the rail's progress is a single CSS variable written by a
@@ -164,28 +161,28 @@ function Experience() {
 const DAYS = [
   {
     n: 'DAY 01',
-    title: 'Breathing + Fertility Baseline Assessment',
-    body: 'Breathing & relaxation practices to reduce body tension + Understand your current fertility starting point',
+    title: 'Calm Your Body and Know Where To Start',
+    body: 'After months of trying and waiting, your body carries a lot of stress. Today, simple breathing helps you relax, and a quick body check shows where you are right now, so you can see how far you have come by Day 5.',
   },
   {
     n: 'DAY 02',
-    title: 'Pelvic + Hip Mobility',
-    body: 'Improve pelvic and hip mobility for better movement & flexibility + Learn how to modify your fertility practice based on your menstrual cycle phase',
+    title: 'Open Up Your Hips and Pelvis',
+    body: 'Long hours of sitting leave your hips and pelvis tight and stiff. Today, gentle movements help you loosen up, and you will learn why your yoga should change with your periods instead of staying the same all month.',
   },
   {
     n: 'DAY 03',
-    title: 'Core + Pelvic Floor Connection',
-    body: 'Improve core & pelvic floor coordination for better stability + Gentle strengthening and posture correction to build the support your body will need to carry your baby through pregnancy.',
+    title: 'Make Your Core and Pelvic Muscles Strong',
+    body: 'These are the muscles that will one day hold and carry your baby. Today, gentle exercises and better posture help them work together, so your body feels strong, steady and ready.',
   },
   {
     n: 'DAY 04',
-    title: 'Cycle-Based Fertility Practice + Fertile Window',
-    body: 'Understand what to do during your period, fertile window & waiting period + Understand your fertile window & probable ovulation days + Practice the right movement, breathing & relaxation techniques for each phase',
+    title: 'Master Your Period-Sync Routine and Your Best Days to get pregnant',
+    body: 'This is the day most women say, “Nobody ever told me this!” You will learn what to do on your period days, your fertile days and the days after, find your own best days to try for a baby, and practise the right yoga and breathing for each part of your cycle.',
   },
   {
     n: 'DAY 05',
-    title: 'Fertility-Enhancement Nutrition + Conception Roadmap',
-    body: 'Understand what to include, what to be mindful of and how nutrition can support your fertility preparation + Compare your Day 1 vs Day 5 progress and create your personal next-step fertility plan',
+    title: 'Leave With Your Personalized Plan for Your Next Pregnancy Attempt',
+    body: 'You will learn simple, everyday food habits that support fertility, without crash diets or confusing advice. Then you will see how far you have come since Day 1 and leave with your own clear plan for your next attempt, feeling hopeful and in control again.',
   },
 ];
 
@@ -260,9 +257,10 @@ function Schedule() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
       <SectionHeading
-        sub={`Each day builds on the last to help you understand your body better, move according to your cycle and feel more prepared for conception. Join live at ${SESSION_TIMES_TZ}.`}
+        sub="Every day, you will learn one new part of your Period-Sync Yoga Routine. By Day 5, you will know what to do on your period days, your fertile days and the days after. Join live at 6 AM or 7 PM."
       >
-        Your <span style={{ color: C.goldDeep }}>5-Day Schedule</span>
+        Your <span style={{ color: C.goldDeep }}>5-Day Plan</span> Before Your First (or Next)
+        Attempt
       </SectionHeading>
 
       {/* Alternating spine. The rail is centred on desktop and slides to the
