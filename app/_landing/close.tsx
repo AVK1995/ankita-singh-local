@@ -39,15 +39,16 @@ import SiteFooter from '@/components/SiteFooter';
 import { legoDelay } from './lego-style';
 import {
   CHECKOUT_HREF,
-  CTA_LABEL,
   CTA_LABEL_ACTION,
   CTA_NOTE,
+  DATES,
+  DISCOUNT_PCT,
   INCLUDED,
   INCLUDED_TOTAL,
   inr,
   PRICE,
-  SESSION_TIMES,
-  START_DATE,
+  SESSION_TIMES_TZ,
+  START_SPOKEN,
 } from './offer';
 import { asset } from './asset-version';
 import { Art, C, CtaNote, PrimaryCTA, SectionHeading } from './shared';
@@ -70,7 +71,7 @@ import { Art, C, CtaNote, PrimaryCTA, SectionHeading } from './shared';
 function Guide() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
-      <SectionHeading>
+      <SectionHeading eyebrow="Meet your guide">
         Meet Ankita Singh,{' '}
         <span style={{ color: C.goldDeep }}>Founder of Bindwithyoga</span>
       </SectionHeading>
@@ -92,24 +93,22 @@ function Guide() {
           <div className="space-y-4 text-[16px] leading-[1.75]" style={{ color: C.inkSoft }}>
             <p>
               Ankita is a Yoga Therapist, Fertility Yoga Practitioner, Prenatal
-              &amp; Postnatal Yoga Expert and Meditation Teacher, with advanced
-              training including 500 RYT Yoga Teacher certification, 300 RYT
-              Meditation Teacher training and a Master&rsquo;s in Yoga Therapy.
+              &amp; Postnatal Yoga Expert and Meditation Teacher, with training
+              including 500 RYT Yoga Teacher certification, 300 RYT Meditation
+              Teacher training and a Master&rsquo;s in Yoga Therapy.
             </p>
             <p>
               Having navigated her own journey with PCOS before conceiving
-              naturally, Ankita understands fertility not only through
-              professional training, but also through lived experience.
+              naturally, Ankita understands fertility through professional
+              training and lived experience.
             </p>
             <p>
-              Today, she has guided 1000+ women across fertility, conception,
-              pregnancy and postnatal recovery.
-            </p>
-            <p>
-              Her work has also been recognised through collaborations with
-              Janitri, SuperBottoms, Cradle Children&rsquo;s Hospital Jaipur and
-              Udbhav Clinic Jaipur, and in December 2025 she was awarded Best
-              Yoga Therapist of the Year at the Rajasthan Glory Awards.
+              She has guided 1,000+ women across fertility, conception, pregnancy
+              and postnatal recovery. Her work has been recognised through
+              collaborations with Janitri, SuperBottoms, Cradle Children&rsquo;s
+              Hospital Jaipur and Udbhav Clinic Jaipur. In December 2025 she
+              received a Best Yoga Therapist of the Year award at the Rajasthan
+              Glory Awards.
             </p>
           </div>
 
@@ -144,9 +143,10 @@ function Guide() {
           </figure>
 
           <p className="mt-7 text-[16px] leading-[1.75]" style={{ color: C.inkSoft }}>
-            That is the approach behind the 5-Day Fertility Reset Challenge:
-            helping you understand your body better and experience a more
-            personalised way to prepare for healthy conception.
+            That&rsquo;s the approach behind the 2-Day Fertility Reset
+            Masterclass: understand your cycle, recognise your individual
+            starting point and discover supportive practices for your fertility
+            journey.
           </p>
         </div>
       </div>
@@ -168,46 +168,49 @@ const PILLARS: { n: string; title: string; icon: Icon; body: string }[] = [
     n: '01',
     title: 'The Same Practice Does Not Suit Every Phase',
     icon: ArrowsClockwise,
-    body: 'What may feel right during your fertile window may not be appropriate during your period or waiting phase. Your practice needs to change with your cycle.',
+    body: 'What feels right during your fertile window may not feel comfortable during your period or waiting phase. Adapt movement to your body.',
   },
   {
     n: '02',
     title: 'Nutrition Matters in Conception Preparation',
     icon: BowlFood,
-    body: 'What you eat can also influence how supported your body feels through your fertility journey. Simple, consistent nutrition habits can work alongside movement, cycle awareness and recovery to better support conception preparation.',
+    body: 'Simple, consistent nutrition habits can support your overall reproductive health alongside movement, rest and medical care.',
   },
   {
     n: '03',
-    title: 'Knowing Your Dates Is Not the Same as Knowing Your Fertile Window',
+    title: 'Knowing Your Dates Is Not Knowing Your Fertile Window',
     icon: Target,
-    body: 'Many women know when their period starts, but are still unclear about their probable ovulation days and when conception chances may actually be highest.',
+    body: 'Many women track period dates but remain unsure about probable ovulation days and when conception is most likely.',
   },
   {
     n: '04',
     title: 'More Exercise Is Not Always Better Preparation',
     icon: Scales,
-    body: 'If your hips are tight, pelvic mobility is limited or your core and pelvic floor are poorly coordinated, simply adding harder workouts may miss what your body needs first.',
+    body: 'If your hips feel tight or your core and pelvic floor are poorly coordinated, simply doing harder workouts may not meet your needs.',
   },
   {
     n: '05',
-    title: "Fertility Concerns Don't All Need the Same Starting Point",
+    title: 'Different Fertility Concerns Need Different Starting Points',
     icon: Path,
-    body: 'A woman with PCOS, irregular cycles or thyroid concerns may need a different focus from someone with endometriosis, unexplained infertility or a previous failed medical treatment.',
+    body: 'PCOS, thyroid concerns, endometriosis, unexplained difficulty conceiving and previous treatment attempts call for individual consideration.',
   },
   {
     n: '06',
-    title: 'Conception Preparation Starts Before the Positive Test',
+    title: 'Your Next Attempt Deserves a Clearer Plan',
     icon: Leaf,
-    body: 'You don’t have to wait until fertility becomes a bigger concern. Working on your body, cycle awareness and daily practices can begin before your next conception attempt.',
+    body: 'Learn your cycle, use suitable movement practices and build daily habits that help you move forward with more confidence.',
   },
 ];
 
 function Mechanism() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvasAlt }}>
-      <SectionHeading sub="Ankita's approach covers each of these factors together, helping you prepare for conception in a way that is more personalised, structured and relevant to your body.">
+      <SectionHeading
+        eyebrow="Ankita’s approach"
+        sub="A useful approach considers your menstrual cycle, individual concerns and everyday habits together, not as isolated tips."
+      >
         What Most Women Miss When{' '}
-        <span style={{ color: C.goldDeep }}>Preparing to Conceive</span>
+        <span style={{ color: C.goldDeep }}>Trying to Conceive</span>
       </SectionHeading>
 
       {/* A 1px-gap grid, so the GAPS become the rules: a ruled ledger with no
@@ -274,21 +277,20 @@ function Mechanism() {
    a list of guarantees. A neutral hairline dash carries the list without
    adding a promise. */
 const RESULTS = [
-  'They feel less confused about what to eat and have a clearer fertility-supportive nutrition direction',
-  'Their body feels less tense and more relaxed',
-  'Hips and pelvic area begin to feel more open and mobile',
-  'Core and pelvic floor feel more connected and supported',
-  'They understand which movements suit different phases of their cycle',
-  'Their fertile window and probable ovulation days feel far less confusing',
-  'They become more aware of what their body needs before conception',
-  'They feel more informed, prepared and confident about their fertility journey',
-  'They stop guessing and finally have a clearer next-step plan for conception preparation',
+  'They feel less confused about what to eat and their nutrition direction.',
+  'Their body feels less tense and more relaxed.',
+  'Their hips and pelvic area feel more open and mobile.',
+  'Their core and pelvic floor feel more connected and supported.',
+  'They better understand which movements suit different phases.',
+  'Their probable ovulation days and fertile window feel less confusing.',
+  'They feel more informed, prepared and confident while trying to conceive.',
+  'They stop guessing and gain a clearer next-step plan.',
 ];
 
 function Results() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
-      <SectionHeading eyebrow="THE RESULTS">
+      <SectionHeading eyebrow="The results">
         That&rsquo;s Why Women{' '}
         <span style={{ color: C.goldDeep }}>Begin to Notice...</span>
       </SectionHeading>
@@ -337,7 +339,7 @@ function Results() {
 function TwoOptions() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvasAlt }}>
-      <SectionHeading>
+      <SectionHeading eyebrow="The choice is yours">
         Now You Have <span style={{ color: C.goldDeep }}>Two Options</span> From
         Here
       </SectionHeading>
@@ -363,10 +365,13 @@ function TwoOptions() {
             <Minus weight="bold" className="h-3 w-3" />
             OPTION 1
           </span>
-          <p className="mt-5 text-[15px] leading-relaxed" style={{ color: C.inkSoft }}>
-            Keep trying random fertility advice, generic routines and isolated
-            fixes, while still feeling unsure about what your body actually
-            needs to prepare for conception.
+          <p className="mt-5 font-display text-[18px] font-bold" style={{ color: C.ink }}>
+            Keep trying random fertility advice.
+          </p>
+          <p className="mt-2 text-[15px] leading-relaxed" style={{ color: C.inkSoft }}>
+            Continue piecing together generic exercise routines and isolated
+            fixes, while wondering which practices are relevant to your cycle
+            or individual fertility concerns.
           </p>
         </div>
 
@@ -391,12 +396,15 @@ function TwoOptions() {
             style={{ background: 'rgba(252, 228, 234,0.18)', color: C.gold }}
           >
             <Plus weight="bold" className="h-3 w-3" />
-            OPTION 2
+            OPTION 2 · RECOMMENDED
           </span>
-          <p className="mt-5 text-[15px] leading-relaxed" style={{ color: C.onDark }}>
-            Take 5 days to understand your cycle, fertile window, body
-            readiness and the right fertility practices for each phase, so you
-            can prepare for conception with more clarity and confidence.
+          <p className="mt-5 font-display text-[18px] font-bold" style={{ color: C.onDark }}>
+            Give yourself two days of clarity and experience.
+          </p>
+          <p className="mt-2 text-[15px] leading-relaxed" style={{ color: C.onDark }}>
+            Understand your cycle and fertile window, experience gentle
+            Period-Sync Yoga and leave with a starting plan for your next
+            conception attempt.
           </p>
 
           <Link
@@ -477,13 +485,23 @@ function Recap() {
           </svg>
         </div>
 
+        <p
+          className="text-center text-[10.5px] font-bold uppercase tracking-[0.2em]"
+          style={{ color: C.goldInk }}
+        >
+          Your special invitation
+        </p>
         <h2
-          className="text-center font-display text-[clamp(26px,3.6vw,40px)] font-bold leading-[1.14]"
+          className="mt-3 text-center font-display text-[clamp(26px,3.6vw,40px)] font-bold leading-[1.14]"
           style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
         >
           Recap of Everything{' '}
           <span style={{ color: C.goldDeep }}>You&rsquo;ll Get</span>
         </h2>
+        <p className="mt-3 text-center text-[14.5px] leading-relaxed" style={{ color: C.inkSoft }}>
+          Two live sessions at {START_SPOKEN.replace('Noon', 'noon')}, four practical bonuses and a clearer
+          starting point for your fertility journey.
+        </p>
 
         <div
           className="mt-10 flex items-center justify-between border-b pb-3 text-[10.5px] font-bold uppercase tracking-[0.2em]"
@@ -530,7 +548,7 @@ function Recap() {
             className="text-[11px] font-bold uppercase tracking-[0.2em]"
             style={{ color: C.inkSoft }}
           >
-            TOTAL VALUE
+            TOTAL PACKAGE VALUE
           </span>
           <span
             className="kz-strike font-display text-[22px] font-bold"
@@ -551,13 +569,13 @@ function Recap() {
             {PRICE}
           </p>
           <p className="mt-2 text-[13px] font-normal" style={{ color: C.inkMuted }}>
-            (One-time payment)
+            One-time masterclass registration · {DISCOUNT_PCT}% off the masterclass value
           </p>
         </div>
 
         <div className="mx-auto mt-9 flex max-w-[520px] flex-col items-center">
-          <PrimaryCTA label={CTA_LABEL} tone="navy" full />
-          <CtaNote text={CTA_NOTE} />
+          <PrimaryCTA label="Yes! Book My Seat for the 2-Day Masterclass" tone="navy" full />
+          <CtaNote text={`${CTA_NOTE} · One session per day · ${SESSION_TIMES_TZ}`} />
         </div>
       </div>
     </section>
@@ -575,7 +593,8 @@ function Colophon() {
     <SiteFooter>
       <p className="mx-auto mb-8 max-w-[640px] text-[13px]" style={{ color: C.onDarkMute }}>
         <span className="inline-block">
-          Starts {START_DATE} · {SESSION_TIMES} · Live on Zoom
+          2-Day Fertility Reset Masterclass · {DATES} · One live Zoom session per day,{' '}
+          {SESSION_TIMES_TZ}
         </span>
         <span aria-hidden className="hidden sm:inline">
           {' · '}

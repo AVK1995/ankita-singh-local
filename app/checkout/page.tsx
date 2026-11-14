@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * /checkout · Bindwithyoga · the 5-Day Reset Challenge.
+ * /checkout · Bindwithyoga · the 2-Day Fertility Reset Masterclass.
  *
  * The house-standard challenge checkout: a centred
  * masthead, then a two-column body with the form on the left and a STICKY
@@ -44,16 +44,18 @@ import { LEGAL } from '../_landing/legal';
 import {
   CALL_BOOKING,
   CALL_LINK_DELIVERY,
+  CALL_PRICE_RUPEES,
   CTA_NOTE,
+  DATES,
   PRICE,
   PRICE_RUPEES,
+  RECORDING_PRICE_RUPEES,
   RECORDINGS_DELIVERY,
   SESSION_TIMES_TZ,
-  START_DATE,
+  TIME_LINE,
   STRIKE_PRICE,
   STRIKE_PRICE_RUPEES,
 } from '../_landing/offer';
-import { OfferCountdown } from '../_landing/countdown';
 import PaymentLogos from '@/components/PaymentLogos';
 import SiteFooter from '@/components/SiteFooter';
 import {
@@ -127,17 +129,9 @@ const COUNTRIES: { iso: string; dial: string; label: string }[] = [
   { iso: 'de', dial: '+49', label: 'Germany (+49)' },
 ];
 
-/* Exactly the two the client asked for, and no "other": a two-way split is the
-   point of the question. The VALUE is what travels to the webhook, so keep it
-   stable even if the label is reworded. */
-const OCCUPATIONS = [
-  { value: 'working_professional', label: 'Working professional' },
-  { value: 'homemaker', label: 'Homemaker' },
-];
-
-/* ⚠️ HOUSE COPY for the two add-on cards: COPY-SOURCE.md has no add-ons. The
-   prices and the two delivery lines come from offer.ts; everything else here
-   needs Ankita's read before launch. Nothing may promise an outcome. */
+/* The two order bumps, verbatim from the approved checkout copy (COPY-SOURCE.md,
+   Part B). Prices come from offer.ts so the card and the charge cannot
+   disagree. */
 type AddonCardCopy = {
   id: AddonId;
   pill: string;
@@ -149,6 +143,8 @@ type AddonCardCopy = {
   body: string;
   bullets: string[];
   note?: string;
+  /** The "Yes! Add …" line at the foot of the card. */
+  cta: string;
 };
 
 const ADDON_CARDS: AddonCardCopy[] = [
@@ -157,37 +153,43 @@ const ADDON_CARDS: AddonCardCopy[] = [
     pill: 'Recommended',
     pillShort: 'Recommended',
     tone: 'rose',
-    title: 'Recordings of all 5 live sessions',
-    short: 'Add session recordings',
-    body: 'Join live, then keep every session. Practise again at your own pace, whenever your day allows.',
+    title: 'Get Recordings of Both Live Sessions',
+    short: 'Add both recordings',
+    body: 'Join live and keep both sessions to revisit the lessons and repeat the yoga practices at your own pace.',
     bullets: [
-      'Full recordings of Day 1 to Day 5',
-      'Catch up on any session you could not attend live',
-      'Repeat the practices at your own pace, as often as you like',
-      `Shared in a private recordings WhatsApp group ${RECORDINGS_DELIVERY}`,
-      `Your live seat is still included in the ${PRICE}`,
+      'Full recording of Day 1: Fertility Reset Blueprint',
+      'Full recording of Day 2: Guided Yoga & Next Steps',
+      'Revisit cycle-tracking explanations when needed',
+      'Repeat the guided yoga routine at your own pace',
+      `Access to recordings through a private WhatsApp group ${RECORDINGS_DELIVERY}`,
     ],
+    note: `Your live masterclass seat is already included in the ${PRICE} registration fee.`,
+    cta: `Yes! Add Both Session Recordings for ${inr(RECORDING_PRICE_RUPEES)}`,
   },
   {
     id: 'call',
     pill: 'One-on-one',
     pillShort: '1-on-1',
     tone: 'ink',
-    title: 'Private 1-on-1 call with Ankita',
-    short: 'Add 1-on-1 call with Ankita',
-    body: 'Ankita looks at your starting point personally: your cycle, your routine and what you have already tried, and tells you what to focus on next.',
+    title: 'Get a Private 1-on-1 Session With Ankita',
+    short: 'Add 1-on-1 session with Ankita',
+    body: 'Your fertility journey and starting point may be different from everyone else’s. In this private wellness guidance call, Ankita will help you understand how to approach supportive yoga and daily practices based on your individual routine and needs.',
     bullets: [
       'A private call with Ankita, not a group session',
-      'Talk through your cycle, routine and what you have tried so far',
-      'Leave with a personalised next-step practice plan',
-      'Ask your questions directly, with no waiting',
+      'Discuss your cycle awareness, current routine and what you’ve already tried',
+      'Learn which gentle practices and daily habits may be suitable for you',
+      'Get a personalised wellness-focused next-step plan',
+      'Ask Ankita your questions directly',
       CALL_BOOKING,
       CALL_LINK_DELIVERY,
     ],
-    note: 'A wellness guidance call, not a medical consultation.',
+    note: 'This is a yoga and wellness guidance session, not a medical fertility consultation.',
+    cta: `Yes! Add My Private Session for ${inr(CALL_PRICE_RUPEES)}`,
   },
 ];
 
+/* No occupation and no batch question: the approved 2-Day checkout removes
+   both. Town / City is OPTIONAL. */
 type Fields = {
   firstName: string;
   lastName: string;
@@ -195,7 +197,6 @@ type Fields = {
   city: string;
   country: string; // ISO-2
   phone: string;
-  occupation: string;
 };
 
 export default function CheckoutPage() {
@@ -206,7 +207,6 @@ export default function CheckoutPage() {
     city: '',
     country: 'in',
     phone: '',
-    occupation: '',
   });
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -246,16 +246,14 @@ export default function CheckoutPage() {
       firstName: f.firstName.trim().length > 1,
       lastName: f.lastName.trim().length > 0,
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()),
-      city: f.city.trim().length > 1,
       /* The dial code is chosen from the picker, so this validates the SUBSCRIBER
          number only: 7 to 12 digits covers every country in the list without
          pulling in libphonenumber-js. India is the strict case at exactly 10. */
       phone: f.country === 'in' ? digits.length === 10 : digits.length >= 7 && digits.length <= 12,
-      occupation: f.occupation !== '',
     };
   }, [f]);
-  const valid =
-    v.firstName && v.lastName && v.email && v.city && v.phone && v.occupation;
+  /* City is optional, so it is not part of validity. */
+  const valid = v.firstName && v.lastName && v.email && v.phone;
 
   const dial = COUNTRIES.find((c) => c.iso === f.country)?.dial ?? '+91';
   /* E.164 without the plus, which is what both Meta and Razorpay expect. */
@@ -286,7 +284,6 @@ export default function CheckoutPage() {
       lastName: f.lastName.trim(),
       city: f.city.trim(),
       country: f.country,
-      occupation: f.occupation,
     }, addons);
 
     try {
@@ -308,7 +305,6 @@ export default function CheckoutPage() {
           dialCode: dial,
           city: f.city.trim(),
           country: f.country,
-          occupation: f.occupation,
           /* Ids, not prices: create-order prices them itself. */
           addons,
           ...collectSignals(),
@@ -390,17 +386,20 @@ export default function CheckoutPage() {
               style={{ background: C.goldWash, color: C.goldInk }}
             >
               <CheckCircle weight="fill" className="h-3 w-3 shrink-0" />
-              5-Day Fertility Reset Challenge
+              2-Day Fertility Reset Masterclass
             </span>
 
             <h1
               className="mt-4 font-display text-[22px] font-extrabold leading-tight sm:text-[28px] md:text-[34px]"
               style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
             >
-              Add your details to confirm your seat.
+              Add Your Details to Confirm Your Seat
             </h1>
             <p className="mt-3 text-[13px] sm:text-[13.5px]" style={{ color: C.inkSoft }}>
-              Starts {START_DATE} · Live on Zoom · {SESSION_TIMES_TZ}
+              {DATES} · LIVE on Zoom · {TIME_LINE}
+            </p>
+            <p className="mt-1 text-[12.5px] font-semibold" style={{ color: C.goldInk }}>
+              One live session per day. No batch selection required.
             </p>
           </div>
 
@@ -428,7 +427,8 @@ export default function CheckoutPage() {
                 Where should we send your seat?
               </h2>
               <p className="mt-2 hidden text-[12.5px] sm:text-[13px] lg:block" style={{ color: C.inkSoft }}>
-                Your Zoom link, reminders and all four bonuses go to these.
+                We&rsquo;ll send your Zoom joining details and session reminders to
+                your WhatsApp number and email address.
               </p>
 
               <div className="mt-4 flex flex-col gap-4 lg:mt-6">
@@ -459,7 +459,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <Field
-                  label="Email"
+                  label="Email Address"
                   type="email"
                   autoComplete="email"
                   placeholder="you@example.com"
@@ -469,13 +469,13 @@ export default function CheckoutPage() {
                 />
 
                 <Field
-                  label="Town / City"
+                  label="Town / City (optional)"
                   type="text"
                   autoComplete="address-level2"
                   placeholder="Your town or city"
                   value={f.city}
                   onChange={(x) => setF((s) => ({ ...s, city: x }))}
-                  bad={touched && !v.city}
+                  bad={false}
                 />
 
                 {/* The dial code is its own control rather than something the
@@ -524,28 +524,8 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <span className="mt-1.5 block text-[11.5px]" style={{ color: C.inkSoft }}>
-                    Your session reminders go here.
+                    Your Zoom joining details and session reminders go here.
                   </span>
-                </div>
-
-                <div className="block">
-                  <span
-                    id="occupation-label"
-                    className="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.16em]"
-                    style={{ color: C.inkSoft }}
-                  >
-                    Are you a working professional or a homemaker?
-                  </span>
-                  <ThemedSelect
-                    className="w-full"
-                    menuClassName="w-full"
-                    labelledBy="occupation-label"
-                    placeholder="Select one"
-                    value={f.occupation}
-                    onChange={(x) => setF((s) => ({ ...s, occupation: x }))}
-                    invalid={touched && !v.occupation}
-                    options={OCCUPATIONS}
-                  />
                 </div>
               </div>
 
@@ -557,7 +537,7 @@ export default function CheckoutPage() {
                   className="text-[10.5px] font-bold uppercase tracking-[0.2em]"
                   style={{ color: C.goldInk }}
                 >
-                  Make the most of your 5 days
+                  Optional add-ons · charged only if selected
                 </p>
                 <div className="mt-3 flex flex-col gap-4">
                   {ADDON_CARDS.map((card) => (
@@ -618,16 +598,6 @@ export default function CheckoutPage() {
                 {CTA_NOTE}
               </p>
 
-              <div className="mt-4 flex flex-col items-center gap-2">
-                <p
-                  className="text-[10.5px] font-bold uppercase tracking-[0.16em]"
-                  style={{ color: C.goldInk }}
-                >
-                  Offer ends in
-                </p>
-                <OfferCountdown />
-              </div>
-
               {/* The three pointers that sit under every checkout CTA we ship.
                   Dot-separated on one line, each nowrap so a narrow phone wraps
                   BETWEEN them rather than mid-phrase. */}
@@ -649,16 +619,25 @@ export default function CheckoutPage() {
                 className="mt-5 text-center text-[12px] leading-relaxed"
                 style={{ color: C.inkSoft }}
               >
-                Your personal data will be used to process your order, support
-                your experience, and for other purposes described in our{' '}
+                By registering, you agree to our{' '}
+                <Link
+                  href="/terms-and-conditions"
+                  className="font-semibold underline"
+                  style={{ color: C.goldInk }}
+                >
+                  Terms and Conditions
+                </Link>{' '}
+                and{' '}
                 <Link
                   href="/privacy-policy"
                   className="font-semibold underline"
                   style={{ color: C.goldInk }}
                 >
-                  privacy policy
+                  Privacy Policy
                 </Link>
-                .
+                . Your information will be used to process your registration,
+                deliver the masterclass, and send essential joining details and
+                reminders.
               </p>
 
               <PaymentMethods />
@@ -719,7 +698,7 @@ export default function CheckoutPage() {
             className="mt-1.5 text-center text-[11px] font-semibold"
             style={{ color: C.emeraldInk }}
           >
-            {CTA_NOTE} · Offer ends in <OfferCountdown inline />
+            {CTA_NOTE} · Secure payments via Razorpay
           </p>
         </div>
       </div>
@@ -819,7 +798,7 @@ function AddonCard({
                 <span aria-hidden className="addon-nudge">
                   <HandPointing weight="fill" className="h-4 w-4 rotate-90" />
                 </span>
-                Tap to add for {inr(price)} more
+                {card.cta}
               </>
             )}
           </p>
@@ -940,7 +919,6 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
   /* The challenge is priced at the strike price here, not its recap value, and
      the discount is whatever brings the full stack down to PRICE. */
   const totalPrice = STRIKE_PRICE_RUPEES + (VALUE_TOTAL - lead.value);
-  const launchDiscount = totalPrice - PRICE_RUPEES;
   /* Add-ons are sold at their own price with no discount, so they add to both
      sides of the strike evenly and the launch discount stays what it was. */
   const extra = addonsTotal(addons);
@@ -962,7 +940,7 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
           className="mt-2 hidden font-display text-[20px] font-extrabold leading-snug sm:text-[22px] lg:block"
           style={{ color: C.ink }}
         >
-          The 5-Day Reset, in full
+          Confirm Your Masterclass Seat
         </span>
       </div>
 
@@ -990,7 +968,7 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
             {lead.title}
           </p>
           <p className="mt-0.5 text-[11px] sm:text-[11.5px]" style={{ color: C.inkSoft }}>
-            {START_DATE} · {SESSION_TIMES_TZ}
+            {DATES} · {SESSION_TIMES_TZ}
           </p>
         </div>
         <div
@@ -1059,12 +1037,12 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
 
         <div className="space-y-2 text-[13.5px]">
           <div className="flex justify-between" style={{ color: C.inkSoft }}>
-            <span>Total Price</span>
+            <span>Total Package Value</span>
             <span className="tabular-nums">{inr(totalPrice)}</span>
           </div>
           <div className="flex justify-between font-semibold" style={{ color: C.ink }}>
-            <span>Launch Discount</span>
-            <span className="tabular-nums">−{inr(launchDiscount)}</span>
+            <span>Registration Fee</span>
+            <span className="tabular-nums">{PRICE}</span>
           </div>
           {extra > 0 && (
             <div className="flex justify-between" style={{ color: C.inkSoft }}>
@@ -1073,6 +1051,9 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
             </div>
           )}
         </div>
+        <p className="mt-2 text-[11.5px]" style={{ color: C.inkMuted }}>
+          Optional add-ons are charged separately only if selected.
+        </p>
       </div>
 
       <div className="my-4 hidden h-px lg:block" style={{ background: C.line }} />
@@ -1087,7 +1068,7 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
             className="font-display text-[13px] font-bold uppercase tracking-[0.12em] sm:text-[14px] sm:tracking-[0.14em]"
             style={{ color: C.ink }}
           >
-            {extra > 0 ? 'Total Today' : <>Today&rsquo;s Offer Price</>}
+            {extra > 0 ? 'Total Today' : 'Your Price Today'}
           </span>
           <div className="flex items-baseline gap-2 text-right">
             <s

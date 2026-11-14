@@ -28,7 +28,7 @@ export const LEGAL = {
 
   /* This client's, verbatim from the copy source. */
   brand: 'Bindwithyoga',
-  product: '5-Day Fertility Reset Challenge',
+  product: '2-Day Fertility Reset Masterclass',
 } as const;
 
 /** While false, the terms page omits the structure from its opening sentence
@@ -39,7 +39,7 @@ export const LEGAL_STRUCTURE_KNOWN = LEGAL.structure.trim().length > 0;
  *  reword it and do not split it. Rendered by the shared footer, so it is
  *  identical on every page. */
 export const LEGAL_DISCLAIMER =
-  'All content, live sessions and resources provided by Bindwithyoga are for educational and general wellness purposes only. This is not medical advice and is not intended to replace care from your doctor, gynaecologist or fertility specialist. Consult a qualified healthcare professional before changing your movement, medication, treatment, nutrition or lifestyle, especially if you have PCOS, thyroid concerns, endometriosis, irregular cycles, are undergoing fertility treatment, or have any other medical condition. Individual experiences and results may vary based on age, health history, lifestyle, consistency, medical factors and other individual circumstances. This website is not affiliated with or endorsed by Meta. FACEBOOK and INSTAGRAM are trademarks of Meta Platforms, Inc.';
+  'All live sessions and resources are educational and for general wellness only. They are not medical advice and do not replace care from a doctor, gynaecologist or fertility specialist. If you have PCOS/PCOD, thyroid conditions, endometriosis, irregular cycles, are undergoing fertility treatment, or may be pregnant, consult a qualified health professional before starting or altering practices. Individual experiences and outcomes vary. This website is not affiliated with or endorsed by Meta. Facebook and Instagram are trademarks of Meta Platforms, Inc.';
 
 /** Fixed, not new Date().getFullYear(): the source states the year, and a
  *  legal notice that silently renumbers itself on 1 January is one nobody

@@ -6,7 +6,7 @@
  *
  *  1. The value is shown PER ITEM, never as one lump. A lump is a claim, a
  *     line-item is a contract.
- *  2. The challenge itself dominates (₹2,500 of the total and the only LIVE
+ *  2. The masterclass itself dominates (₹2,699 of the total and the only LIVE
  *     one), so it is lifted out of the grid onto the page's one accent
  *     surface. The layout says which one matters before the copy does.
  *
@@ -34,7 +34,16 @@ import {
 
 import { asset } from './asset-version';
 import { legoBrick, legoDelay } from './lego-style';
-import { CTA_LABEL, CTA_NOTE, INCLUDED, inr, type IncludedItem } from './offer';
+import {
+  compactRange,
+  CTA_LABEL,
+  CTA_NOTE,
+  DAY1_TIME,
+  DAY2_TIME,
+  INCLUDED,
+  inr,
+  type IncludedItem,
+} from './offer';
 import { Art, C, CtaNote, MediaPlaceholder, PrimaryCTA, SectionHeading } from './shared';
 
 /* One glyph per item, keyed off the stable key rather than the array order, so
@@ -58,7 +67,8 @@ const GLYPH: Record<IncludedItem['key'], Icon> = {
  * reflows either way.
  */
 const COVERS: Record<IncludedItem['key'], string | null> = {
-  challenge: '/system-images/five-day-cards.webp',
+  /* Drawn by MasterclassCover: the old art was five day cards. */
+  challenge: null,
   tracker: '/system-images/bonus-cycle-tracker.webp',
   checklist: '/system-images/bonus-dos-donts-checklist.webp',
   planner: '/system-images/bonus-daily-routine-planner.webp',
@@ -69,7 +79,7 @@ const COVERS: Record<IncludedItem['key'], string | null> = {
 const COVER_RATIO = '4 / 3';
 
 const COVER_LABEL: Record<IncludedItem['key'], string> = {
-  challenge: 'The 5 day cards · 1:1',
+  challenge: 'The 2-Day masterclass',
   tracker: 'Cycle & Fertile Window Tracker cover · 1:1',
   checklist: "Pre-Conception Do's & Don'ts cover · 1:1",
   planner: 'Daily Routine Planner cover · 1:1',
@@ -87,6 +97,7 @@ function Cover({
   className?: string;
   sizes?: string;
 }) {
+  if (item.key === 'challenge') return <MasterclassCover className={className} />;
   const src = COVERS[item.key];
   if (src) {
     return (
@@ -100,6 +111,47 @@ function Cover({
     );
   }
   return <MediaPlaceholder ratio={COVER_RATIO} label={COVER_LABEL[item.key]} className={className} />;
+}
+
+/* The masterclass cover, drawn rather than supplied: the old art was five day
+   cards. Two cards carrying the copy's own "DAY 1: Understand Your Cycle |
+   DAY 2: Practice Your Yoga", at the same 4:3 as every other cover. */
+function MasterclassCover({ className = '' }: { className?: string }) {
+  const days = [
+    { d: 'DAY 1', t: 'Understand Your Cycle', time: compactRange(DAY1_TIME), tilt: '-6deg' },
+    { d: 'DAY 2', t: 'Practice Your Yoga', time: compactRange(DAY2_TIME), tilt: '5deg' },
+  ];
+  return (
+    <div
+      className={`relative flex items-center justify-center gap-3 overflow-hidden rounded-2xl p-4 ${className}`}
+      style={{
+        aspectRatio: COVER_RATIO,
+        background: `radial-gradient(ellipse 80% 70% at 50% 30%, ${C.goldWash}, ${C.coralBed})`,
+        border: `1px solid ${C.line}`,
+      }}
+      role="img"
+      aria-label="Day 1: Understand Your Cycle. Day 2: Practice Your Yoga."
+    >
+      {days.map(({ d, t, time, tilt }) => (
+        <div
+          key={d}
+          className="flex aspect-[3/4] w-[44%] max-w-[150px] flex-col items-center justify-center rounded-xl px-2 text-center"
+          style={{
+            transform: `rotate(${tilt})`,
+            background: C.ctaFill,
+            color: '#FFFFFF',
+            boxShadow: '0 16px 30px -14px rgba(199,58,87,0.6)',
+          }}
+        >
+          <span className="text-[10px] font-bold tracking-[0.2em] opacity-90">{d}</span>
+          <span className="mt-1.5 font-display text-[13px] font-extrabold leading-tight sm:text-[14px]">
+            {t}
+          </span>
+          <span className="mt-2 text-[9px] font-semibold opacity-85">{time} IST</span>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 /* A bed, not a bare glyph: at this size an unbedded icon reads as debris next
@@ -144,8 +196,11 @@ export default function Toolkit() {
 
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvasAlt }}>
-      <SectionHeading eyebrow="GET INSTANT ACCESS TO">
-        Your 5-Day Fertility Reset &amp;{' '}
+      <SectionHeading
+        eyebrow="Included in your enrollment"
+        sub="Four hours of live education and yoga, plus practical resources to support what you learn after the masterclass."
+      >
+        Your 2-Day Fertility Reset &amp;{' '}
         <span style={{ color: C.goldDeep }}>Complete Conception Preparation Toolkit</span>
       </SectionHeading>
 
@@ -177,6 +232,12 @@ export default function Toolkit() {
               </span>
             </div>
             <div className="min-w-0 flex-1">
+              <p
+                className="mb-1.5 text-[10.5px] font-bold uppercase tracking-[0.18em]"
+                style={{ color: C.goldInk }}
+              >
+                {lead.kind}
+              </p>
               <h3
                 className="font-display text-[24px] font-bold leading-snug sm:text-[27px]"
                 style={{ color: C.ink }}
@@ -243,8 +304,14 @@ export default function Toolkit() {
                     ({inr(item.value)} Value)
                   </span>
                 </div>
+                <p
+                  className="mt-4 text-[10.5px] font-bold uppercase tracking-[0.18em]"
+                  style={{ color: C.goldInk }}
+                >
+                  {item.kind}
+                </p>
                 <h3
-                  className="mt-4 font-display text-[19px] font-bold leading-snug"
+                  className="mt-1 font-display text-[19px] font-bold leading-snug"
                   style={{ color: C.ink }}
                 >
                   {item.title}

@@ -14,8 +14,8 @@ import {
   CHECKOUT_HREF,
   DISCOUNT_PCT,
   PRICE,
-  SESSION_TIMES,
-  START_DATE,
+  SESSION_SHORT,
+  DATES,
   STRIKE_PRICE,
 } from './offer';
 import { C } from './shared';
@@ -87,7 +87,7 @@ export default function StickyCta() {
               className="truncate font-display text-[13px] font-bold leading-tight sm:text-[16.5px]"
               style={{ color: C.ink }}
             >
-              5-Day Fertility Reset
+              2-Day Fertility Reset
             </p>
             <p className="mt-0.5 flex items-baseline gap-1.5 tabular-nums">
               <s
@@ -109,11 +109,11 @@ export default function StickyCta() {
             >
               <span className="inline-flex shrink-0 items-center gap-1.5">
                 <CalendarBlank weight="bold" className="h-3 w-3" style={{ color: C.goldInk }} />
-                Starts {START_DATE}
+                {DATES}
               </span>
               <span className="inline-flex shrink-0 items-center gap-1.5">
                 <Clock weight="bold" className="h-3 w-3" style={{ color: C.coralInk }} />
-                {SESSION_TIMES}
+                {SESSION_SHORT}
               </span>
             </p>
           </div>

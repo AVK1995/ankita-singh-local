@@ -1,8 +1,11 @@
 # tgo-ankita
 
-Bindwithyoga · 5-Day Fertility Reset Challenge.
+Bindwithyoga · 2-Day Fertility Reset Masterclass (₹97, one live Zoom session
+per day, 12:00–2:00 PM IST). Set both days with two env values:
+NEXT_PUBLIC_DATES="12, Mar 2027, 13, Mar 2027" and
+NEXT_PUBLIC_TIMES="12:00 PM – 2:00 PM, 12:00 PM – 2:00 PM" (Day 1 first).
 
-A challenge funnel: landing page, checkout, thank-you, three policy pages,
+A masterclass funnel: landing page, checkout, thank-you, three policy pages,
 Razorpay, Meta CAPI, GA4 and the Pabbly fulfilment hand-off.
 
 - `COPY-SOURCE.md` is the sole source of truth for every string on the page.

@@ -82,13 +82,13 @@ export const addonsTotal = (ids: AddonId[]) =>
 
 export const orderTotal = (ids: AddonId[]) => PRICE_RUPEES + addonsTotal(ids);
 
-/** "5-Day Reset Challenge + Session Recordings + Private 1-on-1 Call with Ankita" */
+/** "2-Day Reset Masterclass + Session Recordings + Private 1-on-1 Call with Ankita" */
 export const orderLabel = (ids: AddonId[]) =>
   [PRODUCT_LABEL, ...cleanAddons(ids).map((id) => ADDONS[id].label)].join(' + ');
 
-/** "bwy-5day-reset", "bwy-5day-reset+rec", "bwy-5day-reset+rec+call" */
+/** "bwy-2day-reset", "bwy-2day-reset+rec", "bwy-2day-reset+rec+call" */
 export const orderSku = (ids: AddonId[]) =>
-  ['bwy-5day-reset', ...cleanAddons(ids).map((id) => ADDONS[id].sku)].join('+');
+  ['bwy-2day-reset', ...cleanAddons(ids).map((id) => ADDONS[id].sku)].join('+');
 
 /**
  * The bundle a paid amount can only have come from, or null when no bundle

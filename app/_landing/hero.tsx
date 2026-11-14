@@ -25,39 +25,49 @@ import {
   Star,
   VideoCamera,
 } from '@phosphor-icons/react/dist/ssr';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { legoBrick, legoDelay } from './lego-style';
 import {
   CHECKOUT_HREF,
-  CLIENT_RATING,
+  DATES,
+  compactRange,
+  DAY1_DATE,
+  DAY1_TIME,
+  DAY2_DATE,
+  DAY2_TIME,
   DISCOUNT_PCT,
+  INCLUDED,
+  INCLUDED_TOTAL,
+  inr,
   PRICE,
-  SESSION_TIMES,
-  START_DATE,
+  SAME_TIME,
+  SESSION_SHORT,
+  SESSION_TIMES_TZ,
   STRIKE_PRICE,
   WOMEN_GUIDED,
 } from './offer';
 import { asset } from './asset-version';
-import { SeatCount } from './seat-count';
-import { Art, C } from './shared';
+import { C } from './shared';
 
 /* ══ 0 · Announcement strip ════════════════════════════════════════════════ */
 export function AnnouncementBar() {
+  /* The doc's header line ("2 Days · 12 PM IST · Live on Zoom") plus the
+     offer. The old "Price increases tomorrow" line is gone: the approved copy
+     makes no such deadline claim. */
   const segments = [
     <>
-      <span className="font-bold">Special Offer:</span> 5-Day Fertility Reset
+      <span className="font-bold">Special Offer:</span> 2-Day Fertility Reset Masterclass for{' '}
       {/* gold, not goldInk. The bar is dark, and goldInk measures 1.88:1 on
           navyDeep. The pale step is 10.88:1. */}
-      Challenge for <span style={{ color: C.gold }}>{PRICE}</span>
+      <span style={{ color: C.gold }}>{PRICE}</span>
     </>,
+    <>2 Days · {SESSION_SHORT} · Live on Zoom</>,
     <>
-      Price Increases To <span style={{ color: C.gold }}>{STRIKE_PRICE}</span> Tomorrow
+      <s>{STRIKE_PRICE}</s> <span style={{ color: C.gold }}>{PRICE}</span> · {DISCOUNT_PCT}% Off
     </>,
     <>100% Money-Back Guarantee</>,
-    <>
-      Live · Starts {START_DATE} · {SESSION_TIMES}
-    </>,
   ];
 
   /* One copy of the strip, rendered twice inside the track, which is what makes
@@ -120,13 +130,6 @@ export function AnnouncementBar() {
 
 /* ══ 1 · Hero ══════════════════════════════════════════════════════════════ */
 
-const HERO_FACTS = [
-  { icon: VideoCamera, text: '5-Day Live, at-home Workshop' },
-  { icon: CalendarBlank, text: '21st - 25th October' },
-  { icon: Clock, text: '6 AM or 7 PM Flexible Time' },
-  { icon: Gift, text: 'Bonuses worth ₹4499' },
-];
-
 const HERO_CTA_LABEL = `Book My Seat Now - ${DISCOUNT_PCT}% Off Today!`;
 
 export function Hero() {
@@ -153,15 +156,22 @@ export function Hero() {
                   ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.6)',
                 }}
               />
-              5-Day Fertility Reset Challenge
+              2-Day LIVE Fertility Reset Masterclass
             </span>
 
             <p
-              className="mx-auto mt-6 max-w-[620px] font-body text-[17px] font-semibold leading-[1.45] sm:text-[19px]"
+              className="mx-auto mt-6 max-w-[680px] font-body text-[17px] font-semibold leading-[1.45] sm:text-[19px]"
               style={{ color: C.inkSoft }}
             >
               Want to get pregnant even with{' '}
-              {['PCOS', 'thyroid', 'endometriosis', 'weight gain'].map((c, i, all) => (
+              {[
+                'PCOS/PCOD',
+                'thyroid issues',
+                'endometriosis',
+                'irregular periods',
+                'weight gain',
+                'unexplained fertility struggles',
+              ].map((c, i, all) => (
                 <span key={c}>
                   <strong className="whitespace-nowrap font-extrabold" style={{ color: C.goldDeep }}>
                     {c}
@@ -183,26 +193,15 @@ export function Hero() {
               className="mx-auto mt-4 max-w-[620px] font-body text-[17px] font-semibold leading-[1.45] sm:text-[19px]"
               style={{ color: C.inkSoft }}
             >
-              Even after trying IVF/IUI, hormonal injections or medicines
+              Even after trying IVF/IUI, hormonal injections or medicines.
             </p>
-
-            {/* ══ THE MOBILE CLIENT BANNER ═════════════════════════════════
-                Directly under the headline, and `lg:hidden` because `lg` is
-                where THIS hero's grid goes two-column (see the wrapper above).
-                From there up the offer card sits in the right column level
-                with the headline, so the screen already has its one large
-                image; below it that card is stacked a long way down and the
-                top of a phone screen is otherwise pure type.
-
-                No priority: the LCP candidate on a phone is the headline above
-                it, and preloading a banner pushes that text further out. */}
-            <Art
-              src={asset('/system-images/fertility-collection-animated.webp')}
-              alt="Ankita with the 5 day cards, the 4 guides and the live Zoom sessions"
-              ratio="1 / 1"
-              sizes="100vw"
-              className="mt-7 lg:hidden"
-            />
+            <p
+              className="mx-auto mt-2 max-w-[620px] font-body text-[15px] leading-[1.55] sm:text-[16.5px]"
+              style={{ color: C.inkSoft }}
+            >
+              Understand your cycle, learn what to do during each phase and experience
+              gentle live yoga with Ankita Singh.
+            </p>
 
             <p
               className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[14.5px] font-semibold"
@@ -214,18 +213,14 @@ export function Hero() {
                 ))}
               </span>
               <span>
-                Trusted by {WOMEN_GUIDED} Women on their stress-free motherhood journey
+                Trusted by {WOMEN_GUIDED} women across their fertility &amp; motherhood journeys
               </span>
             </p>
 
-            {/* Desktop: card and facts side by side, widened past the 860 copy
-                column to 980. Below lg both keep their stacked places. */}
-            <div className="mt-8 hidden grid-cols-2 items-center gap-6 lg:-mx-[60px] lg:grid">
-              <OfferCard compact className="h-full" />
-              <HeroFacts />
-            </div>
-
-            <HeroFacts className="mt-6 lg:hidden" />
+            {/* ONE event card at every width, widened past the 860 copy column
+                on desktop. It replaces the old offer card + floating fact
+                tiles, which said the same things twice in two places. */}
+            <EventCard className="mt-8 lg:-mx-[60px]" />
 
             <div className="mt-9 flex justify-center">
               {/* Sized to the button, so the note below centres under it. */}
@@ -250,19 +245,18 @@ export function Hero() {
                   </span>
                 </Link>
 
+                {/* Replaces the old "Last xx seats left" line: the approved
+                    copy makes no seat-limit claim under the button. */}
                 <p
-                  className="mt-4 text-center font-display text-[16px] font-bold leading-snug sm:text-[17px]"
+                  className="mt-4 text-center font-display text-[15px] font-bold leading-snug sm:text-[16px]"
                   style={{ color: C.ink }}
                 >
-                  Last{' '}
-                  <span className="seat-chip">
-                    <SeatCount />
-                  </span>{' '}
-                  Seats Left - Booking Closes Once Full
+                  Single live batch · {SESSION_SHORT}
+                  {SAME_TIME ? ' both days' : ''} · 100% money-back guarantee
                 </p>
 
                 <p
-                  className="mt-3 max-w-[520px] text-center text-[13.5px] leading-snug"
+                  className="mt-3 max-w-[560px] text-center text-[13.5px] leading-snug"
                   style={{ color: C.inkSoft }}
                 >
                   <ShieldCheck
@@ -271,16 +265,17 @@ export function Hero() {
                     className="mr-1.5 inline-block h-4 w-4 align-[-3px]"
                     style={{ color: C.emeraldInk }}
                   />
-                  <strong style={{ color: C.ink }}>Get-Clarity Promise:</strong> Get complete
-                  clarity on how to reset your fertility by day-5 or get 100% refund!
+                  <strong style={{ color: C.ink }}>Get-Clarity Promise:</strong> Understand your
+                  cycle and learn how to begin your Fertility Reset Routine by Day 2 or get a 100%
+                  refund, subject to the published{' '}
+                  <Link href="/refund-policy" className="underline" style={{ color: C.goldInk }}>
+                    refund policy
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
           </div>
-
-          {/* ══ The offer card: stacked on phones, landscape (image left,
-              details right) from md up, centred under the hero copy. */}
-          <OfferCard className="w-full max-w-[980px] lg:hidden" />
         </div>
       </section>
 
@@ -290,94 +285,165 @@ export function Hero() {
   );
 }
 
-function HeroFacts({ className = '' }: { className?: string }) {
+/* ── The event card ──────────────────────────────────────────────────────
+   The doc's hero event box as ONE object: Ankita on the left, then what it
+   is, when it runs (both days as a mini schedule), what comes with it, and
+   the price collapse. It replaces an offer card plus four floating fact
+   tiles that repeated each other.
+
+   The photo is the client's own (303 x 585). It is kept in a column no wider
+   than ~300px so it is never shown much larger than it was shot, and is
+   cropped from the top so the face always survives. */
+const SCHEDULE = [
+  {
+    day: 'DAY 01',
+    date: DAY1_DATE,
+    time: compactRange(DAY1_TIME),
+    title: 'Understand your cycle & the Fertility Reset Blueprint',
+    tag: 'Theory & clarity',
+  },
+  {
+    day: 'DAY 02',
+    date: DAY2_DATE,
+    time: compactRange(DAY2_TIME),
+    title: 'Guided Period-Sync Yoga & your next steps',
+    tag: 'Live yoga practice',
+  },
+];
+
+/* The four bonuses, summed rather than typed (₹1,988). */
+const BONUS_VALUE = INCLUDED.filter((i) => i.access === 'instant').reduce((n, i) => n + i.value, 0);
+
+function EventCard({ className = '' }: { className?: string }) {
   return (
-    <ul className={`grid grid-cols-2 gap-3 ${className}`}>
-      {HERO_FACTS.map(({ icon: Icon, text }, idx) => (
-        <li
-          key={text}
-          data-lego=""
-          className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[12.5px] font-semibold leading-snug sm:text-[13px]"
-          style={{
-            ...legoDelay(idx, 90),
-            background: C.surface,
-            border: `1px solid ${C.lineStrong}`,
-            color: C.ink,
-          }}
+    <div
+      data-lego=""
+      className={`grid overflow-hidden rounded-[28px] text-left sm:grid-cols-[240px_minmax(0,1fr)] lg:grid-cols-[290px_minmax(0,1fr)] ${className}`}
+      style={{
+        ...legoDelay(2, 90),
+        background: C.surface,
+        border: `1px solid ${C.lineStrong}`,
+        boxShadow: '0 0 0 8px rgba(248, 113, 134,0.10), 0 30px 64px -34px rgba(31, 16, 20,0.36)',
+      }}
+    >
+      {/* ── Ankita ── */}
+      <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-full">
+        <Image
+          src={asset('/system-images/ankita-hero.jpg')}
+          alt="Ankita Singh, founder of Bindwithyoga"
+          fill
+          priority
+          sizes="(min-width: 1024px) 290px, (min-width: 640px) 240px, 100vw"
+          className="object-cover"
+          style={{ objectPosition: '50% 12%' }}
+        />
+        <span
+          className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em]"
+          style={{ background: 'rgba(255,255,255,0.94)', color: C.goldInk, boxShadow: '0 6px 16px -8px rgba(31,16,20,0.4)' }}
         >
           <span
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-full"
-            style={{ background: C.goldPale }}
-          >
-            <Icon weight="bold" className="h-4 w-4" style={{ color: C.goldInk }} />
-          </span>
-          {text}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/* Rendered twice in the hero, one per breakpoint. `compact` is the half-width
-   desktop version: image and details side by side at every size. */
-function OfferCard({ className, compact = false }: { className: string; compact?: boolean }) {
-  return (
-    <div className={className}>
-      <div
-        data-lego=""
-        className={
-          compact
-            ? 'grid h-full grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] items-center gap-5 rounded-[24px] p-5 text-left'
-            : 'grid items-center gap-6 rounded-[28px] p-7 text-center sm:p-8 md:grid-cols-2 md:gap-9 md:text-left'
-        }
-        style={{
-          ...legoDelay(2, 90),
-          /* `surface`, not `canvas`. On the dark stage the card was the
-             only light object and any near-white read as paper; on a
-             light stage `canvas` is two steps off the ground and the card
-             stops being an object. Pure white plus the ring is what still
-             separates it, and the halo, which used to be the card's own
-             light bleeding onto a dark slab, becomes a plain accent ring. */
-          background: C.surface,
-          border: `1px solid ${C.lineStrong}`,
-          boxShadow:
-            '0 0 0 8px rgba(248, 113, 134,0.12), 0 28px 60px -34px rgba(31, 16, 20,0.34)',
-        }}
-      >
-        <Art
-          src={asset('/system-images/fertility-collection-animated.webp')}
-          alt="Ankita with the 5 day cards and the 4 guides"
-          ratio="1 / 1"
-          sizes={compact ? '220px' : '(min-width: 768px) 440px, 100vw'}
-        />
-
-        <div>
-          <h2
-            className={`font-display font-bold leading-[1.16] ${compact ? 'text-[20px]' : 'text-[26px]'}`}
-            style={{ color: C.ink }}
-          >
-            5-Day Fertility Reset Challenge
-          </h2>
-          <p className={`mt-2 ${compact ? 'text-[12.5px]' : 'text-[14px]'}`} style={{ color: C.inkSoft }}>
-            Live expert-led sessions · Zoom · 2 session timings
+            className="lego-pulse-dot inline-block h-1.5 w-1.5 rounded-full"
+            style={{ background: C.coral, ['--dot-pulse' as string]: 'rgba(255, 110, 136,0.6)' }}
+          />
+          Live on Zoom
+        </span>
+        <div
+          className="absolute inset-x-0 bottom-0 px-4 pb-4 pt-14"
+          style={{ background: 'linear-gradient(to top, rgba(31,16,20,0.82), rgba(31,16,20,0))' }}
+        >
+          <p className="font-display text-[17px] font-bold leading-tight text-white">Ankita Singh</p>
+          <p className="mt-0.5 text-[11.5px] leading-snug" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            Yoga Therapist · Fertility Yoga Practitioner
           </p>
+        </div>
+      </div>
 
-          <div
-            className={`flex items-baseline justify-center gap-3 border-t md:justify-start ${compact ? 'mt-4 pt-4' : 'mt-6 pt-6'}`}
-            style={{ borderColor: C.line }}
-          >
-            <s
-              className={`font-display font-bold leading-none tabular-nums decoration-2 ${compact ? 'text-[19px]' : 'text-[24px]'}`}
-              style={{ color: C.inkSoft }}
+      {/* ── The masterclass ── */}
+      <div className="flex flex-col p-5 sm:p-6 lg:p-7">
+        <h2
+          className="font-display text-[22px] font-bold leading-[1.15] sm:text-[24px] lg:text-[26px]"
+          style={{ color: C.ink }}
+        >
+          Your 2-Day Live Fertility Reset Masterclass
+        </h2>
+
+        <div className="mt-3 flex flex-wrap gap-2 text-[12px] font-semibold" style={{ color: C.ink }}>
+          <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5" style={{ background: C.goldPale }}>
+            <CalendarBlank weight="bold" className="h-3.5 w-3.5" style={{ color: C.goldInk }} />
+            2 consecutive days · {DATES}
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5" style={{ background: C.goldPale }}>
+            <Clock weight="bold" className="h-3.5 w-3.5" style={{ color: C.goldInk }} />
+            {SAME_TIME ? `${SESSION_TIMES_TZ} · Both days` : SESSION_TIMES_TZ}
+          </span>
+        </div>
+
+        {/* Both days, as the schedule they are. */}
+        <ol className="mt-5 space-y-2.5">
+          {SCHEDULE.map((d, i) => (
+            <li
+              key={d.day}
+              className="flex items-stretch gap-3 rounded-2xl p-2.5"
+              style={{ background: C.canvasAlt, border: `1px solid ${C.line}` }}
             >
-              {STRIKE_PRICE}
-            </s>
-            <span
-              className={`kz-lit font-display font-bold leading-none ${compact ? 'text-[36px]' : 'text-[46px]'}`}
-            >
-              {PRICE}
-            </span>
+              <span
+                className="flex w-[64px] shrink-0 flex-col items-center justify-center rounded-xl text-center text-white"
+                style={{ background: i === 0 ? C.ctaFill : C.ink }}
+              >
+                <span className="text-[9.5px] font-bold tracking-[0.14em] opacity-85">{d.day}</span>
+                <span className="mt-0.5 text-[10.5px] font-semibold leading-tight">{d.time}</span>
+              </span>
+              <span className="min-w-0 py-0.5">
+                <span className="block text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: C.goldInk }}>
+                  {d.tag} · {d.date}
+                </span>
+                <span className="mt-0.5 block text-[14px] font-semibold leading-snug" style={{ color: C.ink }}>
+                  {d.title}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <ul className="mt-4 grid gap-2 text-[13px] sm:grid-cols-2" style={{ color: C.inkSoft }}>
+          <li className="flex items-center gap-2">
+            <VideoCamera weight="fill" className="h-4 w-4 shrink-0" style={{ color: C.goldDeep }} />
+            One LIVE Zoom session each day
+          </li>
+          <li className="flex items-center gap-2">
+            <Gift weight="fill" className="h-4 w-4 shrink-0" style={{ color: C.goldDeep }} />
+            Four bonus resources worth {inr(BONUS_VALUE)}
+          </li>
+        </ul>
+
+        {/* The price collapse. */}
+        <div
+          className="mt-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3.5 sm:mt-auto"
+          style={{ background: C.goldWash, border: `1px solid ${C.lineStrong}` }}
+        >
+          <div className="min-w-0">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: C.inkSoft }}>
+              Masterclass value <s className="ml-1 decoration-2">{STRIKE_PRICE}</s>
+            </p>
+            <p className="mt-1 flex items-baseline gap-2">
+              <span className="kz-lit font-display text-[38px] font-extrabold leading-none sm:text-[42px]">
+                {PRICE}
+              </span>
+              <span className="text-[12px] font-semibold" style={{ color: C.inkSoft }}>
+                today
+              </span>
+            </p>
+            <p className="mt-1 text-[11px]" style={{ color: C.inkMuted }}>
+              Total package value {inr(INCLUDED_TOTAL)}
+            </p>
           </div>
+          <span
+            className="shrink-0 rounded-2xl px-3 py-2.5 text-center leading-none text-white"
+            style={{ background: C.ctaFill, boxShadow: C.ctaGlow }}
+          >
+            <span className="block font-display text-[22px] font-extrabold">{DISCOUNT_PCT}%</span>
+            <span className="mt-1 block text-[9.5px] font-bold uppercase tracking-[0.14em]">Off</span>
+          </span>
         </div>
       </div>
     </div>
@@ -388,37 +454,33 @@ function OfferCard({ className, compact = false }: { className: string; compact?
    Four figures on a ruled row, lifted so the card straddles the seam that
    closes the hero: the join is a designed object rather than a hairline.
 
-   The source marks these with emoji (❤️ ⭐ 🛡️ 💯). They render as
-   matched-weight line icons instead; the words are untouched.
-
-   ⚠️ FLAG FOR ATUL: "5.0 Review" names no platform. An unsourced perfect score
-   is the weakest proof on the page and the easiest to challenge. Verbatim. */
+   The doc's section 03 trust strip, verbatim. */
 const STATS = [
   {
     icon: Heart,
-    big: `${WOMEN_GUIDED} Women Guided`,
-    small: 'On Their Motherhood Journey',
+    big: `${WOMEN_GUIDED} Women`,
+    small: 'Guided on their journeys',
     bed: C.coralBed,
     fg: C.coralInk,
   },
   {
     icon: Star,
-    big: `${CLIENT_RATING} Review`,
-    small: 'Women 40+',
+    big: 'Expert-Led',
+    small: 'Yoga & cycle awareness',
     bed: C.goldPale,
     fg: C.goldInk,
   },
   {
     icon: ShieldCheck,
-    big: '100%',
-    small: 'Money-Back Guarantee',
+    big: '100% Guarantee',
+    small: 'See refund conditions',
     bed: C.navyBed,
     fg: C.emeraldInk,
   },
   {
     icon: VideoCamera,
     big: 'Live on Zoom',
-    small: 'Expert-Led Sessions',
+    small: `${SESSION_SHORT.replace(/\s*IST$/, '')}, one session daily`,
     bed: C.goldPale,
     fg: C.goldInk,
   },

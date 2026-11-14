@@ -40,47 +40,55 @@ import { C, MediaPlaceholder, SectionHeading } from './shared';
    medications, IUI or IVF" reads as a benefit being sold. */
 const RECOGNITION: [string, string, string][] = [
   [
-    'You’re in your ',
-    '"Zero Trimester"',
-    ' - the pre-conception phase where you want to start preparing your body, cycle and daily habits before pregnancy begins.',
+    'You’ve been ',
+    'trying to conceive for months or years',
+    ' without the positive result you’ve been hoping for.',
   ],
   [
-    'You’re married and ',
-    'planning to conceive in the coming months',
-    ', and want to prepare your body beforehand for a healthier conception journey.',
-  ],
-  [
-    'You’ve been trying to conceive, but ',
-    'PCOS, thyroid, endometriosis, irregular cycles or unexplained fertility concerns',
-    ' keep making the journey feel harder.',
-  ],
-  [
-    'You’ve already tried ',
-    'medications, IUI or IVF',
-    ', but still haven’t got the result you were hoping for.',
-  ],
-  [
-    'Your doctor has told you to ',
-    'lose weight or improve your health before trying to conceive',
-    ', but you’re not sure what kind of movement or routine is actually right for you.',
-  ],
-  [
-    'You feel like you’re doing a lot for your health, but ',
-    'still don’t know whether your body is actually prepared for conception',
+    'You’re dealing with ',
+    'PCOS/PCOD, thyroid issues, endometriosis, irregular periods or weight-related concerns',
     '.',
   ],
   [
-    'You’re tired of ',
-    'piecing together fertility advice on your own',
-    ' and want clear, structured guidance on what to focus on first.',
+    'Your tests ',
+    'haven’t revealed a clear explanation',
+    ' for why getting pregnant has been difficult.',
+  ],
+  [
+    'You’ve already tried ',
+    'medication, hormonal injections, IUI or IVF',
+    ', without the result you hoped for.',
+  ],
+  [
+    'You know your period dates but ',
+    'aren’t sure when you’re likely to ovulate or what your fertile window is',
+    '.',
+  ],
+  [
+    'You’re tired of conflicting advice and want ',
+    'a clear, gentle yoga-based wellness routine',
+    ' alongside medical care.',
+  ],
+  [
+    'Your doctor has recommended ',
+    'improving your weight or daily habits',
+    ', but you aren’t sure where to begin.',
+  ],
+  [
+    'You’re ready to replace random tips with ',
+    'understanding, consistency and structured guidance',
+    '.',
   ],
 ];
 
 export function Recognition() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
-      <SectionHeading>
-        Does this <span style={{ color: C.goldDeep }}>sound like you</span>?
+      <SectionHeading
+        eyebrow="See yourself here?"
+        sub="This masterclass is for women actively trying to get pregnant, whether they are trying naturally or have already explored medical fertility treatment."
+      >
+        Does This <span style={{ color: C.goldDeep }}>Sound Like You</span>?
       </SectionHeading>
 
       {/* Seven quiet rows rather than seven cards: the beat wants to be READ,
@@ -114,6 +122,14 @@ export function Recognition() {
           </li>
         ))}
       </ul>
+
+      <p
+        className="mx-auto mt-8 max-w-[820px] text-center font-display text-[17px] font-bold sm:text-[19px]"
+        style={{ color: C.ink }}
+      >
+        If any of this sounds familiar, these two days are designed for you.{' '}
+        <span style={{ color: C.goldDeep }}>♡</span>
+      </p>
     </section>
   );
 }
@@ -442,7 +458,10 @@ export function Testimonials() {
 
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
-      <SectionHeading sub="Some came after months of trying. Some after failed IUI/IVF. Some with no clear answers. These are the women who eventually went on to conceive.">
+      <SectionHeading
+        eyebrow="Real women · Real experiences"
+        sub="Some came after months of trying. Some after IUI/IVF. Some with no clear answers. Hear these women’s own stories about their experiences with Ankita."
+      >
         Real Fertility Journeys From Women Who Were{' '}
         <span style={{ color: C.goldDeep }}>Struggling to Conceive</span>
       </SectionHeading>
@@ -491,6 +510,10 @@ export function Testimonials() {
         <ShotRail shots={SHOTS_RIGHT_TO_LEFT} label="Message screenshots, first wall" />
         <ShotRail shots={SHOTS_LEFT_TO_RIGHT} reverse label="Message screenshots, second wall" />
       </div>
+
+      <p className="mx-auto mt-8 max-w-[680px] text-center text-[12.5px] italic" style={{ color: C.inkMuted }}>
+        These are individual experiences, not a guarantee of a particular fertility outcome.
+      </p>
     </section>
   );
 }

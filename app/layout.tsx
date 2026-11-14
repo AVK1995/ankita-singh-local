@@ -6,7 +6,7 @@ import MetaPixel from '@/components/MetaPixel';
 import { siteUrl } from '@/lib/site-url';
 
 import LegoObserver from './_landing/lego';
-import { PRICE, SESSION_TIMES, START_DATE } from './_landing/offer';
+import { DATES, PRICE, SESSION_TIMES_TZ } from './_landing/offer';
 import './globals.css';
 
 /* Fraunces headlines, Manrope body. Both are variable, so next/font takes no
@@ -24,8 +24,8 @@ const body = Manrope({
   display: 'swap',
 });
 
-const TITLE = 'Conceive Naturally: 5-Day Fertility Reset Challenge | Bindwithyoga';
-const DESCRIPTION = `In just 5 days, discover what can improve your chances of natural conception. A fertility expert-led live reset around your cycle, fertile window, pelvic & core strength, breathing and nutrition. Starts ${START_DATE}, ${SESSION_TIMES}, live on Zoom, for ${PRICE}.`;
+const TITLE = '2-Day Fertility Reset Masterclass | Bindwithyoga';
+const DESCRIPTION = `A 2-day live masterclass with Ankita Singh: understand your cycle and fertile window, then experience gentle Period-Sync Yoga. ${DATES}, ${SESSION_TIMES_TZ}, one live Zoom session each day, for ${PRICE}.`;
 
 /* '' when NEXT_PUBLIC_SITE_URL is unset, which is the current state. The
    metadata block below omits metadataBase and the OG url rather than naming a

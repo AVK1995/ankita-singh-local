@@ -4,9 +4,9 @@
  * Everything below the hero:
  *
  *   7  Real Fertility Journeys ................. ./proof   ← HOISTED, see below
- *   3  What Will Change After This 5-Day Reset .. this file
- *   4  Your 5-Day Plan ......................... this file  ← the signature beat
- *   5  Live Sessions, Twice A Day .............. this file
+ *   3  What Will Change After This 2-Day Reset .. this file
+ *   4  Your 2-Day Plan ......................... this file  ← the signature beat
+ *   5  One Live Session Per Day ................ this file
  *   6  Does this sound like you? ............... ./proof
  *   8  GET INSTANT ACCESS TO ................... ./toolkit
  *   9  Meet Ankita Singh ....................... ./close
@@ -26,6 +26,7 @@ import {
   Barbell,
   BowlFood,
   CalendarBlank,
+  Check,
   Clock,
   Compass,
   Heart,
@@ -38,7 +39,14 @@ import { useEffect, useRef, useState } from 'react';
 import Close from './close';
 import { legoBrick, legoDelay } from './lego-style';
 import { domAnimation, LazyMotion } from './motion-lite';
-import { CHECKOUT_HREF, CTA_LABEL, CTA_NOTE, SESSION_TIMES } from './offer';
+import {
+  CHECKOUT_HREF,
+  compactRange,
+  CTA_NOTE,
+  DAY1_TIME,
+  DAY2_TIME,
+  START_SPOKEN,
+} from './offer';
 import { Recognition, Testimonials } from './proof';
 import { C, SectionHeading } from './shared';
 import Toolkit from './toolkit';
@@ -60,51 +68,54 @@ const EXPERIENCE = [
   {
     icon: ArrowsClockwise,
     title: 'SYNC',
-    body: 'Know exactly what to do during your period, fertile window and waiting phase.',
+    body: 'Know what to focus on during your period, fertile window and waiting phase.',
   },
   {
     icon: CalendarBlank,
     title: 'TRACK',
-    body: 'Find your real fertile window and probable ovulation days, not just your period date.',
+    body: 'Learn to estimate your fertile window and probable ovulation days, not just your period date.',
   },
   {
     icon: PersonSimpleTaiChi,
     title: 'OPEN',
-    body: 'Release tight hips and a stiff pelvis to support conception and a healthy pregnancy.',
+    body: 'Release everyday hip and pelvic stiffness through gentle mobility practices.',
   },
   {
     icon: Barbell,
     title: 'STRENGTHEN',
-    body: 'Reconnect your core and pelvic floor for the stability your body needs to carry a baby.',
+    body: 'Reconnect your core and pelvic floor for strength, stability and body awareness.',
   },
   {
     icon: Heart,
     title: 'CALM',
-    body: 'Let go of the stress after months of trying by calming your nervous system',
+    body: 'Let go of some of the stress after months of trying with relaxation and breathing.',
   },
   {
     icon: BowlFood,
     title: 'NOURISH',
-    body: 'Know what to eat for fertility, without crash diets or conflicting family advice',
+    body: 'Know which everyday nutrition habits support reproductive health, without crash diets.',
   },
   {
     icon: Lightning,
     title: 'ENERGIZE',
-    body: 'Feel lighter, more flexible and more energetic in your body every day',
+    body: 'Feel lighter, more flexible and more energetic with manageable movement.',
   },
   {
     icon: Compass,
     title: 'PLAN',
-    body: 'Leave with a personalized plan for your safe, stress-free and natural pregnancy',
+    body: 'Leave with a clear starting plan for your next attempt to get pregnant.',
   },
 ];
 
 function Experience() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvasAlt }}>
-      <SectionHeading sub="Most women just try harder every month. This workshop reset shows you what to do in each phase of your cycle, so your first (or next) attempt is built on a plan, not a guess.">
-        WHAT WILL CHANGE AFTER THIS{' '}
-        <span style={{ color: C.goldDeep }}>5-DAY RESET?</span>
+      <SectionHeading
+        eyebrow="Your fertility reset"
+        sub="Most women just try harder every month. This masterclass shows you what to focus on during each phase of your cycle, so your next attempt to get pregnant is built on a plan, not a guess."
+      >
+        What Will Change After This{' '}
+        <span style={{ color: C.goldDeep }}>2-Day Reset?</span>
       </SectionHeading>
 
       {/* Eight short cards: two rows of four on desktop. */}
@@ -153,36 +164,45 @@ function Experience() {
   );
 }
 
-/* ══ 4 · Your 5-Day Plan ═══════════════════════════════════════════════════
-   The signature beat, and the page's ONE heavy motion moment. Five days is a
-   genuine sequence, so it is a spine with a filling rail rather than five
-   cards in a row: the rail's progress is a single CSS variable written by a
-   rAF-throttled scroll handler, and nodes ignite as the fill reaches them. */
+/* ══ 4 · Your 2-Day Plan ═══════════════════════════════════════════════════
+   The signature beat, and the page's ONE heavy motion moment. The two days are
+   a genuine sequence, so it is a spine with a filling rail: the rail's
+   progress is a single CSS variable written by a rAF-throttled scroll handler,
+   and nodes ignite as the fill reaches them. */
 const DAYS = [
   {
     n: 'DAY 01',
-    title: 'Calm Your Body and Know Where To Start',
-    body: 'After months of trying and waiting, your body carries a lot of stress. Today, simple breathing helps you relax, and a quick body check shows where you are right now, so you can see how far you have come by Day 5.',
+    time: compactRange(DAY1_TIME),
+    kicker: 'Theory & Clarity',
+    title: 'Understand Your Fertility & Know Where to Start',
+    body: 'The 2-hour Fertility Reset Blueprint. After months of trying, finally understand how your cycle, probable ovulation and lifestyle routines fit together.',
+    points: [
+      'How your menstrual cycle and fertile window work',
+      'Fertile-window awareness, including irregular cycles',
+      'What PCOS/PCOD, thyroid concerns and other fertility challenges can mean for your starting point',
+      'Why your yoga approach may change with your cycle',
+      'Nutrition, sleep, stress management and daily habits',
+      'Build your Fertility Reset Starter Map and ask questions',
+    ],
+    outcome:
+      'You’ll better understand your cycle and know what to focus on before your next attempt.',
   },
   {
     n: 'DAY 02',
-    title: 'Open Up Your Hips and Pelvis',
-    body: 'Long hours of sitting leave your hips and pelvis tight and stiff. Today, gentle movements help you loosen up, and you will learn why your yoga should change with your periods instead of staying the same all month.',
-  },
-  {
-    n: 'DAY 03',
-    title: 'Make Your Core and Pelvic Muscles Strong',
-    body: 'These are the muscles that will one day hold and carry your baby. Today, gentle exercises and better posture help them work together, so your body feels strong, steady and ready.',
-  },
-  {
-    n: 'DAY 04',
-    title: 'Master Your Period-Sync Routine and Your Best Days to get pregnant',
-    body: 'This is the day most women say, “Nobody ever told me this!” You will learn what to do on your period days, your fertile days and the days after, find your own best days to try for a baby, and practise the right yoga and breathing for each part of your cycle.',
-  },
-  {
-    n: 'DAY 05',
-    title: 'Leave With Your Personalized Plan for Your Next Pregnancy Attempt',
-    body: 'You will learn simple, everyday food habits that support fertility, without crash diets or confusing advice. Then you will see how far you have come since Day 1 and leave with your own clear plan for your next attempt, feeling hopeful and in control again.',
+    time: compactRange(DAY2_TIME),
+    kicker: 'Yoga & Next Steps',
+    title: 'Experience Period-Sync Yoga & Know Your Next Steps',
+    body: 'Move from understanding the theory to experiencing a guided yoga practice from home, followed by guidance on how to continue.',
+    points: [
+      'Gentle breathing and relaxation with Ankita',
+      'Beginner-friendly hip and pelvic mobility movements',
+      'Simple core and pelvic-floor awareness practices',
+      'How to adapt movement based on your cycle and comfort',
+      'Daily routine, next steps and participant questions',
+      'Introduction to Ankita’s complete guided fertility yoga program',
+    ],
+    outcome:
+      'You’ll have experienced the routine and understand options for continuing with structured guidance.',
   },
 ];
 
@@ -257,9 +277,10 @@ function Schedule() {
   return (
     <section className="px-4 py-12 sm:py-20 lg:py-24" style={{ background: C.canvas }}>
       <SectionHeading
-        sub="Every day, you will learn one new part of your Period-Sync Yoga Routine. By Day 5, you will know what to do on your period days, your fertile days and the days after. Join live at 6 AM or 7 PM."
+        eyebrow="The complete 4-hour experience"
+        sub="On Day 1, understand your body and the Period-Sync Yoga approach. On Day 2, experience gentle live yoga, create a practical next-step plan and learn about ongoing support."
       >
-        Your <span style={{ color: C.goldDeep }}>5-Day Plan</span> Before Your First (or Next)
+        Your <span style={{ color: C.goldDeep }}>2-Day Plan</span> Before Your Next Pregnancy
         Attempt
       </SectionHeading>
 
@@ -276,7 +297,7 @@ function Schedule() {
             <li
               key={d.n}
               className={`relative mb-6 pl-14 sm:mb-9 sm:w-1/2 sm:pl-0 ${
-                left ? 'sm:pr-12 sm:text-right' : 'sm:ml-auto sm:pl-12'
+                left ? 'sm:pr-12' : 'sm:ml-auto sm:pl-12'
               }`}
             >
               {/* Positioning lives on the outer span and the snap animation on
@@ -311,13 +332,11 @@ function Schedule() {
                 }}
               >
                 <span
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${
-                    left ? 'sm:flex-row-reverse' : ''
-                  }`}
+                  className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em]"
                   style={{ background: C.coralBed, color: C.coralInk }}
                 >
                   <CalendarBlank weight="bold" className="lego-stud h-3 w-3" />
-                  {d.n}
+                  {d.n} · {d.kicker} · {d.time} IST
                 </span>
                 <h3
                   className="mt-3.5 font-display text-[20px] font-bold leading-snug"
@@ -328,6 +347,30 @@ function Schedule() {
                 <p className="mt-2 text-[14px] leading-relaxed" style={{ color: C.inkSoft }}>
                   {d.body}
                 </p>
+                <ul className="mt-3.5 space-y-1.5">
+                  {d.points.map((pt) => (
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2 text-[13.5px] leading-snug"
+                      style={{ color: C.inkSoft }}
+                    >
+                      <Check
+                        weight="bold"
+                        aria-hidden
+                        className="mt-[3px] h-3.5 w-3.5 shrink-0"
+                        style={{ color: C.emeraldInk }}
+                      />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <p
+                  className="mt-4 rounded-xl px-3.5 py-2.5 text-[13px] leading-snug"
+                  style={{ background: C.goldWash, color: C.ink }}
+                >
+                  <strong>By the end of {d.n === 'DAY 01' ? 'Day 1' : 'Day 2'}:</strong>{' '}
+                  {d.outcome}
+                </p>
               </div>
             </li>
           );
@@ -337,8 +380,8 @@ function Schedule() {
   );
 }
 
-/* ══ 5 · Live Sessions, Twice A Day ════════════════════════════════════════
-   A CTA band, not a section with a structure: two timings and a click.
+/* ══ 5 · One Live Session Per Day ══════════════════════════════════════════
+   A CTA band, not a section with a structure: one timing and a click.
 
    This is one of the page's two CONTAINED DARK OBJECTS (with the Option 2
    card), which is the only way dark is allowed below the hero: as an object
@@ -364,17 +407,17 @@ function SessionsBand() {
           style={{ background: 'rgba(252, 228, 234,0.16)', color: C.gold }}
         >
           <Clock weight="bold" className="h-3 w-3" />
-          Live Sessions, Twice A Day
+          One Live Session Per Day
         </span>
 
         <h2
           className="mx-auto mt-6 max-w-[620px] font-display text-[clamp(26px,3.8vw,38px)] font-bold leading-[1.16]"
           style={{ color: C.onDark }}
         >
-          {SESSION_TIMES}, <span style={{ color: C.gold }}>live on Zoom</span>.
+          One Live Session Per Day. <span style={{ color: C.gold }}>At {START_SPOKEN}.</span>
         </h2>
         <p className="mt-3 text-[15.5px]" style={{ color: C.onDarkMute }}>
-          Pick whichever time fits your day.
+          Day 1: {DAY1_TIME} · Day 2: {DAY2_TIME} · Live on Zoom
         </p>
 
         <div className="mx-auto mt-8 flex max-w-[430px] flex-col items-center">
@@ -390,7 +433,7 @@ function SessionsBand() {
             }}
           >
             <span className="inline-flex items-center gap-2.5">
-              {CTA_LABEL}
+              Reserve My Seat
               <ArrowRight
                 weight="bold"
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"

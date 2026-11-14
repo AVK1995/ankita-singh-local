@@ -54,10 +54,12 @@ import {
 import { LEGAL } from '../_landing/legal';
 import {
   CALL_BOOKING_URL,
+  DAY1_DATE,
+  DAY1_TIME,
+  DAY2_DATE,
+  DAY2_TIME,
   RECORDINGS_DELIVERY,
   RECORDINGS_INVITE,
-  SESSION_TIMES_TZ,
-  START_DATE,
   WHATSAPP_INVITE,
   inr,
 } from '../_landing/offer';
@@ -78,11 +80,13 @@ const WA = { green: '#25D366', deep: '#128C7E' } as const;
 const GOOD_GREEN = '#059669';
 const WARN_AMBER = '#B45309';
 
+/* What the community carries, in the masterclass's own terms: one session per
+   day, Day 1 theory and Day 2 live yoga, and the four bonuses. */
 const COMMUNITY_BENEFITS: { icon: typeof CheckCircle; text: string }[] = [
-  { icon: ChatCircleDots, text: 'Daily Zoom session links' },
-  { icon: Megaphone, text: 'Session reminders before class' },
-  { icon: Notebook, text: 'Instructions for each day' },
-  { icon: Heart, text: 'Support during the 5-day reset' },
+  { icon: ChatCircleDots, text: 'Zoom joining links for Day 1 and Day 2' },
+  { icon: Megaphone, text: 'Reminders before each live session' },
+  { icon: Notebook, text: 'Your four bonus resources' },
+  { icon: Heart, text: 'Support and Q&A during the 2-day masterclass' },
   { icon: Person, text: 'Important updates from Ankita' },
 ];
 
@@ -111,10 +115,14 @@ const policyItems = (hasRecording: boolean) =>
    either direction: a "no equipment required" line was NOT carried over,
    because on a movement-based challenge it is a claim rather than a
    reassurance. Add what she actually needs participants to have ready. */
+/* Day 1 is theory and the Fertility Reset Starter Map; Day 2 is guided yoga
+   from home. The list follows that order. */
 const PREP_ITEMS = [
-  'Wear comfortable clothes',
-  'Be in a distraction-free space',
-  'Join the community immediately',
+  'Join the community now',
+  'Day 1: keep a notebook for your Fertility Reset Starter Map',
+  'Note your recent period dates and the questions you want to ask',
+  'Day 2: wear comfortable clothes and clear a little space to move',
+  'Be in a quiet, distraction-free space for both sessions',
 ];
 
 /* The WhatsApp teal one step darker than the community card, so the two
@@ -177,7 +185,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
             className="mt-5 font-display text-[30px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] lg:text-[52px]"
             style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
           >
-            Your 5-Day Fertility Reset is{' '}
+            Your 2-Day Masterclass Seat is{' '}
             <span style={{ color: C.goldDeep }}>Confirmed.</span>
           </h1>
 
@@ -188,14 +196,14 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
             {addons.length === 0 ? (
               <>
                 You are officially enrolled in the{' '}
-                <strong style={{ color: C.ink }}>5-Day Fertility Reset Challenge.</strong>{' '}
+                <strong style={{ color: C.ink }}>2-Day Fertility Reset Masterclass.</strong>{' '}
                 Please read this page carefully, your access depends on the next
                 step.
               </>
             ) : (
               <>
                 You are officially enrolled in the{' '}
-                <strong style={{ color: C.ink }}>5-Day Fertility Reset Challenge</strong>
+                <strong style={{ color: C.ink }}>2-Day Fertility Reset Masterclass</strong>
                 {hasRecording && hasCall
                   ? ', with Session Recordings and a Private 1-on-1 Call with Ankita.'
                   : hasRecording
@@ -212,21 +220,30 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
           {/* What this order includes, at a glance. Add-on pages only. */}
           {addons.length > 0 && (
             <div className="mt-5 flex flex-wrap justify-center gap-2">
-              <IncludedChip label="5-Day Live Challenge" />
+              <IncludedChip label="2-Day Live Masterclass" />
               {hasRecording && <IncludedChip label="Session Recordings" />}
               {hasCall && <IncludedChip label="1-on-1 Call with Ankita" />}
             </div>
           )}
 
-          <div className="mx-auto mt-8 grid max-w-lg gap-3 sm:grid-cols-2">
-            <DetailCard icon={CalendarBlank} label="Challenge date" value={START_DATE} />
+          {/* One card per day, the same schedule the landing page sells. */}
+          <div className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+            <DetailCard
+              icon={CalendarBlank}
+              label="Day 1 · Theory & clarity"
+              value={`${DAY1_DATE} · ${DAY1_TIME}`}
+              footnote="Understand your cycle & the Fertility Reset Blueprint"
+            />
             <DetailCard
               icon={Clock}
-              label="Live session timings"
-              value={SESSION_TIMES_TZ}
-              footnote="Choose the batch that fits"
+              label="Day 2 · Live yoga practice"
+              value={`${DAY2_DATE} · ${DAY2_TIME}`}
+              footnote="Guided Period-Sync Yoga & your next steps"
             />
           </div>
+          <p className="mt-3 text-[12.5px] font-semibold" style={{ color: C.goldInk }}>
+            One live Zoom session each day · Single batch, no batch selection
+          </p>
 
           {paymentId && (
             <p
@@ -269,7 +286,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
               All updates, Zoom links, reminders and daily instructions will be
               shared inside the WhatsApp Community.{' '}
               <strong className="text-white">
-                Your access to the challenge depends on joining this group.
+                Your access to the masterclass depends on joining this group.
               </strong>
             </p>
 
@@ -409,7 +426,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
           >
             <Warning weight="fill" className="mr-1.5 inline-block h-4 w-4 align-text-bottom" />
             Please do <strong>not mute</strong> or <strong>exit the community</strong> during these{' '}
-            <strong>5 days</strong>.
+            <strong>2 days</strong>.
           </p>
         </div>
       </section>
@@ -436,8 +453,9 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
                 <span style={{ color: C.goldDeep }}>5 minutes before</span> each live session.
               </h3>
               <p className="mt-2 text-[14px] leading-relaxed" style={{ color: C.inkSoft }}>
-                These are <strong>live, expert-led sessions</strong>. Arriving
-                late may result in missing important instructions.
+                Both days are <strong>live, expert-led sessions</strong>: Day 1 is
+                theory and clarity, Day 2 is guided yoga from home. Arriving late
+                may mean missing important instructions.
               </p>
             </div>
           </div>
@@ -515,7 +533,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
               What to do <span style={{ color: C.goldDeep }}>before day one.</span>
             </h2>
             <p className="mt-3 text-[14.5px]" style={{ color: C.inkSoft }}>
-              To get the most out of the 5 days, please:
+              To get the most out of the 2 days, please:
             </p>
           </div>
 
@@ -547,8 +565,8 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
               className="mr-1.5 inline-block h-4 w-4 align-text-bottom"
               style={{ color: C.goldInk }}
             />
-            <strong style={{ color: C.ink }}>No prior experience required.</strong> Every practice
-            is guided live, step by step.
+            <strong style={{ color: C.ink }}>Beginner-friendly.</strong> Every practice is guided
+            live by Ankita, step by step.
           </p>
         </div>
       </section>
@@ -570,12 +588,11 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
             className="font-display text-[26px] font-semibold leading-tight sm:text-[36px]"
             style={{ color: C.onDark }}
           >
-            This is your <span style={{ color: C.gold }}>first step</span>
-            <br className="hidden sm:block" /> toward feeling more prepared for
-            conception.
+            Your next attempt deserves{' '}
+            <span style={{ color: C.gold }}>a plan, not a guess.</span>
           </h2>
           <p className="mt-4 text-[14.5px]" style={{ color: C.onDarkMute }}>
-            Now, join the community and we&rsquo;ll see you inside.
+            Join the community now and we&rsquo;ll see you live on Day 1, {DAY1_DATE}.
           </p>
 
           <div className="mt-8">
@@ -615,7 +632,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
         }
         steps={[
           {
-            label: addons.length > 0 ? 'Join Challenge Community' : 'Join the WhatsApp Community',
+            label: addons.length > 0 ? 'Join Masterclass Community' : 'Join the WhatsApp Community',
             href: WHATSAPP_INVITE,
             kind: 'group',
             background: `linear-gradient(135deg, ${WA.deep}, ${WA.green})`,
