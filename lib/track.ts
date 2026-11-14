@@ -32,7 +32,7 @@ import {
    sits on is one of the ones a dataset gets classified on. */
 const VALUE = PRICE_RUPEES;
 const ITEM: Ga4Item = {
-  item_id: 'bwy-5day-reset',
+  item_id: 'bwy-2day-reset',
   item_name: PRODUCT_LABEL,
   price: VALUE,
   quantity: 1,

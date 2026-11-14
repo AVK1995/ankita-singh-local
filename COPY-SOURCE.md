@@ -1,233 +1,316 @@
-# COPY SOURCE · tgo-ankita
+# COPY SOURCE · tgo-ankita · 2-Day Fertility Reset Masterclass
 
-Supplied by Atul, 24 Sep 2026. **This is the sole source of truth for every
-string on the page.** Reproduce headlines, labels, figures and order verbatim.
-Do not re-voice, shorten or drop anything to fit a design. Flag a concern
-rather than editing silently.
+Approved funnel copy, version 13 November 2026 (developer handoff). **This is the
+sole source of truth for every string on the page.** It replaces the earlier
+5-Day Fertility Reset Challenge copy. Reproduce headlines, labels, figures and
+order verbatim. Flag a concern rather than editing silently.
 
----
+## Global details
 
-Special Offer: 5-Day Fertility Reset Challenge for ₹497 | Price Increases To ₹1599 Tomorrow
-| 100% Money-Back Guarantee | Live · Starts 21st October · 6 AM & 7 PM
-
-FOR WOMEN TRYING TO CONCEIVE NATURALLY & PREPARE THEIR BODY FOR PREGNANCY
-
-Improve Your Body's Readiness for Natural Conception in Just 5 Days
-
-Even if You Have PCOS, Thyroid, Endometriosis, Unexplained Infertility or Failed IVF/IUI
-
-Experience five days of guided fertility-focused movement, breathing & cycle-based practices designed to help you improve body awareness, understand your fertile window and prepare your body better for natural conception. Starts 21st October, live on Zoom
-
-Start Your 5-Day Reset · ₹497
-100% Money-Back Guarantee
-
-Starts 21st October               6 AM & 7 PM              Live, Expert-Led Sessions
-
----
-
-5-Day Fertility Reset Challenge
-Live expert-led sessions · Zoom · 2 session timings
-₹497
-Reserve My Spot →
-🔒 100% Secure · UPI / Card / NetBanking
-
----
-
-❤️1000+ Women Guided
-On Their Motherhood Journey
-⭐ 5.0 Review
-Women 28–40
-🛡️100%
-Money-Back Guarantee
-💯Live on Zoom
-Expert-Led Sessions
-
-## Here's What You'll Experience In 5 Days
-
-A live, guided fertility reset designed to help you understand your body better, move according to your cycle and feel more prepared for conception.
-
-**Live Fertility-Focused Sessions**
-Join Ankita live on Zoom every day for guided movement, breathing and fertility-focused practices. No pre-recorded routines or one-size-fits-all workouts.
-
-**Fertility Nutrition Guidance**
-Learn simple, practical nutrition principles and everyday food habits that can better support your fertility health and conception preparation, without complicated diets or restrictive meal plans.
-
-**Cycle-Based Fertility Practice**
-Learn how your movement and intensity should change during your period, fertile window and waiting phase instead of following the same routine throughout your cycle.
-
-**Pelvic & Hip Mobility**
-Work on pelvic and hip mobility to improve flexibility, reduce stiffness and build a stronger foundation in the area that will support and carry your baby through pregnancy.
-
-**Core & Pelvic Floor Connection**
-Learn how to activate and coordinate your core and pelvic floor through gentle strengthening and posture-focused practices that support better body stability.
-
-**Understand Your Fertile Window**
-Learn how to identify your probable ovulation days and understand when your fertile window may fall, because it can vary from woman to woman.
-
-**Breathing & Relaxation Practices**
-Use guided breathing and relaxation practices to reduce body tension, calm your system and support better mind-body regulation, including the hormonal communication pathway often referred to as the HPO axis.
-
-**A Supportive Community of Women Like You**
-Connect with other women who are also preparing for conception, navigating fertility concerns and trying to understand their bodies better, so the journey feels less isolating and more supported.
-
-## Your 5-Day Schedule
-
-Each day builds on the last to help you understand your body better, move according to your cycle and feel more prepared for conception. Join live at 6 AM or 7 PM IST.
-
-**Day 1 — Breathing + Fertility Baseline Assessment**
-Breathing & relaxation practices to reduce body tension + Understand your current fertility starting point
-
-**Day 2 — Pelvic + Hip Mobility**
-Improve pelvic and hip mobility for better movement & flexibility + Learn how to modify your fertility practice based on your menstrual cycle phase
-
-**Day 3 — Core + Pelvic Floor Connection**
-Improve core & pelvic floor coordination for better stability + Gentle strengthening and posture correction to build the support your body will need to carry your baby through pregnancy.
-
-**Day 4 — Cycle-Based Fertility Practice + Fertile Window**
-Understand what to do during your period, fertile window & waiting period + Understand your fertile window & probable ovulation days + Practice the right movement, breathing & relaxation techniques for each phase
-
-**Day 5 — Fertility-Enhancement Nutrition + Conception Roadmap**
-Understand what to include, what to be mindful of and how nutrition can support your fertility preparation + Compare your Day 1 vs Day 5 progress and create your personal next-step fertility plan
-
----
-
-Live Sessions, Twice A Day
-6 AM & 7 PM, live on Zoom.
-Pick whichever time fits your day.
-Start Your 5-Day Reset · ₹497
-
-100% Money-Back Guarantee
-
-## Does this sound like you?
-
-👉 You're in your "Zero Trimester" - the pre-conception phase where you want to start preparing your body, cycle and daily habits before pregnancy begins.
-👉 You're married and planning to conceive in the coming months, and want to prepare your body beforehand for a healthier conception journey.
-👉 You've been trying to conceive, but PCOS, thyroid, endometriosis, irregular cycles or unexplained fertility concerns keep making the journey feel harder.
-👉 You've already tried medications, IUI or IVF, but still haven't got the result you were hoping for.
-👉 Your doctor has told you to lose weight or improve your health before trying to conceive, but you're not sure what kind of movement or routine is actually right for you.
-👉 You feel like you're doing a lot for your health, but still don't know whether your body is actually prepared for conception.
-👉 You're tired of piecing together fertility advice on your own and want clear, structured guidance on what to focus on first.
-
-## Real Fertility Journeys From Women Who Were Struggling to Conceive
-
-Some came after months of trying. Some after failed IUI/IVF. Some with no clear answers. These are the women who eventually went on to conceive.
-
-Testimonial 1
-Testimonial 2
-Testimonial 3
-Testimonial 4
-
-Text Screenshot x7 — Move from right to left
-Text Screenshot x6 — Move from left to right
-
-Drive Folder with all Testimonial Screenshots: https://drive.google.com/drive/folders/1DkyC9n4POUh8tX2qVe2Oe-I41Dont1Le
-
-## GET INSTANT ACCESS TO
-
-Your 5-Day Fertility Reset & Complete Conception Preparation Toolkit
-
-**5-Day Live Fertility Reset Challenge (₹2,500 Value)**
-Experience five expert-led live sessions combining fertility-focused movement, breathing, pelvic & core work and cycle-based practices to help you understand your body better and prepare more intentionally for conception.
-LIVE ACCESS · INCLUDED
-
-**Your Cycle & Fertile Window Tracker (₹497 Value)**
-A simple tracker to help you understand your menstrual cycle, identify your probable ovulation days and know when your fertile window may fall.
-INSTANT ACCESS · INCLUDED
-
-**Pre-Conception Do's & Don'ts Checklist (₹497 Value)**
-A practical checklist of what to focus on, what to avoid and the everyday habits to be more mindful of while preparing your body for conception.
-INSTANT ACCESS · INCLUDED
-
-**The Fertility-Friendly Daily Routine Planner (₹497 Value)**
-A simple daily planner to help you stay consistent with movement, breathing, hydration, sleep and other supportive habits without making fertility preparation feel overwhelming.
-INSTANT ACCESS · INCLUDED
-
-**Garbh Sanskar Before Pregnancy: The Pre-Conception Introduction (₹497 Value)**
-A short guided session from a Spiritual Healer, explaining why Garbh Sanskar can begin even before pregnancy and simple pre-conception practices you can start using now.
-INSTANT ACCESS · INCLUDED
-
-## Meet Ankita Singh, Founder of Bindwithyoga
-
-Ankita is a Yoga Therapist, Fertility Yoga Practitioner, Prenatal & Postnatal Yoga Expert and Meditation Teacher, with advanced training including 500 RYT Yoga Teacher certification, 300 RYT Meditation Teacher training and a Master's in Yoga Therapy.
-
-Having navigated her own journey with PCOD/PCOS before conceiving naturally, Ankita understands fertility not only through professional training, but also through lived experience.
-
-Today, she has guided 1000+ women across fertility, conception, pregnancy and postnatal recovery.
-
-Her work has also been recognised through collaborations with Janitri, SuperBottoms, Cradle Children's Hospital Jaipur and Udbhav Clinic Jaipur, and in December 2025 she was awarded Best Yoga Therapist of the Year at the Rajasthan Glory Awards.
-
-"I don't believe every woman should follow the same fertility routine. Your body, your cycle and your starting point matter."
-
-That is the approach behind the 5-Day Fertility Reset Challenge: helping you understand your body better and experience a more personalised way to prepare for healthy conception.
-
-## What Most Women Miss When Preparing to Conceive
-
-Ankita's approach covers each of these factors together, helping you prepare for conception in a way that is more personalised, structured and relevant to your body.
-
-**01 The Same Practice Does Not Suit Every Phase**
-What may feel right during your fertile window may not be appropriate during your period or waiting phase. Your practice needs to change with your cycle.
-
-**02 Nutrition Matters in Conception Preparation**
-What you eat can also influence how supported your body feels through your fertility journey. Simple, consistent nutrition habits can work alongside movement, cycle awareness and recovery to better support conception preparation.
-
-**03 Knowing Your Dates Is Not the Same as Knowing Your Fertile Window**
-Many women know when their period starts, but are still unclear about their probable ovulation days and when conception chances may actually be highest.
-
-**04 More Exercise Is Not Always Better Preparation**
-If your hips are tight, pelvic mobility is limited or your core and pelvic floor are poorly coordinated, simply adding harder workouts may miss what your body needs first.
-
-**05 Fertility Concerns Don't All Need the Same Starting Point**
-A woman with PCOS, irregular cycles or thyroid concerns may need a different focus from someone with endometriosis, unexplained infertility or a previous failed medical treatment.
-
-**06 Conception Preparation Starts Before the Positive Test**
-You don't have to wait until fertility becomes a bigger concern. Working on your body, cycle awareness and daily practices can begin before your next conception attempt.
-
-## THE RESULTS
-
-That's Why Women Begin to Notice...
-
-They feel less confused about what to eat and have a clearer fertility-supportive nutrition direction
-Their body feels less tense and more relaxed
-Hips and pelvic area begin to feel more open and mobile
-Core and pelvic floor feel more connected and supported
-They understand which movements suit different phases of their cycle
-Their fertile window and probable ovulation days feel far less confusing
-They become more aware of what their body needs before conception
-They feel more informed, prepared and confident about their fertility journey
-They stop guessing and finally have a clearer next-step plan for conception preparation
-
-## Now You Have Two Options From Here
-
-**OPTION 1**
-Keep trying random fertility advice, generic routines and isolated fixes, while still feeling unsure about what your body actually needs to prepare for conception.
-
-**OPTION 2**
-Take five days to understand your cycle, fertile window, body readiness and the right fertility practices for each phase, so you can prepare for conception with more clarity and confidence.
-[Take Action · ₹497 →]
-
-## Recap of Everything You'll Get
-
-| INCLUDED | VALUE |
+| Item | Final copy / instruction |
 |---|---|
-| ✓ 5-Day Live Fertility Reset Challenge | ₹2,500 |
-| ✓ Your Cycle & Fertile Window Tracker | ₹497 |
-| ✓ Pre-Conception Do's & Don'ts Checklist | ₹497 |
-| ✓ Fertility-Friendly Daily Routine Planner | ₹497 |
-| ✓ Garb Sanskar Before Pregnancy: Pre-Conception Introduction | ₹497 |
+| Product | 2-Day Fertility Reset Masterclass |
+| Daily schedule | 12:00 PM–2:00 PM IST, both days |
+| Frequency | ONE live Zoom session per day (no batch selection) |
+| Session format | Day 1: theory and clarity; Day 2: practical yoga, next steps, paid-program invitation |
+| Registration | ₹97 one-time |
+| Offer anchor | ₹2,699 masterclass value · 96% off |
+| Package value | ₹4,687 (masterclass + four ₹497 bonuses) |
+| Dates / times | [DAY 1 DATE] and [DAY 2 DATE], set via NEXT_PUBLIC_DATES ("Date 1, Date 2") and NEXT_PUBLIC_TIMES ("Time 1, Time 2") |
 
-TOTAL VALUE ₹4,988
-GET EVERYTHING TODAY FOR ₹497
-(One-time payment)
-Start Your 5-Day Reset · ₹497
+Core audience: women actively trying to conceive, including those with PCOS/PCOD,
+thyroid issues, endometriosis, irregular periods, weight gain, unexplained
+difficulties, or prior IVF/IUI attempts. Conception-focused; not a prenatal,
+birth-delivery or postnatal program.
 
-100% Money-Back Guarantee
+Developer note: preserve the "Double your chances of Pregnancy" headline as
+written. Supporting evidence for any quantitative outcome, testimonial, award,
+seat-limit or promotional claim should be checked before publication.
 
 ---
 
-## Disclaimer
+# A. LANDING PAGE
 
-Bindwithyoga · 5-Day Fertility Reset Challenge
+## 01 · Header and announcement
+BIND WITH YOGA · with Ankita Singh
+2 Days · 12 PM IST · Live on Zoom
 
-All content, live sessions and resources provided by Bindwithyoga are for educational and general wellness purposes only. This is not medical advice and is not intended to replace care from your doctor, gynaecologist or fertility specialist. Consult a qualified healthcare professional before changing your movement, medication, treatment, nutrition or lifestyle, especially if you have PCOS, thyroid concerns, endometriosis, irregular cycles, are undergoing fertility treatment, or have any other medical condition. Individual experiences and results may vary based on age, health history, lifestyle, consistency, medical factors and other individual circumstances. This website is not affiliated with or endorsed by Meta. FACEBOOK and INSTAGRAM are trademarks of Meta Platforms, Inc.
+## 02 · Hero
+Eyebrow: 2-DAY LIVE FERTILITY RESET MASTERCLASS
 
+Avatar hook: Want to get pregnant even with PCOS/PCOD, thyroid issues, endometriosis,
+irregular periods, weight gain or unexplained fertility struggles?
+
+Headline (verbatim): **Double your chances of Pregnancy with a simple at-home "Period-Sync Yoga Routine"**
+
+Subheadline: Even after trying IVF/IUI, hormonal injections or medicines.
+Understand your cycle, learn what to do during each phase and experience gentle live yoga with Ankita Singh.
+
+★★★★★ Trusted by 1,000+ women across their fertility & motherhood journeys
+
+Event box: Your 2-Day Live Fertility Reset Masterclass
+- 2 consecutive days · [DAY 1 DATE] and [DAY 2 DATE]
+- 12:00 PM – 2:00 PM IST · Both days
+- One LIVE Zoom session each day
+- Four practical bonus resources
+
+₹2,699 → ₹97 · 96% OFF
+
+BUTTON: Book My Seat Now – 96% Off Today!
+
+Single live batch · 12 PM IST both days · 100% money-back guarantee
+
+Get-Clarity Promise: Understand your cycle and learn how to begin your Fertility Reset
+Routine by Day 2 or get a 100% refund, subject to the published refund policy.
+
+Visual overlay: DAY 01 · 12–2 PM · Understand your cycle and the Fertility Reset Blueprint
+· DAY 02 · 12–2 PM · Guided Period-Sync Yoga and next steps · ₹97 · 2-DAY LIVE RESET
+
+## 03 · Trust strip
+- 1,000+ Women · Guided on their journeys
+- Expert-Led · Yoga & cycle awareness
+- 100% Guarantee · See refund conditions
+- Live on Zoom · 12 PM, one session daily
+
+## 04 · Testimonials
+Eyebrow: Real women · Real experiences
+Real Fertility Journeys From Women Who Were Struggling to Conceive
+Some came after months of trying. Some after IUI/IVF. Some with no clear answers. Hear
+these women's own stories about their experiences with Ankita.
+Videos: Heena Patel · Neha · Aditi Rastogi · Nisha · Amrita
+These are individual experiences, not a guarantee of a particular fertility outcome.
+
+## 05 · What changes after the reset
+Eyebrow: Your fertility reset
+What Will Change After This 2-Day Reset?
+Most women just try harder every month. This masterclass shows you what to focus on
+during each phase of your cycle, so your next attempt to get pregnant is built on a
+plan, not a guess.
+- SYNC · Know what to focus on during your period, fertile window and waiting phase.
+- TRACK · Learn to estimate your fertile window and probable ovulation days, not just your period date.
+- OPEN · Release everyday hip and pelvic stiffness through gentle mobility practices.
+- STRENGTHEN · Reconnect your core and pelvic floor for strength, stability and body awareness.
+- CALM · Let go of some of the stress after months of trying with relaxation and breathing.
+- NOURISH · Know which everyday nutrition habits support reproductive health, without crash diets.
+- ENERGIZE · Feel lighter, more flexible and more energetic with manageable movement.
+- PLAN · Leave with a clear starting plan for your next attempt to get pregnant.
+
+## 06 · Two-day curriculum
+Eyebrow: The complete 4-hour experience
+Your 2-Day Plan Before Your Next Pregnancy Attempt
+On Day 1, understand your body and the Period-Sync Yoga approach. On Day 2, experience
+gentle live yoga, create a practical next-step plan and learn about ongoing support.
+
+DAY 01 · THEORY & CLARITY · 12–2 PM IST · Understand Your Fertility & Know Where to Start
+The 2-hour Fertility Reset Blueprint. After months of trying, finally understand how
+your cycle, probable ovulation and lifestyle routines fit together.
+- How your menstrual cycle and fertile window work
+- Fertile-window awareness, including irregular cycles
+- What PCOS/PCOD, thyroid concerns and other fertility challenges can mean for your starting point
+- Why your yoga approach may change with your cycle
+- Nutrition, sleep, stress management and daily habits
+- Build your Fertility Reset Starter Map and ask questions
+By the end of Day 1: You'll better understand your cycle and know what to focus on before your next attempt.
+
+DAY 02 · YOGA & NEXT STEPS · 12–2 PM IST · Experience Period-Sync Yoga & Know Your Next Steps
+Move from understanding the theory to experiencing a guided yoga practice from home,
+followed by guidance on how to continue.
+- Gentle breathing and relaxation with Ankita
+- Beginner-friendly hip and pelvic mobility movements
+- Simple core and pelvic-floor awareness practices
+- How to adapt movement based on your cycle and comfort
+- Daily routine, next steps and participant questions
+- Introduction to Ankita's complete guided fertility yoga program
+By the end of Day 2: You'll have experienced the routine and understand options for continuing with structured guidance.
+
+One Live Session Per Day. At 12 Noon.
+Day 1: 12:00–2:00 PM IST · Day 2: 12:00–2:00 PM IST · Live on Zoom
+BUTTON: Reserve My Seat
+
+## 07 · Does this sound like you?
+Eyebrow: See yourself here?
+This masterclass is for women actively trying to get pregnant, whether they are trying
+naturally or have already explored medical fertility treatment.
+- You've been trying to conceive for months or years without the positive result you've been hoping for.
+- You're dealing with PCOS/PCOD, thyroid issues, endometriosis, irregular periods or weight-related concerns.
+- Your tests haven't revealed a clear explanation for why getting pregnant has been difficult.
+- You've already tried medication, hormonal injections, IUI or IVF, without the result you hoped for.
+- You know your period dates but aren't sure when you're likely to ovulate or what your fertile window is.
+- You're tired of conflicting advice and want a clear, gentle yoga-based wellness routine alongside medical care.
+- Your doctor has recommended improving your weight or daily habits, but you aren't sure where to begin.
+- You're ready to replace random tips with understanding, consistency and structured guidance.
+If any of this sounds familiar, these two days are designed for you. ♡
+
+## 08 · Masterclass and bonus stack
+Eyebrow: Included in your enrollment
+Your 2-Day Fertility Reset & Complete Conception Preparation Toolkit
+Four hours of live education and yoga, plus practical resources to support what you
+learn after the masterclass.
+- 01 · MAIN MASTERCLASS · ₹2,699 · 2-Day LIVE Fertility Reset Masterclass. Two expert-led
+  live Zoom sessions combining cycle education, fertile-window awareness, the Period-Sync
+  Yoga framework, guided yoga and a next-step roadmap. 12:00–2:00 PM IST on both days.
+  LIVE ACCESS · INCLUDED · DAY 1: Understand Your Cycle | DAY 2: Practice Your Yoga
+- 02 · BONUS · ₹497 · Your Cycle & Fertile Window Tracker. Understand your menstrual
+  cycle, estimate probable ovulation days and learn when your fertile window may fall.
+- 03 · BONUS · ₹497 · Pre-Conception Do's & Don'ts Checklist. A checklist of everyday
+  habits to focus on and common mistakes to avoid while trying to conceive.
+- 04 · BONUS · ₹497 · The Fertility-Friendly Daily Routine Planner. Stay consistent with
+  movement, breathing, hydration, sleep and other supportive daily habits.
+- 05 · BONUS · ₹497 · Garbh Sanskar Before Pregnancy: Introduction. A short introduction
+  to optional traditional and mindfulness practices during the pre-conception phase.
+BUTTON: Start Your 2-Day Reset · 96% Off Today · 100% Money-Back Guarantee
+
+## 09 · Meet Ankita
+Eyebrow: Meet your guide
+Meet Ankita Singh, Founder of Bindwithyoga
+Ankita is a Yoga Therapist, Fertility Yoga Practitioner, Prenatal & Postnatal Yoga Expert
+and Meditation Teacher, with training including 500 RYT Yoga Teacher certification, 300
+RYT Meditation Teacher training and a Master's in Yoga Therapy.
+Having navigated her own journey with PCOS before conceiving naturally, Ankita
+understands fertility through professional training and lived experience.
+She has guided 1,000+ women across fertility, conception, pregnancy and postnatal
+recovery. Her work has been recognised through collaborations with Janitri,
+SuperBottoms, Cradle Children's Hospital Jaipur and Udbhav Clinic Jaipur. In December
+2025 she received a Best Yoga Therapist of the Year award at the Rajasthan Glory Awards.
+"I don't believe every woman should follow the same fertility routine. Your body, your
+cycle and your starting point matter."
+That's the approach behind the 2-Day Fertility Reset Masterclass: understand your cycle,
+recognise your individual starting point and discover supportive practices for your
+fertility journey.
+
+## 10 · What most women miss
+Eyebrow: Ankita's approach
+What Most Women Miss When Trying to Conceive
+A useful approach considers your menstrual cycle, individual concerns and everyday
+habits together, not as isolated tips.
+1. The Same Practice Does Not Suit Every Phase · What feels right during your fertile window may not feel comfortable during your period or waiting phase. Adapt movement to your body.
+2. Nutrition Matters in Conception Preparation · Simple, consistent nutrition habits can support your overall reproductive health alongside movement, rest and medical care.
+3. Knowing Your Dates Is Not Knowing Your Fertile Window · Many women track period dates but remain unsure about probable ovulation days and when conception is most likely.
+4. More Exercise Is Not Always Better Preparation · If your hips feel tight or your core and pelvic floor are poorly coordinated, simply doing harder workouts may not meet your needs.
+5. Different Fertility Concerns Need Different Starting Points · PCOS, thyroid concerns, endometriosis, unexplained difficulty conceiving and previous treatment attempts call for individual consideration.
+6. Your Next Attempt Deserves a Clearer Plan · Learn your cycle, use suitable movement practices and build daily habits that help you move forward with more confidence.
+
+## 11 · The results
+Eyebrow: The results
+That's Why Women Begin to Notice...
+- They feel less confused about what to eat and their nutrition direction.
+- Their body feels less tense and more relaxed.
+- Their hips and pelvic area feel more open and mobile.
+- Their core and pelvic floor feel more connected and supported.
+- They better understand which movements suit different phases.
+- Their probable ovulation days and fertile window feel less confusing.
+- They feel more informed, prepared and confident while trying to conceive.
+- They stop guessing and gain a clearer next-step plan.
+
+## 12 · Two-option close
+Eyebrow: The choice is yours
+Now You Have Two Options From Here
+OPTION 1 · Keep trying random fertility advice. Continue piecing together generic
+exercise routines and isolated fixes, while wondering which practices are relevant to
+your cycle or individual fertility concerns.
+OPTION 2 · RECOMMENDED · Give yourself two days of clarity and experience. Understand
+your cycle and fertile window, experience gentle Period-Sync Yoga and leave with a
+starting plan for your next conception attempt.
+BUTTON: Take Action · 96% Off Today
+
+## 13 · Pricing recap
+Eyebrow: Your special invitation
+Recap of Everything You'll Get
+Two live sessions at 12 noon, four practical bonuses and a clearer starting point for
+your fertility journey.
+| Included | Value |
+|---|---|
+| 2-Day LIVE Fertility Reset Masterclass | ₹2,699 |
+| Cycle & Fertile Window Tracker | ₹497 |
+| Pre-Conception Do's & Don'ts Checklist | ₹497 |
+| Fertility-Friendly Daily Routine Planner | ₹497 |
+| Garbh Sanskar Before Pregnancy: Introduction | ₹497 |
+| TOTAL PACKAGE VALUE | ₹4,687 |
+GET EVERYTHING TODAY FOR ₹97
+One-time masterclass registration · 96% off the masterclass value
+BUTTON: Yes! Book My Seat for the 2-Day Masterclass
+100% Money-Back Guarantee · One session per day · 12:00 PM–2:00 PM IST
+
+## 15 · Footer
+Bindwithyoga · 2-Day Fertility Reset Masterclass · One live Zoom session per day,
+12:00–2:00 PM IST · Lotus Wellness and Lifestyle
+C-483 Nirman Nagar, Jaipur – 302019 · Bindwithyoga@gmail.com · 9664044943
+
+All live sessions and resources are educational and for general wellness only. They are
+not medical advice and do not replace care from a doctor, gynaecologist or fertility
+specialist. If you have PCOS/PCOD, thyroid conditions, endometriosis, irregular cycles,
+are undergoing fertility treatment, or may be pregnant, consult a qualified health
+professional before starting or altering practices. Individual experiences and outcomes
+vary.
+
+This website is not affiliated with or endorsed by Meta. Facebook and Instagram are
+trademarks of Meta Platforms, Inc.
+
+Privacy Policy · Terms and Conditions · Refund Policy
 © 2026 Bindwithyoga. All rights reserved.
+
+---
+
+# B. CHECKOUT
+
+## Header
+2-Day Fertility Reset Masterclass
+Add Your Details to Confirm Your Seat
+[DAY 1 DATE] and [DAY 2 DATE] · LIVE on Zoom · 12:00 PM–2:00 PM IST on both days
+One live session per day. No batch selection required.
+
+## Fields
+First Name * · Last Name * · Email Address * · Town / City (optional) · WhatsApp Number *
+We'll send your Zoom joining details and session reminders to your WhatsApp number and
+email address.
+(No "working professional / homemaker" question and no batch selection.)
+
+## Order bump 1 · ₹500 recordings
+Get Recordings of Both Live Sessions
+Join live and keep both sessions to revisit the lessons and repeat the yoga practices at
+your own pace.
+- Full recording of Day 1: Fertility Reset Blueprint
+- Full recording of Day 2: Guided Yoga & Next Steps
+- Revisit cycle-tracking explanations when needed
+- Repeat the guided yoga routine at your own pace
+- Access to recordings through a private WhatsApp group after Day 2
+Your live masterclass seat is already included in the ₹97 registration fee.
+BUTTON: Yes! Add Both Session Recordings for ₹500
+
+## Order bump 2 · ₹1,000 private session
+Get a Private 1-on-1 Session With Ankita
+Your fertility journey and starting point may be different from everyone else's. In
+this private wellness guidance call, Ankita will help you understand how to approach
+supportive yoga and daily practices based on your individual routine and needs.
+- A private call with Ankita, not a group session
+- Discuss your cycle awareness, current routine and what you've already tried
+- Learn which gentle practices and daily habits may be suitable for you
+- Get a personalised wellness-focused next-step plan
+- Ask Ankita your questions directly
+Book your call using the private scheduling link provided after payment, subject to
+available slots.
+This is a yoga and wellness guidance session, not a medical fertility consultation.
+BUTTON: Yes! Add My Private Session for ₹1,000
+
+## Order summary
+Confirm Your Masterclass Seat · 2-Day LIVE Fertility Reset Masterclass
+Regular Price: ₹2,699 · Your Price Today: ₹97
+Package table as in section 13, then Total Package Value ₹4,687 · Registration Fee ₹97
+Optional add-ons are charged separately only if selected.
+BUTTON: Book My Spot Now – 96% Off Today!
+100% Money-Back Guarantee · Secure payments via Razorpay
+By registering, you agree to our Terms and Conditions and Privacy Policy.
+Your information will be used to process your registration, deliver the masterclass,
+and send essential joining details and reminders.
+
+---
+
+# C. PRE-LAUNCH CHECKLIST (from the approved doc)
+- [ ] Set NEXT_PUBLIC_DATES (two consecutive dates) and NEXT_PUBLIC_TIMES (each day's time).
+- [ ] Verify evidence for the "Double your chances of Pregnancy" headline.
+- [ ] Verify testimonials, credentials, collaborations, award and 1,000+ figure.
+- [ ] Confirm refund policy terms and the Get-Clarity Promise conditions.
+- [ ] Recordings delivery details (private WhatsApp group after Day 2).
+- [ ] Private session booking link (NEXT_PUBLIC_CALL_BOOKING_URL).
+- [ ] Zoom link / attendee delivery flow; reminders must say ONE daily session at 12 PM IST.
+- [ ] Supply a purpose-made 2-Day hero portrait (current hero crops an older composite).

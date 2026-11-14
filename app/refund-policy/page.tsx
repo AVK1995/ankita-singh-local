@@ -39,7 +39,7 @@ export default function RefundPolicyPage() {
       <h2>1. The guarantee</h2>
       <p>
         The {LEGAL.product} ({PRICE}) is sold with a{' '}
-        <strong>100% Money-Back Guarantee</strong>. If the challenge is not
+        <strong>100% Money-Back Guarantee</strong>. If the masterclass is not
         right for you, write to us and we will refund what you paid.
       </p>
 
@@ -51,7 +51,7 @@ export default function RefundPolicyPage() {
         </li>
         <li>
           Use the subject line{' '}
-          <strong>&ldquo;Refund Request: 5-Day Fertility Reset Challenge&rdquo;</strong>.
+          <strong>&ldquo;Refund Request: 2-Day Fertility Reset Masterclass&rdquo;</strong>.
         </li>
         <li>Include your full name and the date of purchase.</li>
       </ul>

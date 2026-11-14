@@ -18,4 +18,4 @@
  * sales page, so they know what they are paying for; the label's job here is
  * to identify the order, not to describe the offer.
  */
-export const PRODUCT_LABEL = '5-Day Reset Challenge';
+export const PRODUCT_LABEL = '2-Day Reset Masterclass';

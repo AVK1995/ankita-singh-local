@@ -4,7 +4,7 @@ import Link from 'next/link';
 import LegalPageLayout from '@/components/LegalPageLayout';
 
 import { LEGAL, LEGAL_STRUCTURE_KNOWN } from '../_landing/legal';
-import { PRICE, SESSION_TIMES_TZ, START_DATE } from '../_landing/offer';
+import { DATES, PRICE, SESSION_TIMES_TZ } from '../_landing/offer';
 
 export const metadata: Metadata = {
   title: `Terms and Conditions | ${LEGAL.brand}`,
@@ -34,19 +34,21 @@ export default function TermsPage() {
 
       <h2>2. What you are buying</h2>
       <p>
-        Access to the {LEGAL.product}: five live expert-led sessions delivered
-        on Zoom, starting {START_DATE} at {SESSION_TIMES_TZ}, together with the
-        digital resources listed at checkout. The fee is {PRICE}.
+        Access to the {LEGAL.product}: two live expert-led sessions delivered
+        on Zoom, one per day on {DATES}, each from {SESSION_TIMES_TZ},
+        together with the four bonus resources listed at checkout. There is a
+        single live batch and no batch selection. The registration fee is{' '}
+        {PRICE}. Optional add-ons are charged separately and only if selected.
       </p>
 
       <h2>3. Sessions and scheduling</h2>
       <ul>
         <li>
           Sessions run live at the advertised times. Session recordings are not
-          part of the challenge fee. They are available only as a separately
+          part of the registration fee. They are available only as a separately
           priced add-on chosen at checkout, and only to participants who
-          purchased that add-on. Purchased recordings are shared on the last
-          day of the challenge, after the final live class.
+          purchased that add-on. Purchased recordings of both sessions are
+          shared through a private WhatsApp group after the Day 2 session.
         </li>
         <li>
           Participants who purchased the private 1-on-1 call add-on can book
@@ -62,16 +64,17 @@ export default function TermsPage() {
         <li>You are responsible for your own internet access and device.</li>
       </ul>
 
-      {/* The subject list is THIS programme's, taken from the day-by-day
-          schedule in COPY-SOURCE.md: breathing and relaxation (Day 1), pelvic
-          and hip mobility (Day 2), core and pelvic floor (Day 3), cycle-based
-          practice (Day 4) and nutrition principles (Day 5). A health
-          disclaimer that describes the wrong programme protects nobody. */}
+      {/* The subject list is THIS programme's, taken from the 2-Day curriculum
+          in COPY-SOURCE.md: cycle and fertile-window education, nutrition and
+          daily habits (Day 1); breathing, hip and pelvic mobility, core and
+          pelvic-floor awareness (Day 2). A health disclaimer that describes the
+          wrong programme protects nobody. */}
       <h2>4. Health disclaimer</h2>
       <p>
-        This programme provides general wellness education covering breathing
-        and relaxation, pelvic and hip mobility, core and pelvic floor work,
-        cycle-based movement and simple nutrition principles.{' '}
+        This programme provides general wellness education covering menstrual
+        cycle and fertile-window awareness, nutrition and daily habits,
+        breathing and relaxation, gentle hip and pelvic mobility, and core and
+        pelvic-floor awareness.{' '}
         <strong>It is not medical advice</strong>, it does not diagnose or
         treat any condition, and it is not a substitute for care from your
         doctor, gynaecologist or fertility specialist.

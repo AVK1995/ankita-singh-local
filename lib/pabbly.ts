@@ -26,6 +26,10 @@
  */
 import {
   CALL_BOOKING_URL,
+  DAY1_DATE,
+  DAY1_TIME,
+  DAY2_DATE,
+  DAY2_TIME,
   PRICE_RUPEES,
   RECORDINGS_INVITE,
   SESSION_TIMES_TZ,
@@ -165,6 +169,11 @@ export async function sendPabblyPurchase(
            instead of hard-coding a date that goes stale with the next batch. */
         start_date: START_DATE,
         session_times: SESSION_TIMES_TZ,
+        /* Each day on its own, for messages that list both. */
+        day1_date: DAY1_DATE,
+        day2_date: DAY2_DATE,
+        day1_time: DAY1_TIME,
+        day2_time: DAY2_TIME,
         community_link: WHATSAPP_INVITE,
         /* Sent on every payload, empty for a buyer without that add-on, so
            the field exists in Pabbly's mapper from the very first test. */

@@ -62,7 +62,10 @@ export async function POST(req: Request) {
   const country = truncate(body.country, 2).trim().toLowerCase() || 'in';
   const occupation = truncate(body.occupation, 32).trim();
 
-  if (!firstName || !lastName || !email || !phone || !city || !occupation) {
+  /* City and occupation are no longer required: the 2-Day checkout makes city
+     optional and drops the occupation question entirely. Both still ride in
+     the notes when present (empty otherwise). */
+  if (!firstName || !lastName || !email || !phone) {
     return NextResponse.json({ ok: false, reason: 'missing-fields' }, { status: 400 });
   }
 
