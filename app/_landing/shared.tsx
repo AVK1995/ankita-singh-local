@@ -20,12 +20,23 @@
  * tailwind.config.ts. All three change together, or the page ships in two
  * palettes. Grep the hex before calling a re-skin done.
  */
-import { ImageSquare } from '@phosphor-icons/react/dist/ssr';
+import { Clock, ImageSquare } from '@phosphor-icons/react/dist/ssr';
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CHECKOUT_HREF, DISCOUNT_PCT, PRICE, PRICE_RUPEES, STRIKE_PRICE, inr } from './offer';
+import {
+  CHECKOUT_HREF,
+  DAY1_DATE,
+  DAY1_SLOTS,
+  DAY2_DATE,
+  DAY2_SLOTS,
+  DISCOUNT_PCT,
+  PRICE,
+  PRICE_RUPEES,
+  STRIKE_PRICE,
+  inr,
+} from './offer';
 
 /* The checkout's pay label: the pay button and the mobile docked bar both use
    it. The strike and % off describe the seat alone, so both drop once add-ons
@@ -242,6 +253,150 @@ export function PrimaryCTA({
  * reassurance are one beat. `onDark` picks the step that reads inside one of
  * the page's contained dark cards.
  */
+/**
+ * A session time, made to POP: accent gradient, white type, a clock, and a
+ * slow glow ring. Used for every time on the site so a buyer never has to hunt
+ * for when to show up. `light` is the white variant for dark grounds.
+ */
+export function TimeChip({
+  text,
+  size = 'md',
+  light = false,
+  className = '',
+}: {
+  text: string;
+  size?: 'sm' | 'md' | 'lg';
+  light?: boolean;
+  className?: string;
+}) {
+  const box =
+    size === 'lg'
+      ? 'gap-2 px-4 py-2 text-[15px] sm:text-[17px]'
+      : size === 'sm'
+        ? 'gap-1 px-2.5 py-1 text-[11px]'
+        : 'gap-1.5 px-3 py-1.5 text-[13px]';
+  const icon = size === 'lg' ? 'h-4 w-4 sm:h-5 sm:w-5' : size === 'sm' ? 'h-3 w-3' : 'h-3.5 w-3.5';
+  return (
+    <span
+      className={`time-pop inline-flex items-center whitespace-nowrap rounded-full font-bold tabular-nums ${box} ${className}`}
+      style={
+        light
+          ? { background: '#FFFFFF', color: C.goldInk }
+          : { background: C.ctaFill, color: '#FFFFFF' }
+      }
+    >
+      <Clock weight="bold" aria-hidden className={`shrink-0 ${icon}`} />
+      {text}
+    </span>
+  );
+}
+
+/* ── Session times that SCALE ─────────────────────────────────────────────
+   A day can hold one time or many (NEXT_PUBLIC_TIMES). Pills per time turn
+   into a jumble at 3–4 a day, so times are TEXT: bold accent type separated
+   by soft dots, wrapping cleanly onto a second line however many there are.
+   The day itself is a small calendar tab ("DAY" over a big number). */
+type TimeSize = 'sm' | 'md' | 'lg';
+const TIME_SIZES: Record<TimeSize, { tab: string; tabSmall: string; tabBig: string; text: string; gap: string }> = {
+  sm: { tab: 'h-9 w-9 rounded-lg', tabSmall: 'text-[7.5px]', tabBig: 'text-[14px]', text: 'text-[13.5px]', gap: 'gap-2.5' },
+  md: { tab: 'h-11 w-11 rounded-xl', tabSmall: 'text-[8.5px]', tabBig: 'text-[17px]', text: 'text-[15.5px]', gap: 'gap-3' },
+  lg: { tab: 'h-12 w-12 rounded-xl', tabSmall: 'text-[9px]', tabBig: 'text-[19px]', text: 'text-[17px] sm:text-[18px]', gap: 'gap-3' },
+};
+
+/** The calendar tab: "DAY" over the number. */
+export function DayTab({ n, size = 'md', light = false }: { n: 1 | 2; size?: TimeSize; light?: boolean }) {
+  const s = TIME_SIZES[size];
+  return (
+    <span
+      aria-hidden
+      className={`grid shrink-0 place-content-center text-center leading-none ${s.tab}`}
+      style={
+        light
+          ? { background: '#FFFFFF', color: C.goldInk }
+          : { background: C.ctaFill, color: '#FFFFFF', boxShadow: '0 8px 18px -10px rgba(199,58,87,0.7)' }
+      }
+    >
+      <span className={`font-bold uppercase tracking-[0.14em] opacity-90 ${s.tabSmall}`}>Day</span>
+      <span className={`mt-0.5 font-display font-extrabold ${s.tabBig}`}>{n}</span>
+    </span>
+  );
+}
+
+/** One day's times as text: "10 AM or 8 PM IST". Any count, wraps cleanly. */
+export function SlotChips({
+  slots,
+  size = 'sm',
+  light = false,
+  className = '',
+}: {
+  slots: readonly string[];
+  size?: TimeSize;
+  light?: boolean;
+  className?: string;
+}) {
+  const s = TIME_SIZES[size];
+  return (
+    <span
+      className={`inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 font-bold leading-snug tabular-nums ${s.text} ${className}`}
+      style={{ color: light ? '#FFFFFF' : C.goldDeep }}
+    >
+      {slots.map((t, i) => (
+        <span key={t} className="inline-flex items-baseline gap-1.5 whitespace-nowrap">
+          {t}
+          {i < slots.length - 1 && (
+            <span className="text-[0.8em] font-medium" style={{ color: light ? 'rgba(255,255,255,0.7)' : C.inkMuted }}>
+              or
+            </span>
+          )}
+        </span>
+      ))}
+      <span
+        className="text-[0.7em] font-bold uppercase tracking-[0.1em]"
+        style={{ color: light ? 'rgba(255,255,255,0.7)' : C.inkMuted }}
+      >
+        IST
+      </span>
+    </span>
+  );
+}
+
+/** Day 1 and Day 2, ALWAYS listed separately: calendar tab + that day's times. */
+export function DayTimes({
+  size = 'md',
+  light = false,
+  className = '',
+}: {
+  size?: TimeSize;
+  light?: boolean;
+  className?: string;
+}) {
+  const s = TIME_SIZES[size];
+  return (
+    <span className={`inline-flex flex-col gap-2.5 text-left ${className}`}>
+      {(
+        [
+          [1, DAY1_DATE, DAY1_SLOTS],
+          [2, DAY2_DATE, DAY2_SLOTS],
+        ] as const
+      ).map(([n, date, slots]) => (
+        <span key={n} className={`flex items-center ${s.gap}`}>
+          <DayTab n={n} size={size} light={light} />
+          {/* The date, then that day's times. */}
+          <span className="flex flex-col items-start">
+            <span
+              className="text-[12px] font-extrabold uppercase tracking-[0.06em] sm:text-[13px]"
+              style={{ color: light ? '#FFFFFF' : C.ink }}
+            >
+              {date}
+            </span>
+            <SlotChips slots={slots} size={size} light={light} />
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export function CtaNote({ text, onDark = false }: { text: string; onDark?: boolean }) {
   return (
     <p

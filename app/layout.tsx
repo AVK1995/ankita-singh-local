@@ -25,7 +25,7 @@ const body = Manrope({
 });
 
 const TITLE = '2-Day Fertility Reset Masterclass | Bindwithyoga';
-const DESCRIPTION = `A 2-day live masterclass with Ankita Singh: understand your cycle and fertile window, then experience gentle Period-Sync Yoga. ${DATES}, ${SESSION_TIMES_TZ}, one live Zoom session each day, for ${PRICE}.`;
+const DESCRIPTION = `A 2-day live masterclass with Ankita Singh: understand your cycle and fertile window, then experience gentle Period-Sync Yoga. ${DATES}, ${SESSION_TIMES_TZ}, live on Zoom, for ${PRICE}.`;
 
 /* '' when NEXT_PUBLIC_SITE_URL is unset, which is the current state. The
    metadata block below omits metadataBase and the OG url rather than naming a

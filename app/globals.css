@@ -381,6 +381,39 @@ button {
 }
 .select-pop { transform-origin: top; animation: select-pop 0.18s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* ── Session times: the one thing on the page that must never be missed.
+   Every time chip carries a slow glow ring so it reads as live, not as copy. */
+@keyframes time-glow {
+  0%, 100% {
+    box-shadow: 0 8px 20px -10px rgba(199, 58, 87, 0.6), 0 0 0 0 rgba(242, 76, 105, 0);
+  }
+  50% {
+    box-shadow: 0 8px 20px -10px rgba(199, 58, 87, 0.6), 0 0 0 5px rgba(242, 76, 105, 0.18);
+  }
+}
+.time-pop { animation: time-glow 2.6s ease-in-out infinite; }
+
+/* Hero stat badges drift a few pixels, out of step with each other. */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.float-y { animation: float-y 5s ease-in-out infinite; }
+
+/* Recap cards: a springy pop the FIRST time they scroll into view
+   (data-lego="pop", fired once by the lego observer). */
+@keyframes recap-pop {
+  0% { opacity: 0; transform: translate3d(0, 36px, 0) scale(0.72); }
+  60% { opacity: 1; transform: translate3d(0, -6px, 0) scale(1.05); }
+  80% { transform: translate3d(0, 2px, 0) scale(0.99); }
+  100% { opacity: 1; transform: none; }
+}
+.bw-js [data-lego='pop'].lego-in {
+  animation-name: recap-pop;
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 /* The docked bar arriving from below on a phone. */
 @keyframes addon-dock-in {
   from { transform: translateY(100%); }
@@ -804,6 +837,8 @@ button {
   .addon-tick,
   .addon-dock-in,
   .select-pop,
+  .time-pop,
+  .float-y,
   .tl-node.is-on .tl-node-inner { animation: none !important; }
   .kz-dock { animation: none !important; opacity: 1; transform: none; }
   .tl-fill { transition: none !important; }

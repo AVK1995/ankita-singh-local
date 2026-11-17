@@ -48,10 +48,9 @@ import {
   inr,
   PRICE,
   SESSION_TIMES_TZ,
-  START_SPOKEN,
 } from './offer';
 import { asset } from './asset-version';
-import { Art, C, CtaNote, PrimaryCTA, SectionHeading } from './shared';
+import { Art, C, CtaNote, DayTimes, PrimaryCTA, SectionHeading } from './shared';
 
 /* ══ 9 · Meet Ankita Singh ═════════════════════════════════════════════════
  *
@@ -499,9 +498,12 @@ function Recap() {
           <span style={{ color: C.goldDeep }}>You&rsquo;ll Get</span>
         </h2>
         <p className="mt-3 text-center text-[14.5px] leading-relaxed" style={{ color: C.inkSoft }}>
-          Two live sessions at {START_SPOKEN.replace('Noon', 'noon')}, four practical bonuses and a clearer
+          Two days of live sessions, four practical bonuses and a clearer
           starting point for your fertility journey.
         </p>
+        <div className="mt-4 flex justify-center">
+          <DayTimes size="md" className="items-center" />
+        </div>
 
         <div
           className="mt-10 flex items-center justify-between border-b pb-3 text-[10.5px] font-bold uppercase tracking-[0.2em]"
@@ -575,7 +577,7 @@ function Recap() {
 
         <div className="mx-auto mt-9 flex max-w-[520px] flex-col items-center">
           <PrimaryCTA label="Yes! Book My Seat for the 2-Day Masterclass" tone="navy" full />
-          <CtaNote text={`${CTA_NOTE} · One session per day · ${SESSION_TIMES_TZ}`} />
+          <CtaNote text={`${CTA_NOTE} · Live on Zoom`} />
         </div>
       </div>
     </section>
@@ -591,15 +593,17 @@ function Recap() {
 function Colophon() {
   return (
     <SiteFooter>
-      <p className="mx-auto mb-8 max-w-[640px] text-[13px]" style={{ color: C.onDarkMute }}>
-        <span className="inline-block">
-          2-Day Fertility Reset Masterclass · {DATES} · One live Zoom session per day,{' '}
-          {SESSION_TIMES_TZ}
+      {/* Desktop: three clean lines (what & when · the timings · the price),
+          each kept whole. Phones wrap naturally. */}
+      <p className="mx-auto mb-8 max-w-[760px] text-[13px] leading-relaxed" style={{ color: C.onDarkMute }}>
+        <span className="lg:block lg:whitespace-nowrap">
+          2-Day Fertility Reset Masterclass · {DATES} · Live on Zoom
         </span>
-        <span aria-hidden className="hidden sm:inline">
-          {' · '}
+        <span className="lg:hidden"> · </span>
+        <span className="lg:block lg:whitespace-nowrap">{SESSION_TIMES_TZ}</span>
+        <span className="block">
+          {PRICE}, 100% money-back guarantee
         </span>
-        <span className="block sm:inline">{PRICE}, 100% money-back guarantee</span>
       </p>
     </SiteFooter>
   );

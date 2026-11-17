@@ -32,77 +32,91 @@ import {
   Heart,
   Lightning,
   PersonSimpleTaiChi,
+  VideoCamera,
 } from '@phosphor-icons/react/dist/ssr';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+import { asset } from './asset-version';
 import Close from './close';
 import { legoBrick, legoDelay } from './lego-style';
 import { domAnimation, LazyMotion } from './motion-lite';
 import {
   CHECKOUT_HREF,
-  compactRange,
   CTA_NOTE,
-  DAY1_TIME,
-  DAY2_TIME,
-  START_SPOKEN,
+  DATES_SHORT,
+  DAY1_DATE,
+  DAY1_SLOTS,
+  DAY2_DATE,
+  DAY2_SLOTS,
 } from './offer';
 import { Recognition, Testimonials } from './proof';
-import { C, SectionHeading } from './shared';
+import { C, DayTab, DayTimes, SectionHeading, SlotChips } from './shared';
 import Toolkit from './toolkit';
 
-/* Three beds, rotated. Not seven: the palette has three colours, and a card
-   grid that cycles a rainbow reads as decoration rather than as a set. Every
-   bed here is PALE on a LIGHT band, so each glyph takes the deep step. */
-const BEDS = [
-  { bed: C.goldPale, fg: C.goldDeep },
-  { bed: C.coralBed, fg: C.goldDeep },
-  { bed: C.navyBed, fg: C.goldDeep },
-];
+/* ══ 3 · What Will Change After This 2-Day Reset ══════════════════════════
+   Eight image cards, one per change. Each photo is a client-supplied image,
+   converted to a ~15–60KB WebP (720px), lazy-loaded by next/image and resized
+   per screen through `sizes`, so the section adds little to page weight.
 
-/* ══ 3 · What Will Change After This 5-Day Reset ══════════════════════════
-   Eight parallel capabilities, each with a title and a body. A set, not a
-   sequence, so it is a grid of equal pieces and the order carries no meaning
-   the reader has to follow. */
+   Two columns on phones (the photos carry the scan, the line under each is
+   short), four on desktop. */
 const EXPERIENCE = [
   {
     icon: ArrowsClockwise,
     title: 'SYNC',
+    img: '/system-images/change-sync.webp',
+    alt: 'A smiling woman looking at a pregnancy test',
     body: 'Know what to focus on during your period, fertile window and waiting phase.',
   },
   {
     icon: CalendarBlank,
     title: 'TRACK',
+    img: '/system-images/change-track.webp',
+    alt: 'A cycle calendar with fertile days marked with hearts',
     body: 'Learn to estimate your fertile window and probable ovulation days, not just your period date.',
   },
   {
     icon: PersonSimpleTaiChi,
     title: 'OPEN',
+    img: '/system-images/change-open.webp',
+    alt: 'A woman in a gentle hip-opening yoga lunge',
     body: 'Release everyday hip and pelvic stiffness through gentle mobility practices.',
   },
   {
     icon: Barbell,
     title: 'STRENGTHEN',
+    img: '/system-images/change-strengthen.webp',
+    alt: 'Hands resting over the lower abdomen and pelvis',
     body: 'Reconnect your core and pelvic floor for strength, stability and body awareness.',
   },
   {
     icon: Heart,
     title: 'CALM',
+    img: '/system-images/change-calm.webp',
+    alt: 'A woman breathing calmly with a hand on her chest',
     body: 'Let go of some of the stress after months of trying with relaxation and breathing.',
   },
   {
     icon: BowlFood,
     title: 'NOURISH',
+    img: '/system-images/change-nourish.webp',
+    alt: 'A colourful nourishing bowl with greens, seeds, eggs and fruit',
     body: 'Know which everyday nutrition habits support reproductive health, without crash diets.',
   },
   {
     icon: Lightning,
     title: 'ENERGIZE',
+    img: '/system-images/change-energize.webp',
+    alt: 'A joyful woman with open arms in a garden',
     body: 'Feel lighter, more flexible and more energetic with manageable movement.',
   },
   {
     icon: Compass,
     title: 'PLAN',
+    img: '/system-images/change-plan.webp',
+    alt: 'A hand ticking off a daily wellness checklist',
     body: 'Leave with a clear starting plan for your next attempt to get pregnant.',
   },
 ];
@@ -118,47 +132,45 @@ function Experience() {
         <span style={{ color: C.goldDeep }}>2-Day Reset?</span>
       </SectionHeading>
 
-      {/* Eight short cards: two rows of four on desktop. */}
-      <ul className="mx-auto mt-14 grid max-w-[1120px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {EXPERIENCE.map(({ icon: Icon, title, body }, idx) => {
-          const skin = BEDS[idx % BEDS.length];
-          return (
-            <li
-              key={title}
-              data-lego=""
-              className="lego-hover flex flex-col rounded-3xl p-7"
-              style={{
-                ...legoBrick(idx),
-                /* No seat shadow, because this beat sits on `canvasAlt`, which
-                   is 4% darker than the card: the hairline alone draws the
-                   edge. The Schedule below is on `canvas`, where white on
-                   near-white needs lifting, and it carries one. A 3px rule
-                   along the top ties the card to its bed without letting
-                   colour take a large area. */
-                background: C.surface,
-                border: `1px solid ${C.line}`,
-                borderTop: `3px solid ${skin.bed}`,
-              }}
-            >
+      <ul className="mx-auto mt-10 grid max-w-[1120px] grid-cols-2 gap-3 sm:mt-14 sm:gap-5 lg:grid-cols-4">
+        {EXPERIENCE.map(({ icon: Icon, title, img, alt, body }, idx) => (
+          <li
+            key={title}
+            data-lego=""
+            className="lego-hover group flex flex-col overflow-hidden rounded-[20px] sm:rounded-3xl"
+            style={{
+              ...legoBrick(idx),
+              background: C.surface,
+              border: `1px solid ${C.line}`,
+              boxShadow: '0 16px 36px -26px rgba(31, 16, 20,0.35)',
+            }}
+          >
+            <div className="relative overflow-hidden" style={{ aspectRatio: '4 / 3' }}>
+              <Image
+                src={asset(img)}
+                alt={alt}
+                fill
+                sizes="(min-width: 1024px) 270px, (min-width: 640px) 45vw, 46vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+              {/* The title rides on the photo as a chip, so the card reads in
+                  one glance: picture, word, line. */}
               <span
-                data-lego-stud=""
-                className="lego-stud grid h-12 w-12 place-items-center rounded-2xl"
-                style={{ ...legoBrick(idx), background: skin.bed }}
+                className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10.5px] font-bold tracking-[0.12em] sm:bottom-3 sm:left-3 sm:px-3 sm:py-1.5 sm:text-[12px]"
+                style={{ background: 'rgba(255,255,255,0.94)', color: C.goldInk, boxShadow: '0 6px 16px -8px rgba(31,16,20,0.45)' }}
               >
-                <Icon weight="duotone" className="h-6 w-6" style={{ color: skin.fg }} />
-              </span>
-              <h3
-                className="mt-5 font-display text-[19px] font-bold leading-snug tracking-[0.06em]"
-                style={{ color: C.ink }}
-              >
+                <Icon weight="bold" className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: C.goldDeep }} />
                 {title}
-              </h3>
-              <p className="mt-2.5 text-[14.5px] leading-relaxed" style={{ color: C.inkSoft }}>
-                {body}
-              </p>
-            </li>
-          );
-        })}
+              </span>
+            </div>
+            <p
+              className="p-3 text-[12.5px] leading-snug sm:p-5 sm:text-[14.5px] sm:leading-relaxed"
+              style={{ color: C.inkSoft }}
+            >
+              {body}
+            </p>
+          </li>
+        ))}
       </ul>
     </section>
   );
@@ -172,7 +184,8 @@ function Experience() {
 const DAYS = [
   {
     n: 'DAY 01',
-    time: compactRange(DAY1_TIME),
+    date: DAY1_DATE,
+    slots: DAY1_SLOTS,
     kicker: 'Theory & Clarity',
     title: 'Understand Your Fertility & Know Where to Start',
     body: 'The 2-hour Fertility Reset Blueprint. After months of trying, finally understand how your cycle, probable ovulation and lifestyle routines fit together.',
@@ -189,7 +202,8 @@ const DAYS = [
   },
   {
     n: 'DAY 02',
-    time: compactRange(DAY2_TIME),
+    date: DAY2_DATE,
+    slots: DAY2_SLOTS,
     kicker: 'Yoga & Next Steps',
     title: 'Experience Period-Sync Yoga & Know Your Next Steps',
     body: 'Move from understanding the theory to experiencing a guided yoga practice from home, followed by guidance on how to continue.',
@@ -336,7 +350,13 @@ function Schedule() {
                   style={{ background: C.coralBed, color: C.coralInk }}
                 >
                   <CalendarBlank weight="bold" className="lego-stud h-3 w-3" />
-                  {d.n} · {d.kicker} · {d.time} IST
+                  {d.n} · {d.kicker}
+                </span>
+                <span className="mt-2.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <span className="text-[13.5px] font-extrabold" style={{ color: C.ink }}>
+                    {d.date}
+                  </span>
+                  <SlotChips slots={d.slots} size="sm" />
                 </span>
                 <h3
                   className="mt-3.5 font-display text-[20px] font-bold leading-snug"
@@ -380,69 +400,223 @@ function Schedule() {
   );
 }
 
-/* ══ 5 · One Live Session Per Day ══════════════════════════════════════════
-   A CTA band, not a section with a structure: one timing and a click.
+/* ══ 5 · Quick recap ════════════════════════════════════════════════════════
+   What · When · Where cards that POP UP OUT OF the dark band beneath them:
+   the cards sit on a higher layer and the band starts behind their lower half
+   (negative margin), so on scroll they spring up out of it (data-lego="pop",
+   fired once). The tilt lives on an inner wrapper because the pop animation
+   owns the outer element's transform.
 
-   This is one of the page's two CONTAINED DARK OBJECTS (with the Option 2
-   card), which is the only way dark is allowed below the hero: as an object
-   inside a light band, never as a band. On a light ground a dark object is
-   seated by a SHADOW, and the accent bloom stays low, because a bloom is the
-   dark-page device and at full strength on the canvas it reads as a spotlight
-   someone left switched on. */
+   The band leads with the DATES. Timings are listed as chips and the copy
+   never says how many sessions a day has (NEXT_PUBLIC_TIMES may hold one or
+   several per day). */
+const RECAP_CARDS = [
+  { key: 'what', title: 'What', tilt: '-3deg' },
+  { key: 'when', title: 'When', tilt: '0deg' },
+  { key: 'where', title: 'Where', tilt: '3deg' },
+] as const;
+
 function SessionsBand() {
   return (
-    <section className="px-4 py-14" style={{ background: C.canvasAlt }}>
-      <div
-        className="mx-auto max-w-[920px] rounded-[28px] px-6 py-12 text-center sm:px-12"
-        style={{
-          background: `radial-gradient(ellipse 92% 62% at 50% 0%, rgba(252, 228, 234,0.14), transparent 64%), ${C.navyDeep}`,
-          border: '1px solid rgba(252, 228, 234,0.20)',
-          boxShadow:
-            '0 0 46px -24px rgba(248, 113, 134,0.22), 0 30px 60px -34px rgba(31, 16, 20,0.42)',
-        }}
-      >
-        <span
-          data-lego=""
-          className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em]"
-          style={{ background: 'rgba(252, 228, 234,0.16)', color: C.gold }}
-        >
-          <Clock weight="bold" className="h-3 w-3" />
-          One Live Session Per Day
-        </span>
+    <section className="px-4 py-14 sm:py-20" style={{ background: C.canvasAlt }}>
+      <SectionHeading eyebrow="Quick recap">
+        Your 2-Day Masterclass, <span style={{ color: C.goldDeep }}>at a Glance</span>
+      </SectionHeading>
 
-        <h2
-          className="mx-auto mt-6 max-w-[620px] font-display text-[clamp(26px,3.8vw,38px)] font-bold leading-[1.16]"
-          style={{ color: C.onDark }}
-        >
-          One Live Session Per Day. <span style={{ color: C.gold }}>At {START_SPOKEN}.</span>
-        </h2>
-        <p className="mt-3 text-[15.5px]" style={{ color: C.onDarkMute }}>
-          Day 1: {DAY1_TIME} · Day 2: {DAY2_TIME} · Live on Zoom
-        </p>
+      <div className="relative mx-auto mt-12 max-w-[1000px]">
+        {/* ── PHONES: three compact cards fanned side by side (What and Where
+            tilted out, When upright), BEHIND the band so they rise out of it;
+            the band covers only their bottom padding. ── */}
+        <ul className="relative z-0 grid grid-cols-3 items-end px-1 sm:hidden">
+          {RECAP_CARDS.map((card, i) => {
+            const mid = card.key === 'when';
+            return (
+              <li
+                key={card.key}
+                data-lego="pop"
+                className={mid ? 'relative z-[1] -mx-1.5' : 'relative'}
+                style={legoDelay(i, 140)}
+              >
+                <div
+                  className="flex min-h-[148px] flex-col items-center rounded-[18px] px-2 pb-10 pt-3 text-center"
+                  style={{
+                    transform: `rotate(${mid ? '0deg' : card.key === 'what' ? '-7deg' : '7deg'})`,
+                    background: C.surface,
+                    border: `1px solid ${C.line}`,
+                    boxShadow: mid
+                      ? '0 22px 40px -16px rgba(31, 16, 20,0.5)'
+                      : '0 16px 30px -18px rgba(31, 16, 20,0.45)',
+                  }}
+                >
+                  <h3
+                    className="font-display text-[19px] font-extrabold leading-none"
+                    style={{ color: C.goldDeep }}
+                  >
+                    {card.title}
+                  </h3>
 
-        <div className="mx-auto mt-8 flex max-w-[430px] flex-col items-center">
-          <Link
-            href={CHECKOUT_HREF}
-            data-cta
-            className="lego-press cta-shimmer group inline-flex min-h-[56px] w-full items-center justify-center gap-2.5 rounded-full px-7 font-body text-[15px] font-bold"
-            style={{
-              background: '#FFFFFF',
-              color: C.goldInk,
-              boxShadow: '0 14px 30px -14px rgba(31, 16, 20,0.45)',
-              ['--shimmer' as string]: 'rgba(242, 76, 105,0.25)',
-            }}
+                  {card.key === 'what' && (
+                    <p className="mt-2 text-[11.5px] font-semibold leading-snug" style={{ color: C.ink }}>
+                      A live 2-day Fertility Reset Masterclass
+                    </p>
+                  )}
+
+                  {card.key === 'when' && (
+                    <div className="mt-2 space-y-1.5 text-[11px] leading-tight" style={{ color: C.ink }}>
+                      {(
+                        [
+                          [DAY1_DATE, DAY1_SLOTS],
+                          [DAY2_DATE, DAY2_SLOTS],
+                        ] as const
+                      ).map(([date, slots]) => (
+                        <div key={date}>
+                          <p className="font-extrabold">{date}</p>
+                          <p className="mt-0.5 font-bold" style={{ color: C.goldDeep }}>
+                            {slots.join(' or ')}{' '}
+                            <span className="text-[9px]" style={{ color: C.inkMuted }}>
+                              IST
+                            </span>
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {card.key === 'where' && (
+                    <p className="mt-2 text-[11.5px] font-semibold leading-snug" style={{ color: C.ink }}>
+                      Live on Zoom, from your home
+                    </p>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* ── TABLET & DESKTOP: the cards sit BEHIND the band (z-0 vs z-10), so it
+            covers their bottom edge and they appear to rise out of it. ── */}
+        <ul className="relative z-0 hidden gap-5 px-3 sm:grid sm:grid-cols-3 sm:px-8">
+          {RECAP_CARDS.map((card, i) => (
+            <li key={card.key} data-lego="pop" style={legoDelay(i, 140)}>
+              <div
+                className="h-full rounded-[22px] p-6 pb-14"
+                style={{
+                  transform: `rotate(${card.tilt})`,
+                  background: C.surface,
+                  border: `1px solid ${C.line}`,
+                  boxShadow: '0 26px 50px -24px rgba(31, 16, 20,0.45)',
+                }}
+              >
+                <h3
+                  className="font-display text-[30px] font-extrabold leading-none sm:text-[32px]"
+                  style={{ color: C.goldDeep }}
+                >
+                  {card.title}
+                </h3>
+
+                {card.key === 'what' && (
+                  <p className="mt-4 text-[14.5px] leading-relaxed" style={{ color: C.ink }}>
+                    A live 2-day Fertility Reset Masterclass with Ankita Singh: cycle
+                    clarity on Day 1, guided Period-Sync Yoga on Day 2.
+                  </p>
+                )}
+
+                {card.key === 'when' && (
+                  <div className="mt-4 space-y-3.5 text-[14px]" style={{ color: C.ink }}>
+                    {[
+                      [1, DAY1_DATE, DAY1_SLOTS] as const,
+                      [2, DAY2_DATE, DAY2_SLOTS] as const,
+                    ].map(([n, date, slots]) => (
+                      <div key={n} className="flex items-start gap-3">
+                        <DayTab n={n} size="sm" />
+                        <div className="min-w-0">
+                          <p className="font-bold leading-tight">{date}</p>
+                          <span className="mt-1 flex">
+                            <SlotChips slots={slots} size="sm" />
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {card.key === 'where' && (
+                  <p className="mt-4 text-[14.5px] leading-relaxed" style={{ color: C.ink }}>
+                    Live on Zoom, from the comfort of your home. Your joining link is
+                    shared in the WhatsApp community.
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* ── the band the cards pop out of ── */}
+        <div
+          className="relative z-10 -mt-8 rounded-[28px] px-6 pb-12 pt-10 text-center sm:-mt-10 sm:px-12 sm:pt-12"
+          style={{
+            background: `radial-gradient(ellipse 92% 62% at 50% 100%, rgba(252, 228, 234,0.14), transparent 64%), ${C.navyDeep}`,
+            border: '1px solid rgba(252, 228, 234,0.20)',
+            boxShadow: '0 30px 60px -34px rgba(31, 16, 20,0.42)',
+          }}
+        >
+          <span
+            className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em]"
+            style={{ background: 'rgba(252, 228, 234,0.16)', color: C.gold }}
           >
-            <span className="inline-flex items-center gap-2.5">
-              Reserve My Seat
-              <ArrowRight
-                weight="bold"
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-              />
+            <VideoCamera weight="bold" className="h-3 w-3" />
+            Live on Zoom
+          </span>
+
+          <h2
+            className="mx-auto mt-5 max-w-[640px] font-display text-[clamp(24px,3.4vw,34px)] font-bold leading-[1.2]"
+            style={{ color: C.onDark }}
+          >
+            Mark your calendar
+          </h2>
+
+          {/* The dates, as the headline of the band. */}
+          <p className="mt-4 flex justify-center">
+            <span
+              className="time-pop inline-flex items-center gap-2 whitespace-nowrap rounded-2xl px-4 py-3 font-display text-[clamp(18px,5.6vw,34px)] sm:gap-2.5 sm:px-5 sm:text-[clamp(22px,3.6vw,34px)] font-extrabold leading-none"
+              style={{ background: '#FFFFFF', color: C.goldInk }}
+            >
+              <CalendarBlank weight="duotone" className="h-7 w-7 shrink-0" style={{ color: C.goldDeep }} />
+              {DATES_SHORT}
             </span>
-          </Link>
-          <p className="mt-3.5 text-[13.5px] font-medium" style={{ color: C.onDarkMute }}>
-            {CTA_NOTE}
           </p>
+
+          <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: C.onDarkMute }}>
+            Live timings
+          </p>
+          <div className="mt-2.5 flex justify-center">
+            <DayTimes size="md" light className="items-center" />
+          </div>
+
+          <div className="mx-auto mt-8 flex max-w-[430px] flex-col items-center">
+            <Link
+              href={CHECKOUT_HREF}
+              data-cta
+              className="lego-press cta-shimmer group inline-flex min-h-[56px] w-full items-center justify-center gap-2.5 rounded-full px-7 font-body text-[15px] font-bold"
+              style={{
+                background: '#FFFFFF',
+                color: C.goldInk,
+                boxShadow: '0 14px 30px -14px rgba(31, 16, 20,0.45)',
+                ['--shimmer' as string]: 'rgba(242, 76, 105,0.25)',
+              }}
+            >
+              <span className="inline-flex items-center gap-2.5">
+                Reserve My Seat
+                <ArrowRight
+                  weight="bold"
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                />
+              </span>
+            </Link>
+            <p className="mt-3.5 text-[13.5px] font-medium" style={{ color: C.onDarkMute }}>
+              {CTA_NOTE}
+            </p>
+          </div>
         </div>
       </div>
     </section>

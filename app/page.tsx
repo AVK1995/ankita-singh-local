@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 
 import FunnelTracker from '@/components/FunnelTracker';
 
-import { AnnouncementBar, Hero } from './_landing/hero';
+import { Hero } from './_landing/hero';
 import { C } from './_landing/shared';
 import StickyCta from './_landing/sticky-cta';
 
@@ -26,7 +26,8 @@ export default function Page() {
   return (
     <main className="overflow-x-clip font-body" style={{ background: C.canvas, color: C.ink }}>
       <FunnelTracker />
-      <AnnouncementBar />
+      {/* The announcement marquee is hidden for now (AnnouncementBar in
+          ./_landing/hero). Put <AnnouncementBar /> back here to restore it. */}
       <Hero />
       <BelowFold />
       <StickyCta />

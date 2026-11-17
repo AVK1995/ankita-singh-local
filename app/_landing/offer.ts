@@ -51,13 +51,11 @@ export const CALL_LINK_DELIVERY =
    ⚠️ REQUIRED BEFORE LAUNCH. Two env values, each holding BOTH days:
 
      NEXT_PUBLIC_DATES="12, Mar 2027, 13, Mar 2027"
-     NEXT_PUBLIC_TIMES="12:00 PM – 2:00 PM, 12:00 PM – 2:00 PM"
+     NEXT_PUBLIC_TIMES="10:00 AM - 08:00 PM IST, 10:00 AM"   (see THE TIMES below)
 
    Dates: the "12, Mar 2027" style has a comma INSIDE each date, so the two are
    found by shape (day · month · year), not by splitting on commas. A "|" or
    ";" between them also works ("12 Mar 2027 | 13 Mar 2027").
-   Times: Day 1's time first, then Day 2's, separated by a comma, "|" or ";".
-   " IST" is added when a time does not already say it.
 
    Unset or unreadable, the placeholders render, which is loud on purpose. */
 function splitPair(raw: string | undefined, shape?: RegExp): [string, string] | null {
@@ -77,11 +75,9 @@ function splitPair(raw: string | undefined, shape?: RegExp): [string, string] | 
 
 /* "12, Mar 2027" → "12 Mar 2027": the comma reads as a typo once rendered. */
 const tidyDate = (d: string) => d.replace(/^(\d{1,2})(st|nd|rd|th)?\s*,\s*/i, '$1$2 ');
-const withIst = (t: string) => (/\bIST\b/i.test(t) ? t : `${t} IST`);
 
 const DATE_SHAPE = /\d{1,2}(?:st|nd|rd|th)?,?\s*[A-Za-z]{3,9}\.?,?\s*\d{4}/g;
 const datePair = splitPair(process.env.NEXT_PUBLIC_DATES, DATE_SHAPE);
-const timePair = splitPair(process.env.NEXT_PUBLIC_TIMES);
 
 export const DAY1_DATE = datePair ? tidyDate(datePair[0]) : '[DAY 1 DATE]';
 export const DAY2_DATE = datePair ? tidyDate(datePair[1]) : '[DAY 2 DATE]';
@@ -90,42 +86,68 @@ export const DATES = `${DAY1_DATE} and ${DAY2_DATE}`;
 /** The first day, for "Starts …" lines. */
 export const START_DATE = DAY1_DATE;
 
-/* ONE live session per day. No batch choice anywhere. The approved copy runs
-   both days at 12:00 PM – 2:00 PM IST, which is the fallback. */
-export const DAY1_TIME = withIst(timePair?.[0] ?? '12:00 PM – 2:00 PM');
-export const DAY2_TIME = withIst(timePair?.[1] ?? timePair?.[0] ?? '12:00 PM – 2:00 PM');
-/** True when both days run at the same time, which the copy assumes. */
-export const SAME_TIME = DAY1_TIME === DAY2_TIME;
+/** "12 Mar 2027 and 13 Mar 2027" → "12 & 13 Mar 2027" when month and year match. */
+export const DATES_SHORT = (() => {
+  const a = DAY1_DATE.match(/^(\d{1,2}(?:st|nd|rd|th)?)\s+(.+)$/i);
+  const b = DAY2_DATE.match(/^(\d{1,2}(?:st|nd|rd|th)?)\s+(.+)$/i);
+  return a && b && a[2] === b[2] ? `${a[1]} & ${b[1]} ${a[2]}` : DATES;
+})();
 
-/** "12:00 PM – 2:00 PM IST" → "12 PM" (the start, :00 dropped). */
-const startOf = (t: string) =>
-  t.split(/\s*[–—-]\s*/)[0].replace(/:00/, '').replace(/\s*IST/i, '').trim();
-/** "12:00 PM – 2:00 PM IST" → "12–2 PM" when both ends share AM/PM. */
-export function compactRange(t: string): string {
-  const m = t.match(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\s*[–—-]\s*(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/i);
-  if (!m) return t.replace(/\s*IST/i, '');
-  const a = m[1] + (m[2] && m[2] !== '00' ? `:${m[2]}` : '');
-  const b = m[4] + (m[5] && m[5] !== '00' ? `:${m[5]}` : '');
-  return m[3].toUpperCase() === m[6].toUpperCase()
-    ? `${a}–${b} ${m[6].toUpperCase()}`
-    : `${a} ${m[3].toUpperCase()}–${b} ${m[6].toUpperCase()}`;
+/* ── THE TIMES ────────────────────────────────────────────────────────────
+   Each day can run ONE OR MORE live sessions, and the copy never says how
+   many. NEXT_PUBLIC_TIMES holds Day 1 first, then Day 2:
+
+     NEXT_PUBLIC_TIMES="10:00 AM - 08:00 PM IST, 10:00 AM"
+
+   ","  = the NEXT DAY.   Day 1 first, then Day 2. ("|" or ";" also work.)
+   "-"  = ANOTHER SESSION ON THE SAME DAY (not a range). "&", "/", "+" and
+          "or" work the same way.
+   So the example is Day 1: 10 AM or 8 PM, and Day 2: 10 AM.
+
+   Rendered tidy: "08:00 PM" → "8 PM", several times read "10 AM or 8 PM",
+   and IST is shown once at the end. */
+const DEFAULT_SLOT = '12:00 PM';
+
+/** "08:00 pm" → "8 PM", "10:30 AM" → "10:30 AM". IST is stripped. */
+function tidySlot(raw: string): string {
+  const t = raw.replace(/\bIST\b/gi, '').trim();
+  const m = t.match(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/i);
+  if (!m) return t;
+  return `${parseInt(m[1], 10)}${m[2] && m[2] !== '00' ? `:${m[2]}` : ''} ${m[3].toUpperCase()}`;
 }
 
-/** Full time line: "12:00 PM – 2:00 PM IST", or both days when they differ. */
-export const SESSION_TIMES_TZ = SAME_TIME
-  ? DAY1_TIME
-  : `Day 1: ${DAY1_TIME} · Day 2: ${DAY2_TIME}`;
+function parseDays(raw: string | undefined): [string[], string[]] {
+  const s = (raw ?? '').trim();
+  const days = s ? s.split(/[|;]/.test(s) ? /[|;]/ : /,/).map((d) => d.trim()).filter(Boolean) : [];
+  const slots = (d: string | undefined) =>
+    (d ?? DEFAULT_SLOT)
+      .split(/\s*(?:[–—-]|&|\/|\+|\bor\b)\s*/i)
+      .map((x) => x.trim())
+      .filter(Boolean)
+      .map(tidySlot);
+  return [slots(days[0]), slots(days[1] ?? days[0])];
+}
+
+/** Each day's sessions, tidied: ["10 AM", "8 PM"]. */
+export const [DAY1_SLOTS, DAY2_SLOTS] = parseDays(process.env.NEXT_PUBLIC_TIMES);
+
+/** "10 AM or 8 PM" (no IST): for chips and tight spots. */
+export const DAY1_TIME_SHORT = DAY1_SLOTS.join(' or ');
+export const DAY2_TIME_SHORT = DAY2_SLOTS.join(' or ');
+/** "10 AM or 8 PM IST" */
+export const DAY1_TIME = `${DAY1_TIME_SHORT} IST`;
+export const DAY2_TIME = `${DAY2_TIME_SHORT} IST`;
+/* ALWAYS per day. The two days are never merged into one "both days" time,
+   even when they happen to match: each day can carry its own, and several,
+   times, and the copy must never imply how many sessions a day has. */
+
+/** "Day 1: 10 AM or 8 PM · Day 2: 10 AM IST" */
+export const SESSION_TIMES_TZ = `Day 1: ${DAY1_TIME_SHORT} · Day 2: ${DAY2_TIME_SHORT} IST`;
 export const SESSION_TIMES = SESSION_TIMES_TZ;
-/** "12:00 PM – 2:00 PM IST on both days" / "Day 1: … · Day 2: …" */
-export const TIME_LINE = SAME_TIME ? `${DAY1_TIME} on both days` : SESSION_TIMES_TZ;
-/** The short form for tight spots: "12 PM IST", or "12 PM & 4 PM IST". */
-export const SESSION_SHORT = SAME_TIME
-  ? `${startOf(DAY1_TIME)} IST`
-  : `${startOf(DAY1_TIME)} & ${startOf(DAY2_TIME)} IST`;
-/** "12 Noon" when the session starts at 12 PM, which the copy calls it. */
-export const START_SPOKEN = SAME_TIME
-  ? startOf(DAY1_TIME).replace(/^12 PM$/i, '12 Noon')
-  : SESSION_SHORT;
+export const SESSION_SHORT = SESSION_TIMES_TZ;
+/** With the dates: "Day 1 (28 Nov 2026): 10 AM or 8 PM · Day 2 (29 Nov 2026): 10 AM IST" */
+export const TIME_LINE = `Day 1 (${DAY1_DATE}): ${DAY1_TIME_SHORT} · Day 2 (${DAY2_DATE}): ${DAY2_TIME_SHORT} IST`;
+
 
 /**
  * ⚠️ UNVERIFIED, flagged in the approved copy itself: audience proof, awards
@@ -203,7 +225,7 @@ export const INCLUDED: IncludedItem[] = [
     title: '2-Day LIVE Fertility Reset Masterclass',
     short: '2-Day LIVE Fertility Reset Masterclass',
     value: 2699,
-    body: `Two expert-led live Zoom sessions combining cycle education, fertile-window awareness, the Period-Sync Yoga framework, guided yoga and a next-step roadmap. ${TIME_LINE}.`,
+    body: `Expert-led live Zoom sessions across two days, combining cycle education, fertile-window awareness, the Period-Sync Yoga framework, guided yoga and a next-step roadmap. ${TIME_LINE}.`,
     tag: 'LIVE ACCESS · INCLUDED',
     access: 'live',
   },

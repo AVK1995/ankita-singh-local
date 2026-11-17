@@ -52,7 +52,6 @@ import {
   RECORDING_PRICE_RUPEES,
   RECORDINGS_DELIVERY,
   SESSION_TIMES_TZ,
-  TIME_LINE,
   STRIKE_PRICE,
   STRIKE_PRICE_RUPEES,
 } from '../_landing/offer';
@@ -76,7 +75,7 @@ import {
   trackInitiateCheckout,
 } from '@/lib/track';
 
-import { C, CtaLabel } from '../_landing/shared';
+import { C, CtaLabel, DayTimes } from '../_landing/shared';
 import { RECAP, VALUE_TOTAL, inr } from './included';
 
 declare global {
@@ -153,9 +152,9 @@ const ADDON_CARDS: AddonCardCopy[] = [
     pill: 'Recommended',
     pillShort: 'Recommended',
     tone: 'rose',
-    title: 'Get Recordings of Both Live Sessions',
+    title: 'Get Recordings of Both Days',
     short: 'Add both recordings',
-    body: 'Join live and keep both sessions to revisit the lessons and repeat the yoga practices at your own pace.',
+    body: 'Join live and keep both days of the masterclass to revisit the lessons and repeat the yoga practices at your own pace.',
     bullets: [
       'Full recording of Day 1: Fertility Reset Blueprint',
       'Full recording of Day 2: Guided Yoga & Next Steps',
@@ -396,11 +395,11 @@ export default function CheckoutPage() {
               Add Your Details to Confirm Your Seat
             </h1>
             <p className="mt-3 text-[13px] sm:text-[13.5px]" style={{ color: C.inkSoft }}>
-              {DATES} · LIVE on Zoom · {TIME_LINE}
+              {DATES} · LIVE on Zoom
             </p>
-            <p className="mt-1 text-[12.5px] font-semibold" style={{ color: C.goldInk }}>
-              One live session per day. No batch selection required.
-            </p>
+            <div className="mt-3 flex justify-center">
+              <DayTimes size="md" className="items-center" />
+            </div>
           </div>
 
           {/* Form left, summary right. The summary is sticky on desktop so the
@@ -1068,7 +1067,7 @@ function OrderSummary({ addons }: { addons: AddonId[] }) {
             className="font-display text-[13px] font-bold uppercase tracking-[0.12em] sm:text-[14px] sm:tracking-[0.14em]"
             style={{ color: C.ink }}
           >
-            {extra > 0 ? 'Total Today' : 'Your Price Today'}
+            You Pay Today
           </span>
           <div className="flex items-baseline gap-2 text-right">
             <s
