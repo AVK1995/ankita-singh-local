@@ -6,19 +6,19 @@
  * On phones it is always on screen. From md up it shows only between the hero
  * and the closing recap, where no other CTA is in view.
  */
-import { ArrowRight, CalendarBlank, Clock } from '@phosphor-icons/react/dist/ssr';
+import { ArrowRight, CalendarBlank } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import {
   CHECKOUT_HREF,
+  DATES_SHORT,
   DISCOUNT_PCT,
   PRICE,
   SESSION_SHORT,
-  DATES,
   STRIKE_PRICE,
 } from './offer';
-import { C } from './shared';
+import { C, TimeChip } from './shared';
 
 export default function StickyCta() {
   const [show, setShow] = useState(false);
@@ -109,12 +109,9 @@ export default function StickyCta() {
             >
               <span className="inline-flex shrink-0 items-center gap-1.5">
                 <CalendarBlank weight="bold" className="h-3 w-3" style={{ color: C.goldInk }} />
-                {DATES}
+                {DATES_SHORT}
               </span>
-              <span className="inline-flex shrink-0 items-center gap-1.5">
-                <Clock weight="bold" className="h-3 w-3" style={{ color: C.coralInk }} />
-                {SESSION_SHORT}
-              </span>
+              <TimeChip text={SESSION_SHORT} size="sm" />
             </p>
           </div>
 

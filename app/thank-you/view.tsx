@@ -122,7 +122,7 @@ const PREP_ITEMS = [
   'Day 1: keep a notebook for your Fertility Reset Starter Map',
   'Note your recent period dates and the questions you want to ask',
   'Day 2: wear comfortable clothes and clear a little space to move',
-  'Be in a quiet, distraction-free space for both sessions',
+  'Be in a quiet, distraction-free space for every live session',
 ];
 
 /* The WhatsApp teal one step darker than the community card, so the two
@@ -242,7 +242,7 @@ function ThankYou({ addons }: { addons: AddonId[] }) {
             />
           </div>
           <p className="mt-3 text-[12.5px] font-semibold" style={{ color: C.goldInk }}>
-            One live Zoom session each day · Single batch, no batch selection
+            Live on Zoom · Your joining link is shared in the WhatsApp community
           </p>
 
           {paymentId && (

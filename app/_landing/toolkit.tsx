@@ -35,7 +35,6 @@ import {
 import { asset } from './asset-version';
 import { legoBrick, legoDelay } from './lego-style';
 import {
-  compactRange,
   CTA_LABEL,
   CTA_NOTE,
   DAY1_TIME,
@@ -118,8 +117,8 @@ function Cover({
    DAY 2: Practice Your Yoga", at the same 4:3 as every other cover. */
 function MasterclassCover({ className = '' }: { className?: string }) {
   const days = [
-    { d: 'DAY 1', t: 'Understand Your Cycle', time: compactRange(DAY1_TIME), tilt: '-6deg' },
-    { d: 'DAY 2', t: 'Practice Your Yoga', time: compactRange(DAY2_TIME), tilt: '5deg' },
+    { d: 'DAY 1', t: 'Understand Your Cycle', time: DAY1_TIME, tilt: '-6deg' },
+    { d: 'DAY 2', t: 'Practice Your Yoga', time: DAY2_TIME, tilt: '5deg' },
   ];
   return (
     <div
@@ -147,7 +146,7 @@ function MasterclassCover({ className = '' }: { className?: string }) {
           <span className="mt-1.5 font-display text-[13px] font-extrabold leading-tight sm:text-[14px]">
             {t}
           </span>
-          <span className="mt-2 text-[9px] font-semibold opacity-85">{time} IST</span>
+          <span className="mt-2 text-[9px] font-semibold opacity-85">{time}</span>
         </div>
       ))}
     </div>

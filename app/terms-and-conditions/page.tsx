@@ -34,11 +34,11 @@ export default function TermsPage() {
 
       <h2>2. What you are buying</h2>
       <p>
-        Access to the {LEGAL.product}: two live expert-led sessions delivered
-        on Zoom, one per day on {DATES}, each from {SESSION_TIMES_TZ},
-        together with the four bonus resources listed at checkout. There is a
-        single live batch and no batch selection. The registration fee is{' '}
-        {PRICE}. Optional add-ons are charged separately and only if selected.
+        Access to the {LEGAL.product}: live expert-led sessions delivered on
+        Zoom across two days, {DATES}, at the advertised times ({SESSION_TIMES_TZ}),
+        together with the four bonus resources listed at checkout. The
+        registration fee is {PRICE}. Optional add-ons are charged separately and
+        only if selected.
       </p>
 
       <h2>3. Sessions and scheduling</h2>
@@ -47,8 +47,8 @@ export default function TermsPage() {
           Sessions run live at the advertised times. Session recordings are not
           part of the registration fee. They are available only as a separately
           priced add-on chosen at checkout, and only to participants who
-          purchased that add-on. Purchased recordings of both sessions are
-          shared through a private WhatsApp group after the Day 2 session.
+          purchased that add-on. Purchased recordings of both days are shared
+          through a private WhatsApp group after the Day 2 session.
         </li>
         <li>
           Participants who purchased the private 1-on-1 call add-on can book
