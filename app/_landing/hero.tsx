@@ -173,7 +173,7 @@ export function Hero() {
             </p>
 
             <h1
-              className="mt-4 font-display text-[30px] font-extrabold leading-[1.12] sm:text-[40px] lg:-mx-[60px] lg:mt-3 lg:text-[42px]"
+              className="mt-4 font-display text-[28px] font-extrabold leading-[1.12] sm:text-[40px] lg:-mx-[60px] lg:mt-3 lg:text-[42px]"
               style={{ color: C.ink, textWrap: 'balance' } as React.CSSProperties}
             >
               Double your chances of Pregnancy with a simple at-home{' '}
@@ -191,7 +191,11 @@ export function Hero() {
               style={{ color: C.inkSoft }}
             >
               Understand your cycle, learn what to do during each phase and experience
-              gentle live yoga with Ankita Singh.
+              gentle live yoga with{' '}
+              <strong className="font-extrabold" style={{ color: C.goldDeep }}>
+                Ankita Singh
+              </strong>
+              .
             </p>
 
             <p
@@ -398,7 +402,7 @@ function FactTiles() {
         </span>
       </Tile>
       {/* Each day: a rounded badge ("Day 1" over "28 Nov"), then that day's
-          times joined by "•", at most THREE per line, so a 4th+ time starts a
+          times joined by "or", at most THREE per line, so a 4th+ time starts a
           new line. Side by side from sm up, stacked on narrow phones. */}
       <Tile icon={CalendarBlank} label="Dates & timings" i={2} className="col-span-2">
         <span className={`mt-2 grid gap-3 ${SIDE_BY_SIDE ? 'sm:grid-cols-2 sm:gap-4' : ''}`}>
@@ -421,7 +425,7 @@ function FactTiles() {
               <span className="min-w-0 text-[14px] font-bold leading-snug sm:text-[15px]" style={{ color: C.goldDeep }}>
                 {chunk(slots, 3).map((line, li, all) => (
                   <span key={li} className="block whitespace-nowrap">
-                    {line.join(' • ')}
+                    {line.join(' or ')}
                     {li === all.length - 1 && (
                       <span className="ml-1 text-[0.72em] font-bold tracking-[0.08em]" style={{ color: C.inkMuted }}>
                         IST
@@ -440,7 +444,7 @@ function FactTiles() {
 
 /* Days sit side by side only while each has at most two times; with three or
    more per line they need the full row, so the days stack instead. */
-const SIDE_BY_SIDE = Math.max(DAY1_SLOTS.length, DAY2_SLOTS.length) <= 2;
+const SIDE_BY_SIDE = Math.max(DAY1_SLOTS.length, DAY2_SLOTS.length) <= 1;
 
 /** "28 Nov 2026" → "28 Nov" (the year is clear from context and keeps the badge compact). */
 const shortDate = (d: string) => d.replace(/[,\s]+\d{4}\s*$/, '');

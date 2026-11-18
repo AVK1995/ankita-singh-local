@@ -187,6 +187,9 @@ export function SectionHeading({
  *   cream · on a contained dark card, where a pale pill sits inside its own
  *           bloom.
  */
+/** The one CTA label phones see on every section button. */
+export const MOBILE_CTA_LABEL = `Book My Seat Now - ${DISCOUNT_PCT}% Off Today`;
+
 export function PrimaryCTA({
   href = CHECKOUT_HREF,
   label,
@@ -227,7 +230,7 @@ export function PrimaryCTA({
     <Link
       href={href}
       data-cta
-      className={`lego-press cta-shimmer group inline-flex min-h-[58px] items-center justify-center gap-2.5 rounded-full px-8 py-4 font-body text-[15.5px] font-bold ${
+      className={`lego-press cta-shimmer group inline-flex min-h-[58px] items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 py-4 font-body text-[12.5px] font-bold min-[375px]:gap-2 min-[375px]:px-5 min-[375px]:text-[14.5px] sm:gap-2.5 sm:px-8 sm:text-[15.5px] ${
         breathe ? 'cta-breath' : ''
       } ${full ? 'w-full' : 'w-full sm:w-auto'}`}
       style={{
@@ -238,7 +241,10 @@ export function PrimaryCTA({
       }}
     >
       <span className="inline-flex items-center gap-2.5">
-        {label}
+        {/* Phones get one short, consistent label; wider screens keep the
+            section's own wording. */}
+        <span className="sm:hidden">{MOBILE_CTA_LABEL}</span>
+        <span className="hidden sm:inline">{label}</span>
         <ArrowRight
           weight="bold"
           className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
@@ -379,7 +385,7 @@ export function DayTimes({
           [2, DAY2_DATE, DAY2_SLOTS],
         ] as const
       ).map(([n, date, slots]) => (
-        <span key={n} className={`flex items-center ${s.gap}`}>
+        <span key={n} className={`flex items-center self-start ${s.gap}`}>
           <DayTab n={n} size={size} light={light} />
           {/* The date, then that day's times. */}
           <span className="flex flex-col items-start">
