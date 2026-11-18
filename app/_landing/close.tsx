@@ -50,7 +50,7 @@ import {
   SESSION_TIMES_TZ,
 } from './offer';
 import { asset } from './asset-version';
-import { Art, C, CtaNote, DayTimes, PrimaryCTA, SectionHeading } from './shared';
+import { Art, C, CtaNote, DayTimes, MOBILE_CTA_LABEL, PrimaryCTA, SectionHeading } from './shared';
 
 /* ══ 9 · Meet Ankita Singh ═════════════════════════════════════════════════
  *
@@ -409,16 +409,17 @@ function TwoOptions() {
           <Link
             href={CHECKOUT_HREF}
             data-cta
-            className="lego-press cta-shimmer group mt-7 inline-flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-full px-6 font-body text-[15px] font-bold"
+            className="lego-press cta-shimmer group mt-7 inline-flex min-h-[54px] w-full items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 font-body text-[13.5px] font-bold sm:gap-2.5 sm:px-6 sm:text-[15px]"
             style={{
-              background: C.ctaFill,
-              color: C.onAccent,
-              boxShadow: C.ctaGlow,
-              ['--shimmer' as string]: 'rgba(255,255,255,0.55)',
+              background: '#FFFFFF',
+              color: C.goldInk,
+              boxShadow: '0 14px 30px -14px rgba(31, 16, 20,0.45)',
+              ['--shimmer' as string]: 'rgba(242, 76, 105,0.25)',
             }}
           >
             <span className="inline-flex items-center gap-2.5">
-              {CTA_LABEL_ACTION}
+              <span className="sm:hidden">{MOBILE_CTA_LABEL}</span>
+              <span className="hidden sm:inline">{CTA_LABEL_ACTION}</span>
               <ArrowRight
                 weight="bold"
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"

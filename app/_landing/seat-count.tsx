@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 /* ── "Last N seats left" ────────────────────────────────────────────────
    One shared countdown, so every instance on the page shows the same number.
 
-   Starts at a RANDOM number between 40 and 70, then drops by one every 30–40
-   seconds (randomised per drop). The current number is kept in sessionStorage,
+   Starts at a RANDOM number between 30 and 45, then drops by one every 25
+   seconds. The current number is kept in sessionStorage,
    so a reload or a hop to the checkout and back never jumps it back up.
    It stops at FLOOR rather than running to zero on a long visit.
 
    ⚠️ This is a display number, not a real inventory count. */
-const START_MIN = 40;
-const START_MAX = 70;
-const STEP_MIN_S = 30;
-const STEP_MAX_S = 40;
+const START_MIN = 30;
+const START_MAX = 45;
+const STEP_MIN_S = 25;
+const STEP_MAX_S = 25;
 const FLOOR = 9;
 const KEY = 'bwy_seats';
 

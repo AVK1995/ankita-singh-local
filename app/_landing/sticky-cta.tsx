@@ -127,7 +127,8 @@ export default function StickyCta() {
             }}
           >
             <span className="inline-flex items-center gap-2">
-              Book My Spot - {DISCOUNT_PCT}% Off Today
+              Book My Spot
+              <span className="-ml-1 hidden sm:inline">- {DISCOUNT_PCT}% Off Today</span>
               <ArrowRight
                 weight="bold"
                 className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
